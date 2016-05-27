@@ -11,7 +11,7 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- 导出  表 timegallery.user 结构
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE IF NOT EXISTS `users` (
   `Uuid` char(50) NOT NULL,
   `OpenId` char(50) NOT NULL,
   `Name` varchar(50) NOT NULL,
