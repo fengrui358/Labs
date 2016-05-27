@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `IsFollower` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`Uuid`),
   UNIQUE KEY `OpenID` (`OpenId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- 数据导出被取消选择。
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

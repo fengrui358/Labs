@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UniqueLab
 {
-    public class UserDbEntity
+    public class User
     {
         public virtual string Uuid { get; set; }
 
@@ -18,7 +18,7 @@ namespace UniqueLab
 
         public virtual bool IsFollower { get; set; }
 
-        public UserDbEntity()
+        public User()
         {
             Uuid = Guid.NewGuid().ToString();
             OpenId = Guid.NewGuid().ToString();
