@@ -19,7 +19,7 @@ namespace Timer
             private set
             {
                 _lastRefreshTime = value;
-                _timer.Change((int) TimeSpan.FromSeconds(15).TotalMilliseconds,
+                _timer.Change((int) TimeSpan.FromSeconds(40).TotalMilliseconds,
                     Timeout.Infinite);
             }
         }
@@ -34,7 +34,7 @@ namespace Timer
 
             _timer = new System.Threading.Timer((s) =>
             {
-                if (LastRefreshTime.AddSeconds(10) < DateTime.Now)
+                if (LastRefreshTime.AddSeconds(30) < DateTime.Now)
                 {
                     ExpireEvent?.Invoke(this, null);
                 }

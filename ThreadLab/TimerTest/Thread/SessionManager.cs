@@ -15,7 +15,7 @@ namespace Thread
 
         public SessionManager()
         {
-            for (int i = 0; i < 1000000; i++)
+            for (int i = 0; i < 5000000; i++)
             {
                 var session = new Session();
                 _sessions.TryAdd(session.Id, session);
@@ -33,7 +33,7 @@ namespace Thread
         {
             while (true)
             {
-                var expires = _sessions.Where(s => s.Value.LastRefreshTime.AddMinutes(1) < DateTime.Now).ToList();
+                var expires = _sessions.Where(s => s.Value.LastRefreshTime.AddSeconds(30) < DateTime.Now).ToList();
                 foreach (var keyValuePair in expires)
                 {
                     Session outSession;
@@ -52,7 +52,8 @@ namespace Thread
                 var session = new Session();
                 _sessions.TryAdd(session.Id, session);
 
-                GC.Collect();
+                //GC.Collect();
+                Console.WriteLine($"Session剩余数量{_sessions.Count}");
                 System.Threading.Thread.Sleep(10 * 1000);
             }
         }

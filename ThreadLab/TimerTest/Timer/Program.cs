@@ -14,7 +14,17 @@ namespace Timer
             var mgr = new SessionManager();
 
             Console.WriteLine("运行中");
-            Console.ReadKey();
+
+            while (true)
+            {
+                Console.WriteLine("输入gc，进行内存回收");
+
+                var input = Console.ReadLine();
+                if (input.Equals("gc", StringComparison.OrdinalIgnoreCase))
+                {
+                    GC.Collect();
+                }
+            }            
         }
     }
 }

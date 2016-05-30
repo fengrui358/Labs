@@ -15,7 +15,7 @@ namespace Timer
 
         public SessionManager()
         {
-            for (int i = 0; i < 1000000; i++)
+            for (int i = 0; i < 5000000; i++)
             {
                 var session = new Session();
                 session.ExpireEvent += ExpireEventHandler;
@@ -49,7 +49,8 @@ namespace Timer
                 var session = new Session();
                 _sessions.TryAdd(session.Id, session);
 
-                GC.Collect();
+                //GC.Collect();
+                Console.WriteLine($"Session剩余数量{_sessions.Count}");
                 System.Threading.Thread.Sleep(10 * 1000);
             }
         }
