@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SharpCompress.Archive.Rar;
 using SharpCompress.Archive.Zip;
+using SharpCompress.Common;
 using SharpCompress.Reader;
 using SharpCompress.Reader.Rar;
 using SharpCompress.Reader.Zip;
@@ -45,20 +46,22 @@ namespace ZipLabs
                         reader = ReaderFactory.Open(stream);
                     }
 
+                    var subGuidDir =
+                                new DirectoryInfo(Path.Combine(ZipBase.UnZipRootDir, Guid.NewGuid().ToString("N")));
+                    subGuidDir.Create();
+                    
                     if (reader != null)
                     {
                         while (reader.MoveToNextEntry())
                         {
                             if (!reader.Entry.IsDirectory)
                             {
-                                var subGuidDir =
-                                new DirectoryInfo(Path.Combine(ZipBase.UnZipRootDir, Guid.NewGuid().ToString("N")));
-                                subGuidDir.Create();
-
-                                reader.WriteEntryToDirectory(subGuidDir.FullName);
-                                return VerifyManager.Verify(subGuidDir.FullName);
+                                reader.WriteEntryToDirectory(subGuidDir.FullName,
+                                    ExtractOptions.ExtractFullPath | ExtractOptions.Overwrite);
                             }
                         }
+
+                        return VerifyManager.Verify(subGuidDir.FullName);
                     }
                 }
             }

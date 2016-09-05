@@ -23,7 +23,6 @@ namespace ZipLabs.VerifyStrategies
                 Debug.WriteLine(e);
             }
             
-            
             return result;
         }
 
@@ -33,7 +32,7 @@ namespace ZipLabs.VerifyStrategies
             var subDirs = dir.GetDirectories();
             FileInfo testFile = null;
 
-            var subDir = subDirs.FirstOrDefault(s => s.Name == "测试");
+            var subDir = subDirs.FirstOrDefault(s => s.Name == "测试目录");
             if (subDir != null)
             {
                 testFile = subDir.GetFiles("测试.txt").First();
