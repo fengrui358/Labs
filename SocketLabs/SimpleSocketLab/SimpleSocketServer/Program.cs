@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Net;
 using System.Net.Sockets;
@@ -9,6 +11,8 @@ namespace SimpleSocketServer
 {
     class Program
     {
+        private static ConcurrentDictionary<string, Socket> _allClientSockets = new ConcurrentDictionary<string, Socket>();
+
         private static Socket _serverSocket;
 
         static void Main(string[] args)
@@ -21,23 +25,65 @@ namespace SimpleSocketServer
 
             _serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             _serverSocket.Bind(new IPEndPoint(IPAddress.Any, port));
-            _serverSocket.Listen(10);
+            _serverSocket.Listen(100);
 
-            var t = new Thread(ListenClientConnect);
-            t.Start();
+            ListenClientConnect();
 
             Console.ReadKey();
         }
 
         private static void ListenClientConnect()
         {
-            while(true)
-            {
-                var socketClient = _serverSocket.Accept();
-                socketClient.Send(Encoding.UTF8.GetBytes("Hello World"));
+            var socketAsyncEventArgs = new SocketAsyncEventArgs();
+            socketAsyncEventArgs.Completed += SocketAsyncEventArgsOnCompleted;
 
-                var t = new Thread(ReceiveMessage);
-                t.Start(socketClient);
+            _serverSocket.AcceptAsync(socketAsyncEventArgs);            
+        }
+
+        private static void SocketAsyncEventArgsOnCompleted(object sender, SocketAsyncEventArgs socketAsyncEventArgs)
+        {
+            switch (socketAsyncEventArgs.LastOperation)
+            {
+                case SocketAsyncOperation.Accept:
+                    ProcessAccept(socketAsyncEventArgs);
+                    break;
+            }
+        }
+
+        private static void ProcessAccept(SocketAsyncEventArgs socketAsyncEventArgs)
+        {
+            var clientSocket = socketAsyncEventArgs.AcceptSocket;
+
+            Console.WriteLine("客户端Accecpt成功，地址：" + clientSocket.RemoteEndPoint);
+
+            _allClientSockets.TryAdd(clientSocket.RemoteEndPoint.ToString(), clientSocket);
+
+            SendHelloToClient(socketAsyncEventArgs);
+
+            ReceiveMessage(clientSocket);
+
+            //监听新的链接
+            ListenClientConnect();
+        }
+
+        private static void SendHelloToClient(SocketAsyncEventArgs socketAsyncEventArgs)
+        {
+            var sendData = Encoding.UTF8.GetBytes("Hello World");
+            var clientSocket = socketAsyncEventArgs.AcceptSocket;
+
+            clientSocket.BeginSend(sendData, 0, sendData.Length, SocketFlags.None, SendCallback, clientSocket);
+        }
+
+        private static void SendCallback(IAsyncResult ar)
+        {
+            try
+            {
+                Socket handler = (Socket) ar.AsyncState;
+                handler.EndSend(ar);
+            }
+            catch (SocketException ex)
+            {
+                Console.WriteLine(ex);
             }
         }
 
@@ -45,21 +91,39 @@ namespace SimpleSocketServer
         {
             var client = (Socket) socketClient;
             var receiveReult = new byte[1024];
-            while (true)
+
+            client.BeginReceive(receiveReult, 0, receiveReult.Length, SocketFlags.None, ReceiveCallback, new Tuple<Socket,byte[]>(client, receiveReult));
+        }
+
+        private static void ReceiveCallback(IAsyncResult ar)
+        {
+            Tuple<Socket, byte[]> asyncState = (Tuple<Socket, byte[]>)ar.AsyncState;
+            var clientSocket = asyncState.Item1;
+
+            try
             {
-                try
+                int rEnd = clientSocket.EndReceive(ar);
+                if (rEnd > 0)
                 {
-                    int receiveNumber = client.Receive(receiveReult);
-                    Console.WriteLine(
-                        $"接受到客户端{client.RemoteEndPoint}的消息：{Encoding.UTF8.GetString(receiveReult, 0, receiveNumber)}");
+                    byte[] data = new byte[rEnd];
+                    Array.Copy(asyncState.Item2, 0, data, 0, rEnd);
+
+                    Console.WriteLine($"当前客户总数：{_allClientSockets.Count}；" + Encoding.UTF8.GetString(data));
+
+
+                    clientSocket.BeginReceive(asyncState.Item2, 0, asyncState.Item2.Length, 0, ReceiveCallback,
+                        new Tuple<Socket, byte[]>(clientSocket, asyncState.Item2));
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                    client.Shutdown(SocketShutdown.Both);
-                    client.Close();
-                    break;
-                }
+            }
+            catch (SocketException ex)
+            {
+                Console.WriteLine(ex);
+
+                Socket outSocket;
+                _allClientSockets.TryRemove(clientSocket.RemoteEndPoint.ToString(), out outSocket);
+
+                clientSocket.Shutdown(SocketShutdown.Both);
+                clientSocket.Close();
             }
         }
     }
