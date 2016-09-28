@@ -115,9 +115,6 @@ namespace SimpleSocketClient
                 client.BeginReceiveFrom(receiveResult, 0, receiveResult.Length, SocketFlags.None, ref _remoteEndPoint,
                     ReviceCallBack, new Tuple<Socket, byte[]>(client, receiveResult));
 
-                var sendMsg = $"客户端：{tuple.Item2}，{Guid.NewGuid()}，时间：{DateTime.Now}";
-                Console.WriteLine(sendMsg);
-
                 _allSockets.TryAdd(client.LocalEndPoint.ToString(), new Tuple<int, Socket>(tuple.Item2, client));
             }
             catch (Exception ex)

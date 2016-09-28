@@ -69,14 +69,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NoFilter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TelnetServer.cs" />
-    <Compile Include="TelnetSession.cs" />
+    <Compile Include="TcpReceiveAllFilter.cs" />
+    <Compile Include="TcpServer.cs" />
+    <Compile Include="TcpSession.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Config\log4net.config" />
+    <Content Include="Config\log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Config\log4net.unix.config" />
     <None Include="packages.config" />
     <None Include="supersocket.cmd" />
