@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleSocketLabServer", "Si
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SimpleSocket", "SimpleSocket", "{33AC2839-2EA8-442D-A40C-BEA435E7E8B8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SuperSocket", "SuperSocket", "{41BCC7B0-C048-4F93-B81D-6168097F23E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperSocketServer", "SuperSocketServer\SuperSocketServer.csproj", "{366503E7-DA78-47F8-A2D8-DBC79DAEE276}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperSocketClient", "SuperSocketClient\SuperSocketClient.csproj", "{3880C706-F18F-4A6C-BF47-3B115553EF45}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +29,14 @@ Global
 		{E4C3E99B-6324-457C-9DF2-27D69676E51B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4C3E99B-6324-457C-9DF2-27D69676E51B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4C3E99B-6324-457C-9DF2-27D69676E51B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{366503E7-DA78-47F8-A2D8-DBC79DAEE276}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{366503E7-DA78-47F8-A2D8-DBC79DAEE276}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{366503E7-DA78-47F8-A2D8-DBC79DAEE276}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{366503E7-DA78-47F8-A2D8-DBC79DAEE276}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3880C706-F18F-4A6C-BF47-3B115553EF45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3880C706-F18F-4A6C-BF47-3B115553EF45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3880C706-F18F-4A6C-BF47-3B115553EF45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3880C706-F18F-4A6C-BF47-3B115553EF45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,5 +44,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E12B8AB3-AA7B-42F0-8150-565F26626256} = {33AC2839-2EA8-442D-A40C-BEA435E7E8B8}
 		{E4C3E99B-6324-457C-9DF2-27D69676E51B} = {33AC2839-2EA8-442D-A40C-BEA435E7E8B8}
+		{366503E7-DA78-47F8-A2D8-DBC79DAEE276} = {41BCC7B0-C048-4F93-B81D-6168097F23E7}
+		{3880C706-F18F-4A6C-BF47-3B115553EF45} = {41BCC7B0-C048-4F93-B81D-6168097F23E7}
 	EndGlobalSection
 EndGlobal
