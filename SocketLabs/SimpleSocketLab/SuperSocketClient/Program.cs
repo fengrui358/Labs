@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using SuperSocket.ClientEngine;
 using SuperSocket.ProtoBase;
@@ -40,6 +41,32 @@ namespace SuperSocketClient
             {
                 CreateSocket(i + 1, _remoteEndPoint);
             }
+
+            while (true)
+            {
+                var all = _allClients.Values;
+
+                foreach (var tuple in all)
+                {
+                    try
+                    {
+                        if (tuple.Item2.IsConnected)
+                        {
+                            var sendMsg = $"客户端：{tuple.Item1}，{Guid.NewGuid()}，时间：{DateTime.Now}";
+                            Console.WriteLine(sendMsg);
+
+                            var sendMsgBytes = Encoding.UTF8.GetBytes(sendMsg);
+                            tuple.Item2.Send(sendMsgBytes);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                    }
+                }
+
+                Thread.Sleep(_sendInterval);
+            }
         }
 
         private static async void CreateSocket(int clientId, EndPoint remoteEndPoint)
@@ -68,9 +95,13 @@ namespace SuperSocketClient
             });
         }
 
-        private static void ReceiveHandler(IPackageInfo packageInfo)
+        private static void ReceiveHandler(BufferedPackageInfo packageInfo)
         {
-            
+            foreach (var arrayBytes in packageInfo.Data)
+            {
+                var bytes = arrayBytes.ToArray();
+                Console.WriteLine(Encoding.UTF8.GetString(bytes));
+            }
         }
     }
 }

@@ -12,6 +12,8 @@ namespace SuperSocketServer
 {
     class Program
     {
+        private static TcpServer _server;
+
         static void Main(string[] args)
         {
             Console.WriteLine("服务启动");
@@ -20,19 +22,19 @@ namespace SuperSocketServer
 
             Console.WriteLine($"地址：{IPAddress.Any}:{port}");
 
-            var server = new TcpServer();
-            server.Setup(port);
+            _server = new TcpServer();
+            _server.Setup(port);
 
-            server.NewRequestReceived += ServerOnNewRequestReceived;
+            _server.NewRequestReceived += ServerOnNewRequestReceived;
 
-            server.Start();
+            _server.Start();
 
             Console.ReadKey();
         }
 
         private static void ServerOnNewRequestReceived(TcpSession session, BinaryRequestInfo requestInfo)
         {
-            Console.WriteLine($"收到来时客户端{session.SessionID}的消息：{Encoding.UTF8.GetString(requestInfo.Body)}");
+            Console.WriteLine($"当前客户端总数{_server.GetAllSessions().Count()}，收到来时客户端{session.SessionID}的消息：{Encoding.UTF8.GetString(requestInfo.Body)}");
         }
     }
 }
