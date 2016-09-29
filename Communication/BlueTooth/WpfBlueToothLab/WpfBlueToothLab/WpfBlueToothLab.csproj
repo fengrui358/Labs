@@ -80,9 +80,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DeviceView.xaml.cs">
-      <DependentUpon>DeviceView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Model\Device.cs" />
     <Compile Include="ServiceLocal.cs" />
@@ -90,10 +87,6 @@
     <Compile Include="Services\ISenderBluetoothService.cs" />
     <Compile Include="Services\ReceiverBluetoothService.cs" />
     <Compile Include="Services\SenderBluetoothService.cs" />
-    <Page Include="DeviceView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
