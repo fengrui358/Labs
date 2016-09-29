@@ -12,7 +12,7 @@ namespace PluginBleDemo
         public App()
         {
             // The root page of your application
-            MainPage = new MainPageView();
+            MainPage = new NavigationPage(new MainPageView());
         }
 
         protected override void OnStart()
