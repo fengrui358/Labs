@@ -1,5 +1,6 @@
 ﻿using System;
 using InTheHand.Net.Sockets;
+using System.Collections.Generic;
 
 namespace Bluetooth.Model
 {
@@ -111,6 +112,31 @@ namespace Bluetooth.Model
         public override string ToString()
         {
             return DeviceName;
+        }
+
+        
+    }
+
+    public class DeviceEqualityComparer<T> : IEqualityComparer<T>
+    {
+        public new bool Equals(T x, T y)
+        {
+            if (typeof(Device) == typeof(T))
+            {
+                return (x as Device).DeviceInfo.DeviceAddress == (y as Device).DeviceInfo.DeviceAddress;
+            }
+
+            return x.Equals(y);
+        }
+
+        public int GetHashCode(T obj)
+        {
+            if (typeof(Device) == typeof(T))
+            {
+                return (obj as Device).DeviceInfo.DeviceAddress.GetHashCode();
+            }
+
+            return obj.GetHashCode();
         }
     }
 }

@@ -5,16 +5,58 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfBlueToothLab"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="550" Width="725" WindowStartupLocation="CenterScreen">
     
-    <Grid>
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="4*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0">
-            <Button Content="发现设备" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5" Command="{Binding DiscoverCommand}"></Button>
-            <ListView ItemsSource="{Binding SlaveDevices}"></ListView>
-        </StackPanel>
+        <ListView Grid.Row="0" Grid.Column="0" ItemsSource="{Binding SlaveDevices}" VerticalAlignment="Stretch" SelectedItem="{Binding SelectedDevice}"></ListView>
+        <TextBlock Margin="3" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding StatusMsg}"></TextBlock>
+        
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <GroupBox Header="自身蓝牙信息" Grid.Column="0" Margin="3">
+                    <local:DeviceView></local:DeviceView>
+                </GroupBox>
+                <GroupBox Header="对方蓝牙信息" Grid.Column="1" Margin="3">
+                    <local:DeviceView></local:DeviceView>
+                </GroupBox>
+            </Grid>
+            <GroupBox Header="信息接受区" Grid.Row="1">
+                <StackPanel Margin="5">
+                    <ListView BorderThickness="0" ItemsSource="{Binding ReceiveMsgs}"></ListView>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="信息发送区" Grid.Row="2">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBox Grid.Row="0" Grid.Column="0" Margin="0,0,10,0" Text="{Binding ToBeSendMsg, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <Button Grid.Row="0" Content="发送" Grid.Column="1" Command="{Binding SendCommand}"></Button>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="2" Text="{Binding SendStatus}"></TextBlock>
+                </Grid>
+            </GroupBox>
+        </Grid>
     </Grid>
 </Window>
