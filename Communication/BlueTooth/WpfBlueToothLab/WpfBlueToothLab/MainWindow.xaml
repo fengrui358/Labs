@@ -53,7 +53,7 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
                     <TextBox Grid.Row="0" Grid.Column="0" Margin="0,0,10,0" Text="{Binding ToBeSendMsg, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                    <Button Grid.Row="0" Content="发送" Grid.Column="1" Command="{Binding SendCommand}"></Button>
+                    <Button Grid.Row="0" Content="发送" Grid.Column="1" Command="{Binding SendCommand}" MinWidth="40" IsDefault="True"></Button>
                     <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="2" Text="{Binding SendStatus}"></TextBlock>
                 </Grid>
             </GroupBox>
