@@ -76,7 +76,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Model\Device.cs" />
+    <Compile Include="ServiceLocal.cs" />
     <Compile Include="Services\IReceiverBluetoothService.cs" />
     <Compile Include="Services\ISenderBluetoothService.cs" />
     <Compile Include="Services\ReceiverBluetoothService.cs" />
