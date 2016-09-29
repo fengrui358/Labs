@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Bluetooth.Model;
 using InTheHand.Net;
 using InTheHand.Net.Sockets;
+using NLog;
 
 namespace Bluetooth.Services
 {
@@ -74,7 +75,7 @@ namespace Bluetooth.Services
                     try
                     {
                         var ep = new BluetoothEndPoint(device.DeviceInfo.DeviceAddress, _serviceClassId);
-                       
+
                         // connecting
                         bluetoothClient.Connect(ep);
 
@@ -93,10 +94,11 @@ namespace Bluetooth.Services
                         }
                         return false;
                     }
-                    catch
+                    catch (Exception ex)
                     {
                         // the error will be ignored and the send data will report as not sent
                         // for understood the type of the error, handle the exception
+                        LogManager.GetCurrentClassLogger().Error(ex);
                     }
                 }
                 return false;
