@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfBlueToothLab"
         xmlns:model="clr-namespace:Bluetooth.Model"
+        xmlns:helper="clr-namespace:WpfBlueToothLab.Helper"
         mc:Ignorable="d"
         Title="MainWindow" Height="550" Width="725" WindowStartupLocation="CenterScreen">
     
@@ -23,10 +24,17 @@
         <Grid Grid.Row="0" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <GroupBox Header="对方蓝牙信息" Grid.Row="0">
+            <GroupBox Header="自身蓝牙信息" Grid.Row="0">
+                <WrapPanel>
+                    <TextBlock Text="ServiceId："></TextBlock>
+                    <TextBox></TextBox>
+                </WrapPanel>
+            </GroupBox>
+            <GroupBox Header="对方蓝牙信息" Grid.Row="1">
                 <WrapPanel>
                     <ContentControl Content="{Binding ElementName=DevicesList, Path=SelectedItem}">
                         <ContentControl.ContentTemplate>
@@ -82,12 +90,12 @@
                     </ContentControl>
                 </WrapPanel>
             </GroupBox>
-            <GroupBox Header="信息接受区" Grid.Row="1">
+            <GroupBox Header="信息接受区" Grid.Row="2">
                 <StackPanel Margin="5">
                     <ListView BorderThickness="0" ItemsSource="{Binding ReceiveMsgs}"></ListView>
                 </StackPanel>
             </GroupBox>
-            <GroupBox Header="信息发送区" Grid.Row="2">
+            <GroupBox Header="信息发送区" Grid.Row="3">
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>

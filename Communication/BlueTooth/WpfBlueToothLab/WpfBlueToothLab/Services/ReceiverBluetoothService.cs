@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using InTheHand.Net.Sockets;
+using WpfBlueToothLab.Helper;
 
 namespace Bluetooth.Services
 {
@@ -12,20 +13,15 @@ namespace Bluetooth.Services
     /// </summary>
     public class ReceiverBluetoothService : ObservableObject, IDisposable, IReceiverBluetoothService
     {
-        private readonly Guid _serviceClassId;
+        private Guid _serviceClassId
+        {
+            get { return BlueToothHelper.ServiceClassId; }
+        }
         private Action<string> _responseAction;
         private BluetoothListener _listener;
         private CancellationTokenSource _cancelSource;
         private bool _wasStarted;
         private string _status;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ReceiverBluetoothService" /> class.
-        /// </summary>
-        public ReceiverBluetoothService()
-        {
-           _serviceClassId = new Guid("9bde4762-89a6-418e-bacf-fcd82f1e0677");
-        }
 
         /// <summary>
         /// Gets or sets a value indicating whether was started.

@@ -5,6 +5,7 @@ using Bluetooth.Model;
 using InTheHand.Net;
 using InTheHand.Net.Sockets;
 using NLog;
+using WpfBlueToothLab.Helper;
 
 namespace Bluetooth.Services
 {
@@ -13,16 +14,9 @@ namespace Bluetooth.Services
     /// </summary>
     public sealed class SenderBluetoothService : ISenderBluetoothService
     {
-         private readonly Guid _serviceClassId;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SenderBluetoothService"/> class. 
-        /// </summary>
-        public SenderBluetoothService()
+        private Guid _serviceClassId
         {
-            // this guid is random, only need to match in Sender & Receiver
-            // this is like a "key" for the connection!
-            _serviceClassId = new Guid("9bde4762-89a6-418e-bacf-fcd82f1e0677");
+            get { return BlueToothHelper.ServiceClassId; }
         }
 
         /// <summary>

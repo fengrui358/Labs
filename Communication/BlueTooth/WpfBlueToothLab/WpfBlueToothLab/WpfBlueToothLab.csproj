@@ -80,6 +80,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helper\BlueToothHelper.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Model\Device.cs" />
     <Compile Include="ServiceLocal.cs" />
