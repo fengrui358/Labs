@@ -4,11 +4,13 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using Plugin.BLE;
 using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;
+using PluginBleDemo.Models;
 using Xamarin.Forms;
 
 namespace PluginBleDemo
@@ -25,7 +27,7 @@ namespace PluginBleDemo
 
         private string _scanStatus;
 
-        private ObservableCollection<IDevice> _devices;
+        private ObservableCollection<BlDevice> _devices;
         private INavigation _navigation;
 
         #endregion
@@ -56,7 +58,7 @@ namespace PluginBleDemo
             set { Set(() => ScanStatus, ref _scanStatus, value); }
         }
 
-        public ObservableCollection<IDevice> Devices
+        public ObservableCollection<BlDevice> Devices
         {
             get { return _devices; }
             set { Set(() => Devices, ref _devices, value); }
@@ -69,12 +71,12 @@ namespace PluginBleDemo
         public MainPageViewModel(INavigation navigation)
         {
             _navigation = navigation;
-            _devices = new ObservableCollection<IDevice>();
+            _devices = new ObservableCollection<BlDevice>();
 
             _ble = CrossBluetoothLE.Current;
 
             //设置扫描等待为20S
-            _ble.Adapter.ScanTimeout = 20000;
+            //_ble.Adapter.ScanTimeout = 20000;
 
             _ble.StateChanged += (sender, args) =>
             {
@@ -123,7 +125,10 @@ namespace PluginBleDemo
 
             if (exist == null)
             {
-                Devices.Add(deviceEventArgs.Device);
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    Devices.Add(new BlDevice(deviceEventArgs.Device));
+                });
             }
         }
 
@@ -143,7 +148,8 @@ namespace PluginBleDemo
                         var sw = Stopwatch.StartNew();
                         ScanStatus = "开始扫描……";
 
-                        await _ble.Adapter.StartScanningForDevicesAsync();                        
+                        var _cancellationTokenSource = new CancellationTokenSource();
+                        await _ble.Adapter.StartScanningForDevicesAsync(cancellationToken: _cancellationTokenSource.Token);                        
 
                         await _ble.Adapter.StopScanningForDevicesAsync();
 
