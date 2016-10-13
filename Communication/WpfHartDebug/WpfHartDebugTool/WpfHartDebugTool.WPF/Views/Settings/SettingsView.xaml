@@ -1,0 +1,49 @@
+﻿<base:BaseView x:Class="WpfHartDebugTool.WPF.Views.Settings.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:base="clr-namespace:WpfHartDebugTool.WPF.Views.Base"
+             xmlns:settings="clr-namespace:WpfHartDebugTool.WPF.Views.Settings"
+             xmlns:commands="clr-namespace:MvvmCross.Wpf.Commands;assembly=MvvmCross.Wpf"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <base:BaseView.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Width" Value="80"></Setter>
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="MinWidth" Value="80"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        </Style>
+    </base:BaseView.Resources>
+    <GroupBox Header="串口设置">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <WrapPanel>
+                    <Label Content="端口"></Label>
+                    <TextBox Text="{Binding Port}"></TextBox>
+                </WrapPanel>
+                <WrapPanel>
+                    <Label Content="波特率"></Label>
+                    <TextBox Text="{Binding Port}"></TextBox>
+                </WrapPanel>
+                <WrapPanel>
+                    <Label Content="校验位"></Label>
+                    <TextBox Text="{Binding Port}"></TextBox>
+                </WrapPanel>
+            </StackPanel>
+            <Grid Grid.Column="1">
+                <StackPanel VerticalAlignment="Center">
+                    <Button Content="{Binding OpenSerialStatus}" Command="{Binding OpenSerialPortCommand}"></Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </GroupBox>
+</base:BaseView>
+
