@@ -17,6 +17,10 @@
       <Label Text="{Binding IsAvailable}"></Label>
     </StackLayout>
     <StackLayout Orientation="Horizontal" VerticalOptions="Start">
+      <Label Text="启动：" VerticalOptions="Center" HorizontalOptions="Center" />      
+      <Button Text="启动扫描" Command="{Binding StartScanCommand}"></Button>
+    </StackLayout>
+    <StackLayout Orientation="Horizontal" VerticalOptions="Start">
       <Label Text="扫描状态：" VerticalOptions="Center" HorizontalOptions="Center" />
       <Label Text="{Binding ScanStatus}"></Label>
     </StackLayout>
