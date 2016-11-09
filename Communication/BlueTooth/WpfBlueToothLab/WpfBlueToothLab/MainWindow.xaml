@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfBlueToothLab"
+        xmlns:model="clr-namespace:Bluetooth.Model"
+        xmlns:helper="clr-namespace:WpfBlueToothLab.Helper"
         mc:Ignorable="d"
         Title="MainWindow" Height="550" Width="725" WindowStartupLocation="CenterScreen">
     
@@ -16,33 +18,84 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="4*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ListView Grid.Row="0" Grid.Column="0" ItemsSource="{Binding SlaveDevices}" VerticalAlignment="Stretch" SelectedItem="{Binding SelectedDevice}"></ListView>
+        <ListView x:Name="DevicesList" Grid.Row="0" Grid.Column="0" ItemsSource="{Binding SlaveDevices}" VerticalAlignment="Stretch" SelectedItem="{Binding SelectedDevice}"></ListView>
         <TextBlock Margin="3" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding StatusMsg}"></TextBlock>
         
         <Grid Grid.Row="0" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <GroupBox Header="自身蓝牙信息" Grid.Column="0" Margin="3">
-                    <local:DeviceView></local:DeviceView>
-                </GroupBox>
-                <GroupBox Header="对方蓝牙信息" Grid.Column="1" Margin="3">
-                    <local:DeviceView></local:DeviceView>
-                </GroupBox>
-            </Grid>
-            <GroupBox Header="信息接受区" Grid.Row="1">
+            <GroupBox Header="自身蓝牙信息" Grid.Row="0">
+                <WrapPanel>
+                    <TextBlock Text="ServiceId："></TextBlock>
+                    <TextBox></TextBox>
+                </WrapPanel>
+            </GroupBox>
+            <GroupBox Header="对方蓝牙信息" Grid.Row="1">
+                <WrapPanel>
+                    <ContentControl Content="{Binding ElementName=DevicesList, Path=SelectedItem}">
+                        <ContentControl.ContentTemplate>
+                            <DataTemplate DataType="{x:Type model:Device}">
+                                <WrapPanel>
+                                    <WrapPanel Margin="3" Background="AliceBlue">
+                                        <Label Content="DeviceName："></Label>
+                                        <Label Content="{Binding DeviceName}"></Label>
+                                    </WrapPanel>
+                                    <WrapPanel Margin="3" Background="AliceBlue">
+                                        <Label Content="IsAuthenticated："></Label>
+                                        <Label Content="{Binding IsAuthenticated}"></Label>
+                                    </WrapPanel>
+                                    <WrapPanel Margin="3" Background="AliceBlue">
+                                        <Label Content="IsConnected："></Label>
+                                        <Label Content="{Binding IsConnected}"></Label>
+                                    </WrapPanel>
+                                    <WrapPanel Margin="3" Background="AliceBlue">
+                                        <Label Content="Nap："></Label>
+                                        <Label Content="{Binding Nap}"></Label>
+                                    </WrapPanel>
+                                    <WrapPanel Margin="3" Background="AliceBlue">
+                                        <Label Content="Sap："></Label>
+                                        <Label Content="{Binding Sap}"></Label>
+                                    </WrapPanel>
+                                    <WrapPanel Margin="3" Background="AliceBlue">
+                                        <Label Content="LastSeen："></Label>
+                                        <Label Content="{Binding LastSeen}"></Label>
+                                    </WrapPanel>
+                                    <WrapPanel Margin="3" Background="AliceBlue">
+                                        <Label Content="LastUsed："></Label>
+                                        <Label Content="{Binding LastUsed}"></Label>
+                                    </WrapPanel>
+                                    <WrapPanel Margin="3" Background="AliceBlue">
+                                        <Label Content="Remembered："></Label>
+                                        <Label Content="{Binding Remembered}"></Label>
+                                    </WrapPanel>
+                                    <WrapPanel Margin="3" Background="AliceBlue">
+                                        <Label Content="Rssi："></Label>
+                                        <Label Content="{Binding DeviceInfo.Rssi}"></Label>
+                                    </WrapPanel>
+                                    <WrapPanel Margin="3" Background="AliceBlue">
+                                        <Label Content="DeviceAddress："></Label>
+                                        <Label Content="{Binding DeviceInfo.DeviceAddress}"></Label>
+                                    </WrapPanel>
+                                    <!--<WrapPanel Margin="3">
+                                        <Label Content="DeviceAddress："></Label>
+                                        <Label Content="{Binding DeviceInfo.InstalledServices.Count}"></Label>
+                                    </WrapPanel>-->
+                                </WrapPanel>
+                            </DataTemplate>
+                        </ContentControl.ContentTemplate>
+                    </ContentControl>
+                </WrapPanel>
+            </GroupBox>
+            <GroupBox Header="信息接受区" Grid.Row="2">
                 <StackPanel Margin="5">
                     <ListView BorderThickness="0" ItemsSource="{Binding ReceiveMsgs}"></ListView>
                 </StackPanel>
             </GroupBox>
-            <GroupBox Header="信息发送区" Grid.Row="2">
+            <GroupBox Header="信息发送区" Grid.Row="3">
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>

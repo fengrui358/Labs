@@ -17,18 +17,22 @@
       <Label Text="{Binding IsAvailable}"></Label>
     </StackLayout>
     <StackLayout Orientation="Horizontal" VerticalOptions="Start">
+      <Label Text="启动：" VerticalOptions="Center" HorizontalOptions="Center" />      
+      <Button Text="启动扫描" Command="{Binding StartScanCommand}"></Button>
+    </StackLayout>
+    <StackLayout Orientation="Horizontal" VerticalOptions="Start">
       <Label Text="扫描状态：" VerticalOptions="Center" HorizontalOptions="Center" />
       <Label Text="{Binding ScanStatus}"></Label>
     </StackLayout>
     <StackLayout Orientation="Horizontal" VerticalOptions="Start">
       <ListView ItemsSource="{Binding Devices}" ItemTapped="ListView_OnItemTapped">
-        <ListView.ItemTemplate>
+        <!--<ListView.ItemTemplate>
           <DataTemplate>
             <ContentView>
               <Entry Text="{Binding Name}"></Entry>
             </ContentView>
           </DataTemplate>
-        </ListView.ItemTemplate>
+        </ListView.ItemTemplate>-->
       </ListView>
     </StackLayout>
   </StackLayout>
