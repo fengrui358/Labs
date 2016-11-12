@@ -20,7 +20,7 @@ namespace AirKissLib
                 LeadingPart();
                 MagicCode(ssid, passWord);
 
-                for (int i = 0; i < 15; ++i) //注意是 ++i
+                for (int i = 0; i < 15; i++)
                 {
                     PrefixCode(passWord);
                     var data = passWord + _randomChar + ssid;
@@ -52,8 +52,8 @@ namespace AirKissLib
         public int[] GetEncodedData()
         {
             var encodedData = new int[_length];
-            _encodedData.CopyTo(encodedData, _length);
-
+            Array.Copy(_encodedData, 0, encodedData, 0, _length);
+       
             return encodedData;
         }
 
@@ -62,7 +62,7 @@ namespace AirKissLib
         /// </summary>
         private void LeadingPart()
         {
-            //发送400ms的前导域。todo：这里应该不止
+            //发送前导域。
             for (int i = 0; i < 50; ++i)
             {
                 //前导域固定有四个字节组成：{1,2,3,4}

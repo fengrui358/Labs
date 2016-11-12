@@ -21,12 +21,24 @@ namespace AirKissDemo.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        private AirKissTask _airKissTask;
+
         public MainWindow()
         {
             InitializeComponent();
+        }
 
-            var x =new AirKissEncoder("free_home", "helloworld");
+        private void Start(object sender, RoutedEventArgs e)
+        {
+            var airKissEncoder = new AirKissEncoder(SsidText.Text, PswText.Text);
 
+            _airKissTask = new AirKissTask(airKissEncoder);
+            _airKissTask.Execute();
+        }
+
+        private void Stop(object sender, RoutedEventArgs e)
+        {
+            _airKissTask?.Stop();
         }
     }
 }
