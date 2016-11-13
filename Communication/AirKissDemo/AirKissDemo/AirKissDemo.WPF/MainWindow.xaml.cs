@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AirKissDemo.Core;
+using AirKissDemo.UDP;
 using AirKissLib;
 
 namespace AirKissDemo.WPF
@@ -21,24 +23,11 @@ namespace AirKissDemo.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private AirKissTask _airKissTask;
-
         public MainWindow()
         {
             InitializeComponent();
-        }
 
-        private void Start(object sender, RoutedEventArgs e)
-        {
-            var airKissEncoder = new AirKissEncoder(SsidText.Text, PswText.Text);
-
-            _airKissTask = new AirKissTask(airKissEncoder);
-            _airKissTask.Execute();
-        }
-
-        private void Stop(object sender, RoutedEventArgs e)
-        {
-            _airKissTask?.Stop();
+            DataContext = new MainPageViewModel(new UdpServerWrap(), new UdpClientWrap());
         }
     }
 }
