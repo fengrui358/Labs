@@ -31,7 +31,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;__MOBILE__</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
@@ -41,7 +41,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;__MOBILE__</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
@@ -97,6 +97,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AirKissDemo.WPF\UdpClientWrap.cs">
+      <Link>UdpSocket\UdpClientWrap.cs</Link>
+    </Compile>
+    <Compile Include="..\AirKissDemo.WPF\UdpServerWrap.cs">
+      <Link>UdpSocket\UdpServerWrap.cs</Link>
+    </Compile>
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -121,6 +127,10 @@
     <AndroidResource Include="Resources\values\styles.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AirKissDemo.Core\AirKissDemo.Core.csproj">
+      <Project>{eb4959ff-73e2-43a7-a91f-bd46fc922f23}</Project>
+      <Name>AirKissDemo.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AirKissDemo\AirKissDemo.csproj">
       <Project>{947d01ae-9e94-4f8d-ae2e-795f306c1193}</Project>
       <Name>AirKissDemo</Name>

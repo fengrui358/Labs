@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Globalization;
-using System.Windows.Data;
+using Xamarin.Forms;
 
-namespace AirKissDemo.WPF
+namespace AirKissDemo
 {
     public class BoolConverter : IValueConverter
     {

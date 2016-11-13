@@ -5,7 +5,13 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using AirKissDemo.Core;
+using AirKissDemo.UDP;
 
+#if __MOBILE__
+using Xamarin.Forms;
+
+[assembly: Dependency(typeof(UdpServerWrap))]
+#endif
 namespace AirKissDemo.UDP
 {
     public class UdpServerWrap : IUdpServer

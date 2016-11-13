@@ -33,12 +33,7 @@ namespace AirKissDemo.Core
         public string Status
         {
             get { return _status; }
-            //set { SetProperty(ref _status, value); }
-            set
-            {
-                _status = value;
-                RaisePropertyChanged(()=>Status);
-            }
+            set { SetProperty(ref _status, value); }
         }
 
         /// <summary>
@@ -62,6 +57,9 @@ namespace AirKissDemo.Core
 
         public MainPageViewModel(IUdpServer udpServer, IUdpClient udpClient)
         {
+            SSID = "free_home";
+            PassWord = "woshiwifi";
+
             _udpServer = udpServer;
             _udpClient = udpClient;
 
@@ -98,7 +96,7 @@ namespace AirKissDemo.Core
 
                     StartConfig = _udpServer.Start && _udpClient.Start;
 
-                    Task.Delay(1000).Wait();
+                    Task.Delay(200).Wait();
 
                     Debug.WriteLine("设置成功，" + DateTime.Now);
                     Status = "设置成功，" + DateTime.Now;

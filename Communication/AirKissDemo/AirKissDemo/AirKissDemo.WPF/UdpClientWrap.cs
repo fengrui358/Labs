@@ -4,7 +4,13 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using AirKissDemo.Core;
+using AirKissDemo.UDP;
 
+#if __MOBILE__
+using Xamarin.Forms;
+
+[assembly: Dependency(typeof(UdpClientWrap))]
+#endif
 namespace AirKissDemo.UDP
 {
     public class UdpClientWrap : IUdpClient
@@ -51,12 +57,9 @@ namespace AirKissDemo.UDP
                         for (int i = 0; i < data.Length; i++)
                         {
                             SendPacketAndSleep(data[i]);
-                            if (i%200 == 0)
+                            if (!Start)
                             {
-                                if (!Start)
-                                {
-                                    break;
-                                }
+                                break;
                             }
 
                             Thread.Sleep(SleepingTime);
@@ -72,7 +75,7 @@ namespace AirKissDemo.UDP
                     finally
                     {
                         index++;
-                        Thread.Sleep(500);
+                        Thread.Sleep(1000);
                     }
                 }
             })
@@ -90,7 +93,7 @@ namespace AirKissDemo.UDP
         {
             try
             {
-                _udpClient?.Send(_dummyData, length, "255.255.255.255", 7788);
+                _udpClient?.Send(_dummyData, length, "255.255.255.255", Port);
             }
             catch (Exception ex)
             {

@@ -88,6 +88,12 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\AirKissDemo.WPF\UdpClientWrap.cs">
+      <Link>UdpSocket\UdpClientWrap.cs</Link>
+    </Compile>
+    <Compile Include="..\AirKissDemo.WPF\UdpServerWrap.cs">
+      <Link>UdpSocket\UdpServerWrap.cs</Link>
+    </Compile>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
@@ -138,11 +144,16 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AirKissDemo.Core\AirKissDemo.Core.csproj">
+      <Project>{eb4959ff-73e2-43a7-a91f-bd46fc922f23}</Project>
+      <Name>AirKissDemo.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AirKissDemo\AirKissDemo.csproj">
       <Project>{947d01ae-9e94-4f8d-ae2e-795f306c1193}</Project>
       <Name>AirKissDemo</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.2.0.45\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.2.0.45\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
