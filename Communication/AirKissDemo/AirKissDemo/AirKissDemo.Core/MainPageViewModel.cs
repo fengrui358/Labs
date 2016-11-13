@@ -57,9 +57,12 @@ namespace AirKissDemo.Core
 
         public MainPageViewModel(IUdpServer udpServer, IUdpClient udpClient)
         {
+#if DEBUG
+
             SSID = "free_home";
             PassWord = "woshiwifi";
 
+#endif
             _udpServer = udpServer;
             _udpClient = udpClient;
 
