@@ -50,6 +50,7 @@ namespace AirKissDemo.UDP
                     {
                         Debug.WriteLine(ex);
                         _udpClient.Close();
+                        break;
                     }
                 }
 
@@ -59,6 +60,7 @@ namespace AirKissDemo.UDP
         public void StopListening()
         {
             Start = false;
+            _udpClient?.Close();
         }
 
         public event EventHandler<byte[]> NewDataReceiveEvent;

@@ -4,12 +4,13 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using AirKissLib;
 using MvvmCross.Core.ViewModels;
 
 namespace AirKissDemo.Core
 {
-    public class MainPageViewModel : MvxViewModel, INotifyPropertyChanged
+    public class MainPageViewModel : MvxViewModel
     {
         private readonly IUdpServer _udpServer;
         private readonly IUdpClient _udpClient;
@@ -95,8 +96,12 @@ namespace AirKissDemo.Core
                     _udpServer.StopListening();
                     _udpClient.Stop();
 
-                    Debug.WriteLine("设置成功");
-                    Status = "设置成功";
+                    StartConfig = _udpServer.Start && _udpClient.Start;
+
+                    Task.Delay(1000).Wait();
+
+                    Debug.WriteLine("设置成功，" + DateTime.Now);
+                    Status = "设置成功，" + DateTime.Now;
                 }
                 catch (Exception ex)
                 {

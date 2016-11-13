@@ -34,6 +34,7 @@ namespace AirKissDemo.UDP
             new Thread(() =>
             {
                 _udpClient = new UdpClient(new IPEndPoint(IPAddress.Any, 0));
+                var index = 1;
 
                 while (true)
                 {
@@ -44,8 +45,8 @@ namespace AirKissDemo.UDP
                             break;
                         }
 
-                        Debug.WriteLine("开始发送数据" + DateTime.Now);
-                        StatusEvent?.Invoke(this, "开始发送数据" + DateTime.Now);
+                        Debug.WriteLine($"开始第{index}轮发送数据，{DateTime.Now}");
+                        StatusEvent?.Invoke(this, $"开始第{index}轮发送数据，{DateTime.Now}");
 
                         for (int i = 0; i < data.Length; i++)
                         {
@@ -61,8 +62,8 @@ namespace AirKissDemo.UDP
                             Thread.Sleep(SleepingTime);
                         }
 
-                        Debug.WriteLine("数据发送完毕" + DateTime.Now);
-                        StatusEvent?.Invoke(this, "数据发送完毕" + DateTime.Now);
+                        Debug.WriteLine($"第{index}轮数据发送完毕，{DateTime.Now}");
+                        StatusEvent?.Invoke(this, $"第{index}轮数据发送完毕，{DateTime.Now}");
                     }
                     catch (Exception ex)
                     {
@@ -70,6 +71,7 @@ namespace AirKissDemo.UDP
                     }
                     finally
                     {
+                        index++;
                         Thread.Sleep(500);
                     }
                 }
