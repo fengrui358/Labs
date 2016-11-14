@@ -56,7 +56,7 @@ namespace AirKissDemo.UDP
 
                         for (int i = 0; i < data.Length; i++)
                         {
-                            SendPacketAndSleep(data[i]);
+                            SendPacket(data[i]);
                             if (!Start)
                             {
                                 break;
@@ -89,7 +89,7 @@ namespace AirKissDemo.UDP
 
         public event EventHandler<string> StatusEvent;
 
-        private void SendPacketAndSleep(int length)
+        private void SendPacket(int length)
         {
             try
             {

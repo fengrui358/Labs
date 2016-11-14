@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -53,7 +54,18 @@ namespace AirKissLib
         {
             var encodedData = new int[_length];
             Array.Copy(_encodedData, 0, encodedData, 0, _length);
-       
+
+#if DEBUG
+            var debugStr = new StringBuilder();
+            foreach (var i in encodedData)
+            {
+                debugStr.Append($"{i} ");
+            }
+
+            Debug.WriteLine("打印发送编码数据:");
+            Debug.WriteLine(debugStr);
+#endif
+
             return encodedData;
         }
 
