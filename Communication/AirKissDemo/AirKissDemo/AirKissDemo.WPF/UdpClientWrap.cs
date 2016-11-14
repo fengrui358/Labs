@@ -18,7 +18,7 @@ namespace AirKissDemo.UDP
         private readonly byte[] _dummyData = new byte[1500];
         private UdpClient _udpClient;
 
-        public int SleepingTime { get; set; } = 4;
+        public int SleepingTime { get; set; } = 8; //第三方库的源代码是4ms，Android和WPF都可以，但是iOS貌似有发送缓冲区溢出，这里默认改大
 
         public int Port { get; set; } = 7788;
 
@@ -40,6 +40,7 @@ namespace AirKissDemo.UDP
             new Thread(() =>
             {
                 _udpClient = new UdpClient(new IPEndPoint(IPAddress.Any, 0));
+
                 var index = 1;
 
                 while (true)

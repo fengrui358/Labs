@@ -22,6 +22,8 @@ namespace AirKissDemo.Core
 
         private bool _startConfig;
 
+        private int _frameInterval = 8; //发包帧间隔默认8ms
+
         /// <summary>
         /// 工作状态
         /// </summary>
@@ -47,6 +49,15 @@ namespace AirKissDemo.Core
         public string PassWord { get; set; }
 
         /// <summary>
+        /// 发包帧间隔
+        /// </summary>
+        public int FrameInterval
+        {
+            get { return _frameInterval; }
+            set { SetProperty(ref _frameInterval, value); }
+        }
+
+        /// <summary>
         /// 是否启动配置
         /// </summary>
         public bool StartConfig
@@ -59,8 +70,8 @@ namespace AirKissDemo.Core
         {
 #if DEBUG
 
-            SSID = "free_home";
-            PassWord = "woshiwifi";
+            SSID = "testwifi";
+            PassWord = "testwifi";
 
 #endif
             _udpServer = udpServer;
@@ -123,6 +134,7 @@ namespace AirKissDemo.Core
 
                 _replyByteCounter = 0;
 
+                _udpClient.SleepingTime = _frameInterval > 0 ? _frameInterval : 1;
                 _udpServer.StartListening();
                 _udpClient.StartSend(airKissEncoder.GetEncodedData());
 

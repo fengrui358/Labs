@@ -11,8 +11,9 @@
   <StackLayout VerticalOptions="Center">
     <Label HorizontalOptions="Center" Text="AirKiss调试" FontSize="18"></Label>
     <Label Text="{Binding Status}" TextColor="Red"></Label>
-    <Editor Text="{Binding SSID}"></Editor>
-    <Editor Text="{Binding PassWord}"></Editor>
+    <Entry Placeholder="WifiSSID" Text="{Binding SSID}"></Entry>
+    <Entry Placeholder="密码" Text="{Binding PassWord}"></Entry>
+    <Entry Placeholder="发包帧间隔" Text="{Binding FrameInterval}"></Entry>
     <Button Text="调试" Command="{Binding StartCommand}" IsEnabled="{Binding StartConfig, Converter={StaticResource BoolConverter}}"></Button>
     <Button Text="停止" Command="{Binding StopCommand}" IsEnabled="{Binding StartConfig}"/>
   </StackLayout>
