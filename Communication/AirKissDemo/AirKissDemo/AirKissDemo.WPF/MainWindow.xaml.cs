@@ -27,7 +27,7 @@ namespace AirKissDemo.WPF
         {
             InitializeComponent();
 
-            DataContext = new MainPageViewModel(new UdpServerWrap(), new UdpClientWrap());
+            DataContext = new MainPageViewModel(new UdpServerWrap(), new UdpClientWrap(), new WlanClientWrap());
         }
     }
 }

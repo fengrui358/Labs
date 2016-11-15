@@ -80,8 +80,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BoolConverter.cs" />
+    <Compile Include="Interop.cs" />
     <Compile Include="UdpClientWrap.cs" />
     <Compile Include="UdpServerWrap.cs" />
+    <Compile Include="WlanApi.cs" />
+    <Compile Include="WlanClientWrap.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -14,6 +14,7 @@ namespace AirKissDemo.Core
     {
         private readonly IUdpServer _udpServer;
         private readonly IUdpClient _udpClient;
+        private readonly IWlanClient _wlanClient;
 
         private const int ReplyByteConfirmTimes = 5; //收到随机码的确认信息可表示配置成功的阀值次数
         private char _randomChar;
@@ -66,7 +67,7 @@ namespace AirKissDemo.Core
             set { SetProperty(ref _startConfig, value); }
         }
 
-        public MainPageViewModel(IUdpServer udpServer, IUdpClient udpClient)
+        public MainPageViewModel(IUdpServer udpServer, IUdpClient udpClient ,IWlanClient wlanClient)
         {
 #if DEBUG
 
@@ -76,6 +77,7 @@ namespace AirKissDemo.Core
 #endif
             _udpServer = udpServer;
             _udpClient = udpClient;
+            _wlanClient = wlanClient;
 
             _udpServer.NewDataReceiveEvent += UdpServerOnNewDataReceiveEvent;
             _udpClient.StatusEvent += UdpClientOnStatusEvent;
@@ -84,6 +86,8 @@ namespace AirKissDemo.Core
             StopCommand = new MvxCommand(StopCommandHander);
 
             ShouldAlwaysRaiseInpcOnUserInterfaceThread(false); //Mvx需要关闭必须UI线程刷新
+
+            TrySetSSID();
         }
 
         private void UdpClientOnStatusEvent(object sender, string s)
@@ -150,6 +154,18 @@ namespace AirKissDemo.Core
                 _udpClient.Stop();
 
                 StartConfig = _udpServer.Start && _udpClient.Start;
+            }
+        }
+
+        /// <summary>
+        /// 尝试设置当前的SSID
+        /// </summary>
+        private void TrySetSSID()
+        {
+            var ssid = _wlanClient?.GetCurrentWifiSSID();
+            if (!string.IsNullOrEmpty(ssid))
+            {
+                SSID = ssid;
             }
         }
     }
