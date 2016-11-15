@@ -15,7 +15,7 @@ namespace AirKissDemo
             InitializeComponent();
 
             BindingContext = new MainPageViewModel(DependencyService.Get<IUdpServer>(),
-                DependencyService.Get<IUdpClient>(), null);
+                DependencyService.Get<IUdpClient>(), DependencyService.Get<IWlanClient>());
         }
     }
 }

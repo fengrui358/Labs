@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using AirKissDemo.Core;
 using NativeWifi;
@@ -10,25 +11,17 @@ namespace AirKissDemo.WPF
 {
     public class WlanClientWrap :IWlanClient
     {
-        private WlanClient _wlanClient;
-
-        public WlanClientWrap()
-        {
-            
-        }
+        private readonly Lazy<WlanClient> _wlanClient = new Lazy<WlanClient>(() => new WlanClient(),
+            LazyThreadSafetyMode.PublicationOnly);
 
         public string GetCurrentWifiSSID()
         {
-            if (_wlanClient == null)
-            {
-                _wlanClient = new WlanClient();
-            }
-
             var ssid = string.Empty;
 
-            if (_wlanClient != null && _wlanClient.Interfaces != null)
+            var wlanclient = _wlanClient.Value;
+            if (wlanclient?.Interfaces != null)
             {
-                var connector = _wlanClient.Interfaces.FirstOrDefault(
+                var connector = wlanclient.Interfaces.FirstOrDefault(
                     s => s.CurrentConnection.isState == Wlan.WlanInterfaceState.Connected);
 
                 ssid = connector?.CurrentConnection.profileName;

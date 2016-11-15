@@ -69,12 +69,6 @@ namespace AirKissDemo.Core
 
         public MainPageViewModel(IUdpServer udpServer, IUdpClient udpClient ,IWlanClient wlanClient)
         {
-#if DEBUG
-
-            SSID = "testwifi";
-            PassWord = "testwifi";
-
-#endif
             _udpServer = udpServer;
             _udpClient = udpClient;
             _wlanClient = wlanClient;
