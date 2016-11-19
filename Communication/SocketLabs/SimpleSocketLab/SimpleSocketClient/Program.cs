@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,6 +26,15 @@ namespace SimpleSocketClient
 
             var ip = ConfigurationManager.AppSettings["RemoteIp"];
             var port = int.Parse(ConfigurationManager.AppSettings["RemotePort"]);
+
+            var isIp = Regex.Match(ip,
+                @"((?:(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d)))\.){3}(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d))))")
+                .Success;
+            if (!isIp)
+            {
+                var firstIpAddress = Dns.GetHostAddresses(ip).First();
+                ip = firstIpAddress.ToString();
+            }
 
             Console.WriteLine($"服务器地址：{ip}:{port}");
 
