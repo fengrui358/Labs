@@ -17,11 +17,11 @@ namespace SimpleSocketServer
 
         static void Main(string[] args)
         {
-            Console.WriteLine("启动服务");
+            Console.WriteLine("Start Service");
 
             var port = int.Parse(ConfigurationManager.AppSettings["Port"]);
 
-            Console.WriteLine($"地址：{IPAddress.Any}:{port}");
+            Console.WriteLine($"Address:{IPAddress.Any}:{port}");
 
             _serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             _serverSocket.Bind(new IPEndPoint(IPAddress.Any, port));
@@ -68,8 +68,8 @@ namespace SimpleSocketServer
 
         private static void SendHelloToClient(SocketAsyncEventArgs socketAsyncEventArgs)
         {
-            var sendData = Encoding.UTF8.GetBytes("Hello World");
             var clientSocket = socketAsyncEventArgs.AcceptSocket;
+            var sendData = Encoding.UTF8.GetBytes($"Service Time: {DateTime.Now} ;Hello World {clientSocket.RemoteEndPoint}");
 
             clientSocket.BeginSend(sendData, 0, sendData.Length, SocketFlags.None, SendCallback, clientSocket);
         }

@@ -24,7 +24,7 @@ namespace SuperSocketClient
 
         static void Main(string[] args)
         {
-            Console.WriteLine("启动客户端");
+            Console.WriteLine("Start Client");
 
             var ip = ConfigurationManager.AppSettings["RemoteIp"];
             var port = int.Parse(ConfigurationManager.AppSettings["RemotePort"]);
@@ -38,7 +38,7 @@ namespace SuperSocketClient
                 ip = firstIpAddress.ToString();
             }
 
-            Console.WriteLine($"服务器地址：{ip}:{port}");
+            Console.WriteLine($"Service Addess:{ip}:{port}");
 
             var ipAddress = IPAddress.Parse(ip);
 
@@ -86,6 +86,13 @@ namespace SuperSocketClient
                 try
                 {
                     var client = new EasyClient();
+
+                    var port = int.Parse(ConfigurationManager.AppSettings["LocalPort"]);
+                    if (port != 0)
+                    {
+                        client.LocalEndPoint = new IPEndPoint(IPAddress.Any, port);
+                    }
+
                     client.Initialize(new ReceiveFilter(), ReceiveHandler);
 
                     var isConnected = await client.ConnectAsync(remoteEndPoint);

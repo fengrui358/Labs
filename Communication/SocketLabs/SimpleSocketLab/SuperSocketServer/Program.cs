@@ -16,11 +16,11 @@ namespace SuperSocketServer
 
         static void Main(string[] args)
         {
-            Console.WriteLine("服务启动");
+            Console.WriteLine("Start Service");
 
             var port = int.Parse(ConfigurationManager.AppSettings["Port"]);
 
-            Console.WriteLine($"地址：{IPAddress.Any}:{port}");
+            Console.WriteLine($"Address:{IPAddress.Any}:{port}");
 
             _server = new TcpServer();
             _server.Setup(port);

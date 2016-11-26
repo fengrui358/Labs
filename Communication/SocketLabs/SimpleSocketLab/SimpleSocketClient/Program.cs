@@ -22,7 +22,7 @@ namespace SimpleSocketClient
 
         static void Main(string[] args)
         {
-            Console.WriteLine("启动客户端");
+            Console.WriteLine("Start Client");
 
             var ip = ConfigurationManager.AppSettings["RemoteIp"];
             var port = int.Parse(ConfigurationManager.AppSettings["RemotePort"]);
@@ -36,7 +36,7 @@ namespace SimpleSocketClient
                 ip = firstIpAddress.ToString();
             }
 
-            Console.WriteLine($"服务器地址：{ip}:{port}");
+            Console.WriteLine($"Service Addess:{ip}:{port}");
 
             var ipAddress = IPAddress.Parse(ip);
 
@@ -81,6 +81,11 @@ namespace SimpleSocketClient
         private static void CreateSocket(int clientId, EndPoint remoteEndPoint)
         {
             var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            var port = int.Parse(ConfigurationManager.AppSettings["LocalPort"]);
+            if (port != 0)
+            {
+                client.Bind(new IPEndPoint(IPAddress.Any, port));
+            }
 
             try
             {
