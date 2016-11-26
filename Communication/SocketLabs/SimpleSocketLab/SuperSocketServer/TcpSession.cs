@@ -14,7 +14,7 @@ namespace SuperSocketServer
         {
             try
             {
-                Console.WriteLine("Session启动");
+                Console.WriteLine("Session start");
                 Send("Hello " + SessionID);
             }
             catch (Exception ex)
@@ -37,7 +37,7 @@ namespace SuperSocketServer
         {
             try
             {
-                Console.WriteLine($"客户端Session{SessionID}断开连接，{reason}");
+                Console.WriteLine($"Client session:{SessionID} disconnect,{reason}");
             }
             catch (Exception ex)
             {

@@ -42,7 +42,7 @@ namespace SimpleSocketClient
 
             _remoteEndPoint = new IPEndPoint(ipAddress, port);
 
-            Console.WriteLine("输入期望建立的链接数：");
+            Console.WriteLine("Except the count of the connectors:");
             var num = int.Parse(Console.ReadLine());
 
             for (int i = 0; i < num; i++)
@@ -60,7 +60,7 @@ namespace SimpleSocketClient
                     {
                         if (tuple.Item2.Connected)
                         {
-                            var sendMsg = $"客户端：{tuple.Item1}，{Guid.NewGuid()}，时间：{DateTime.Now}";
+                            var sendMsg = $"Client:{tuple.Item1},{Guid.NewGuid()},Time:{DateTime.Now}";
                             Console.WriteLine(sendMsg);
 
                             var sendMsgBytes = Encoding.UTF8.GetBytes(sendMsg);
@@ -94,7 +94,7 @@ namespace SimpleSocketClient
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                Console.WriteLine("连接服务失败！");
+                Console.WriteLine("Connect server faild!");
             }
         }
 
@@ -106,7 +106,7 @@ namespace SimpleSocketClient
                 var client = tuple.Item1;
 
                 var receiveNumber = client.EndReceiveFrom(ar, ref _remoteEndPoint);
-                Console.WriteLine($"接收到服务端消息：{Encoding.UTF8.GetString(tuple.Item2, 0, receiveNumber)}");
+                Console.WriteLine($"Accept service message:{Encoding.UTF8.GetString(tuple.Item2, 0, receiveNumber)}");
 
                 client.BeginReceiveFrom(tuple.Item2, 0, tuple.Item2.Length, SocketFlags.None, ref _remoteEndPoint,
                     ReviceCallBack, new Tuple<Socket, byte[]>(client, tuple.Item2));
@@ -135,7 +135,7 @@ namespace SimpleSocketClient
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                Console.WriteLine("连接服务失败！");
+                Console.WriteLine("Connect server faild!");
             }
         }
 

@@ -34,7 +34,7 @@ namespace SuperSocketServer
 
         private static void ServerOnNewRequestReceived(TcpSession session, BinaryRequestInfo requestInfo)
         {
-            Console.WriteLine($"当前客户端总数{_server.GetAllSessions().Count()}，收到来时客户端{session.SessionID}的消息：{Encoding.UTF8.GetString(requestInfo.Body)}");
+            Console.WriteLine($"Current connected clients number:{_server.GetAllSessions().Count()},accept message from client:{session.SessionID}, the message is:{Encoding.UTF8.GetString(requestInfo.Body)}");
         }
     }
 }

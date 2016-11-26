@@ -54,7 +54,7 @@ namespace SimpleSocketServer
         {
             var clientSocket = socketAsyncEventArgs.AcceptSocket;
 
-            Console.WriteLine("客户端Accecpt成功，地址：" + clientSocket.RemoteEndPoint);
+            Console.WriteLine("Accecpt client success,address:" + clientSocket.RemoteEndPoint);
 
             _allClientSockets.TryAdd(clientSocket.RemoteEndPoint.ToString(), clientSocket);
 
@@ -108,7 +108,7 @@ namespace SimpleSocketServer
                     byte[] data = new byte[rEnd];
                     Array.Copy(asyncState.Item2, 0, data, 0, rEnd);
 
-                    Console.WriteLine($"当前客户总数：{_allClientSockets.Count}；" + Encoding.UTF8.GetString(data));
+                    Console.WriteLine($"Current connected clients number:{_allClientSockets.Count};" + Encoding.UTF8.GetString(data));
 
 
                     clientSocket.BeginReceive(asyncState.Item2, 0, asyncState.Item2.Length, 0, ReceiveCallback,

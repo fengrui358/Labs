@@ -44,7 +44,7 @@ namespace SuperSocketClient
 
             _remoteEndPoint = new IPEndPoint(ipAddress, port);
 
-            Console.WriteLine("输入期望建立的链接数：");
+            Console.WriteLine("Except the count of the connectors:");
             var num = int.Parse(Console.ReadLine());
 
             for (int i = 0; i < num; i++)
@@ -62,7 +62,7 @@ namespace SuperSocketClient
                     {
                         if (tuple.Item2.IsConnected)
                         {
-                            var sendMsg = $"客户端：{tuple.Item1}，{Guid.NewGuid()}，时间：{DateTime.Now}";
+                            var sendMsg = $"Client:{tuple.Item1},{Guid.NewGuid()},Time:{DateTime.Now}";
                             Console.WriteLine(sendMsg);
 
                             var sendMsgBytes = Encoding.UTF8.GetBytes(sendMsg);
@@ -102,7 +102,7 @@ namespace SuperSocketClient
                     }
                     else
                     {
-                        Console.WriteLine($"客户端{clientId}链接服务失败。");
+                        Console.WriteLine($"Client:{clientId} connect service faild!");
                     }
                 }
                 catch (Exception ex)
