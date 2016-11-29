@@ -49,7 +49,7 @@ namespace AirKissDemo.Droid
                         if (Build.VERSION.SdkInt >= BuildVersionCodes.JellyBeanMr1 && ssid.StartsWith("\"") &&
                             ssid.EndsWith("\""))
                         {
-                            ssid = Regex.Replace(ssid, @"^\\|\\$", "");
+                            ssid = Regex.Replace(ssid, "^\"|\"$", "");
                         }
                     }
                 }
