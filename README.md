@@ -21,3 +21,6 @@ CSharp的一些语法测试
 
 ## ZipLabs ##
 压缩库的SDK测试
+
+## AppDomainLabs ##
+DotNet程序集域的加载卸载测试，顺便提供一个小工具检查目录下的dll引用的程序集版本是否一致
