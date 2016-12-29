@@ -9,7 +9,7 @@
     <MaxConnections>5</MaxConnections>
     <MaxUploadSpeed>0</MaxUploadSpeed>
     <MaxDownloadSpeed>0</MaxDownloadSpeed>
-    <Root>C:\</Root>
+    <Root>D:\</Root>
     <ConnectionCount>0</ConnectionCount>
   </FtpUser>
   <FtpUser>
@@ -21,7 +21,7 @@
     <MaxConnections>5</MaxConnections>
     <MaxUploadSpeed>0</MaxUploadSpeed>
     <MaxDownloadSpeed>0</MaxDownloadSpeed>
-    <Root>C:\</Root>
+    <Root>D:\</Root>
     <ConnectionCount>0</ConnectionCount>
   </FtpUser>
 </ArrayOfFtpUser>

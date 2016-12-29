@@ -21,8 +21,14 @@ namespace FtpClient
             var ftpClient = new FTPClient();
             ftpClient.RemoteHost = "192.168.1.80";
             ftpClient.RemotePort = 21;
+            ftpClient.RemoteUser = "anonymous";
+            ftpClient.RemotePass = "*";
 
             ftpClient.Connect();
+
+            ftpClient.MkDir("Hello");
+
+            Console.ReadKey();
         }
     }
 }
