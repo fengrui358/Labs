@@ -7,7 +7,4 @@
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
   </view>
-  <view class="countdown">
-    <text class="count-down">{{countdown}}!</text>
-  </view>
 </view>

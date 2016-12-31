@@ -19,11 +19,3 @@
 .usermotto {
   margin-top: 200px;
 }
-
-.countdown{
-  color: #f00;
-}
-
-.count-down{
-  font-size: 48rpx;
-}
