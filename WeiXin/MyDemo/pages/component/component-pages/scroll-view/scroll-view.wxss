@@ -1,0 +1,4 @@
+/* pages/component/component-pages/scroll-view/scroll-view.wxss */
+.scroll-view-item{
+  height: 200px;
+}

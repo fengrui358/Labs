@@ -2,6 +2,7 @@
   "pages":[
     "pages/component/index",
     "pages/component/component-pages/view/view",
+    "pages/component/component-pages/scroll-view/scroll-view",
     "pages/API/index/index"
   ],
   "window":{
