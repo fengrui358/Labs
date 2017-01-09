@@ -1,6 +1,15 @@
 // pages/API/index/index.js
 Page({
-  data:{},
+  data:{
+    menuList:[{
+      name: '开放接口',
+      APIList: [{
+        zhName: '微信登录',
+        enName: 'login',
+        url: '../login/login'
+      }]
+    }]
+  },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
   },
