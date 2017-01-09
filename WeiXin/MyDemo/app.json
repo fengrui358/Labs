@@ -3,6 +3,7 @@
     "pages/component/index",
     "pages/component/component-pages/view/view",
     "pages/component/component-pages/scroll-view/scroll-view",
+    "pages/component/component-pages/swiper/swiper",
     "pages/API/index/index"
   ],
   "window":{

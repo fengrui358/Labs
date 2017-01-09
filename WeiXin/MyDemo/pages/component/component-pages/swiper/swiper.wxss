@@ -1,0 +1,5 @@
+/* pages/component/component-pages/swiper/swiper.wxss */
+.swiper-item{
+  display: block;
+  height: 150px;
+}

@@ -53,6 +53,10 @@ page {
     padding-right: 30rpx;
 }
 
+.section_gap{
+    padding: 0 30rpx;
+}
+
 .bc_green{
     background-color: #09BB07;
 }
