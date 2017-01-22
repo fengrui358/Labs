@@ -36,7 +36,7 @@ namespace DictionaryHashCodeMemeryLab
                 {
                     _intKeyDic.Add(g.ToString().GetHashCode(), g.ToString());
                 }
-                catch (ArgumentException e)
+                catch (ArgumentException)
                 {
                     var hashCode = g.ToString().GetHashCode();
                     var oldGuid = _intKeyDic[hashCode];

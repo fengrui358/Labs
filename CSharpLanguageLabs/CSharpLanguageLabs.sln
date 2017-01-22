@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DictionaryHashCodeMemeryLab
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventSubscribeLab", "EventSubscribeLab\EventSubscribeLab.csproj", "{7999D205-9F34-429F-A45D-228E763521CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EqualLab", "EqualLab\EqualLab.csproj", "{87EC24F0-A0BA-4DD1-A4A5-0D6D42E6F767}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{7999D205-9F34-429F-A45D-228E763521CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7999D205-9F34-429F-A45D-228E763521CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7999D205-9F34-429F-A45D-228E763521CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87EC24F0-A0BA-4DD1-A4A5-0D6D42E6F767}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87EC24F0-A0BA-4DD1-A4A5-0D6D42E6F767}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87EC24F0-A0BA-4DD1-A4A5-0D6D42E6F767}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87EC24F0-A0BA-4DD1-A4A5-0D6D42E6F767}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
