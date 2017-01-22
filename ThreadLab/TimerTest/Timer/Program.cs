@@ -10,21 +10,11 @@ namespace Timer
     {
         static void Main(string[] args)
         {
-            //初始化
-            var mgr = new SessionManager();
+            var labs = new Labs();
+            //labs.SessionLab();
+            labs.TimerPerformanceLab();
 
-            Console.WriteLine("运行中");
-
-            while (true)
-            {
-                Console.WriteLine("输入gc，进行内存回收");
-
-                var input = Console.ReadLine();
-                if (input.Equals("gc", StringComparison.OrdinalIgnoreCase))
-                {
-                    GC.Collect();
-                }
-            }            
+            Console.ReadKey();
         }
     }
 }
