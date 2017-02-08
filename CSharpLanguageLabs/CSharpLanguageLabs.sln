@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventSubscribeLab", "EventS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EqualLab", "EqualLab\EqualLab.csproj", "{87EC24F0-A0BA-4DD1-A4A5-0D6D42E6F767}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadStaticLab", "ThreadStaticLab\ThreadStaticLab.csproj", "{3A14E970-D543-4F17-BA4F-4C7122851599}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{87EC24F0-A0BA-4DD1-A4A5-0D6D42E6F767}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87EC24F0-A0BA-4DD1-A4A5-0D6D42E6F767}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87EC24F0-A0BA-4DD1-A4A5-0D6D42E6F767}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A14E970-D543-4F17-BA4F-4C7122851599}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A14E970-D543-4F17-BA4F-4C7122851599}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A14E970-D543-4F17-BA4F-4C7122851599}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A14E970-D543-4F17-BA4F-4C7122851599}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
