@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "逆变协变", "逆变协变\逆变协变.csproj", "{B1B21DA8-33FF-4180-92CB-4B489933737A}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadStaticLab", "ThreadStaticLab\ThreadStaticLab.csproj", "{3A14E970-D543-4F17-BA4F-4C7122851599}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp7Lab", "CSharp7Lab\CSharp7Lab.csproj", "{75CC97CC-67A6-4F26-AD43-192C6166E0D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CmdLabs", "CmdLabs\CmdLabs.csproj", "{7BCD0195-1FD0-4DB4-80D5-DEA43C800827}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{75CC97CC-67A6-4F26-AD43-192C6166E0D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75CC97CC-67A6-4F26-AD43-192C6166E0D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75CC97CC-67A6-4F26-AD43-192C6166E0D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BCD0195-1FD0-4DB4-80D5-DEA43C800827}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BCD0195-1FD0-4DB4-80D5-DEA43C800827}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BCD0195-1FD0-4DB4-80D5-DEA43C800827}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BCD0195-1FD0-4DB4-80D5-DEA43C800827}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
