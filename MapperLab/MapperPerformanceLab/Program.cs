@@ -11,7 +11,7 @@ using Nelibur.ObjectMapper;
 namespace MapperLab
 {
     /// <summary>
-    /// 对TinyMapper和AutoMapper进行性能测试，结果是AutoMapper的性能更胜一筹，不像TinyMapper宣传的那样，而且AutoMapper的灵活性也更高
+    /// 对TinyMapper和AutoMapper进行性能测试，结果相差不大
     /// </summary>
     class Program
     {
@@ -21,7 +21,7 @@ namespace MapperLab
             Console.WriteLine("构造测试数据");
             var testDatas = new List<StubClass>();
 
-            for (int i = 0; i < 100000; i++)
+            for (int i = 0; i < 10000; i++)
             {
                 var data = new StubClass
                 {
@@ -29,7 +29,7 @@ namespace MapperLab
                     IntB = i,
                     StringListC = new List<StubSubClass>()
                 };
-                for (int j = 0; j < 100; j++)
+                for (int j = 0; j < 1000; j++)
                 {
                     data.StringListC.Add(new StubSubClass { StringA = Guid.NewGuid().ToString(), IntB = i});
                 }
@@ -43,22 +43,42 @@ namespace MapperLab
 
             var stopWatch = Stopwatch.StartNew();
 
-            TinyMapper.Map<List<StubClass>>(testDatas);
+            var outs = TinyMapper.Map<List<StubClass>>(testDatas);
+            if (!VerifyReferenceIsDeepCopy(testDatas, outs))
+            {
+                Console.WriteLine("测试TinyMapper：映射出错");
+            }
 
             stopWatch.Stop();
             Console.WriteLine("TinyMapper耗时：" + stopWatch.ElapsedMilliseconds);
 
             #endregion
 
-            #region AutoMapper
+            #region 清理
 
-            Mapper.Initialize(new MapperConfigurationExpression());
+            outs = null;
+            GC.Collect();
+
+            #endregion
+
+            #region AutoMapper
 
             Console.WriteLine("测试AutoMapper");
 
             stopWatch.Restart();
 
-            Mapper.Map<List<StubClass>>(testDatas);
+            Mapper.Initialize(s =>
+            {
+                s.CreateMissingTypeMaps = true;
+                s.CreateMap<StubClass, StubClass>();
+                s.CreateMap<StubSubClass, StubSubClass>();
+            });
+
+            outs = Mapper.Map<List<StubClass>>(testDatas);
+            if (!VerifyReferenceIsDeepCopy(testDatas, outs))
+            {
+                Console.WriteLine("测试AutoMapper：映射出错");
+            }
 
             stopWatch.Stop();
             Console.WriteLine("AutoMapper耗时：" + stopWatch.ElapsedMilliseconds);
@@ -66,6 +86,19 @@ namespace MapperLab
             #endregion
 
             Console.Read();
+        }
+
+        private static bool VerifyReferenceIsDeepCopy(List<StubClass> a, List<StubClass> b)
+        {
+            //比较两个集合是完全进行的深度拷贝
+            if (a == b || a.First() == b.First() || a.First().StringListC == b.First().StringListC ||
+                a.First().StringA != b.First().StringA || a.First().StringListC.First().StringA !=
+                b.First().StringListC.First().StringA)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
