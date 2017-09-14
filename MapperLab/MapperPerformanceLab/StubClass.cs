@@ -28,7 +28,11 @@ namespace MapperLab
 
         public string Phone { get; set; }
 
+        public StubSubClass StubSubClass { get; set; }
+
         public List<StubSubClass> StringListC { get; set; }
+
+        public Dictionary<string, string> Dictionary { get; set; }
     }
 
     public class StubSubClass
