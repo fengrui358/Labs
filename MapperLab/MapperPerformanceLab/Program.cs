@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -21,17 +22,37 @@ namespace MapperLab
             Console.WriteLine("构造测试数据");
             var testDatas = new List<StubClass>();
 
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < 30000; i++)
             {
                 var data = new StubClass
                 {
                     StringA = Guid.NewGuid().ToString(),
                     IntB = i,
+                    Id = Guid.NewGuid(),
+                    FirstName = "John",
+                    LastName = "Doe",
+                    Email = "support@tinymapper.net",
+                    Address = "Wall Street",
+                    CreateTime = DateTime.Now,
+                    Nickname = "Object Mapper",
+                    Phone = "Call Me Maybe ",
                     StringListC = new List<StubSubClass>()
                 };
                 for (int j = 0; j < 1000; j++)
                 {
-                    data.StringListC.Add(new StubSubClass { StringA = Guid.NewGuid().ToString(), IntB = i});
+                    data.StringListC.Add(new StubSubClass
+                    {
+                        StringA = Guid.NewGuid().ToString(),
+                        IntB = i,
+                        Id = Guid.NewGuid(),
+                        FirstName = "John",
+                        LastName = "Doe",
+                        Email = "support@tinymapper.net",
+                        Address = "Wall Street",
+                        CreateTime = DateTime.Now,
+                        Nickname = "Object Mapper",
+                        Phone = "Call Me Maybe "
+                    });
                 }
 
                 testDatas.Add(data);
@@ -42,6 +63,8 @@ namespace MapperLab
             Console.WriteLine("测试TinyMapper");
 
             var stopWatch = Stopwatch.StartNew();
+            TinyMapper.Bind<StubClass, StubClass>();
+            TinyMapper.Bind<StubSubClass, StubSubClass>();
 
             var outs = TinyMapper.Map<List<StubClass>>(testDatas);
             if (!VerifyReferenceIsDeepCopy(testDatas, outs))
@@ -88,8 +111,21 @@ namespace MapperLab
             Console.Read();
         }
 
-        private static bool VerifyReferenceIsDeepCopy(List<StubClass> a, List<StubClass> b)
+        private static bool VerifyReferenceIsDeepCopy(IList a, IList b)
         {
+            if (a.Count == b.Count)
+            {
+                var propertiesForA = a.GetType().GetProperties();
+                var propertiesForB = b.GetType().GetProperties();
+
+                propertiesForA.Zip(propertiesForB, (a, b) =>
+                {
+                    
+                })
+            }
+
+            return false;
+
             //比较两个集合是完全进行的深度拷贝
             if (a == b || a.First() == b.First() || a.First().StringListC == b.First().StringListC ||
                 a.First().StringA != b.First().StringA || a.First().StringListC.First().StringA !=
