@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace MapperLab
 {
+    [Serializable]
     public class StubClass
     {
         public string StringA { get; set; }
@@ -33,8 +34,28 @@ namespace MapperLab
         public List<StubSubClass> StringListC { get; set; }
 
         public Dictionary<string, string> Dictionary { get; set; }
+
+        public StubClass Copy()
+        {
+            var result = (StubClass)MemberwiseClone();
+            result.StringListC = new List<StubSubClass>();
+
+            foreach (var stubSubClass in StringListC)
+            {
+                result.StringListC.Add(stubSubClass.Copy());
+            }
+
+            result.Dictionary = new Dictionary<string, string>();
+            foreach (KeyValuePair<string, string> keyValuePair in Dictionary)
+            {
+                result.Dictionary.Add(keyValuePair.Key, keyValuePair.Value);
+            }
+
+            return result;
+        }
     }
 
+    [Serializable]
     public class StubSubClass
     {
         public string StringA { get; set; }
@@ -56,5 +77,10 @@ namespace MapperLab
         public string Nickname { get; set; }
 
         public string Phone { get; set; }
+
+        public StubSubClass Copy()
+        {
+            return (StubSubClass) MemberwiseClone();
+        }
     }
 }
