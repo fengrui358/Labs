@@ -26,7 +26,7 @@ namespace MapperLab
             Console.WriteLine("构造测试数据");
             var testDatas = new List<StubClass>();
 
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 8000; i++)
             {
                 var data = new StubClass
                 {
@@ -91,11 +91,19 @@ namespace MapperLab
             //如果实体含有Dictinory则Bind会报错？
             //TinyMapper.Bind<StubClass, StubClass>();
             //TinyMapper.Bind<StubSubClass, StubSubClass>();
+            List<StubClass> outs = null;
 
-            var outs = TinyMapper.Map<List<StubClass>>(testDatas);
-            if (!VerifyReferenceIsDeepCopy(testDatas, outs))
+            try
             {
-                Console.WriteLine("测试TinyMapper：映射出错");
+                outs = TinyMapper.Map<List<StubClass>>(testDatas);
+                if (!VerifyReferenceIsDeepCopy(testDatas, outs))
+                {
+                    Console.WriteLine("测试TinyMapper：映射出错");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
             }
 
             stopWatch.Stop();
@@ -116,17 +124,24 @@ namespace MapperLab
 
             stopWatch.Restart();
 
-            Mapper.Initialize(s =>
+            try
             {
-                s.CreateMissingTypeMaps = true;
-                s.CreateMap<StubClass, StubClass>();
-                s.CreateMap<StubSubClass, StubSubClass>();
-            });
+                Mapper.Initialize(s =>
+                {
+                    s.CreateMissingTypeMaps = true;
+                    s.CreateMap<StubClass, StubClass>();
+                    s.CreateMap<StubSubClass, StubSubClass>();
+                });
 
-            outs = Mapper.Map<List<StubClass>>(testDatas);
-            if (!VerifyReferenceIsDeepCopy(testDatas, outs))
+                outs = Mapper.Map<List<StubClass>>(testDatas);
+                if (!VerifyReferenceIsDeepCopy(testDatas, outs))
+                {
+                    Console.WriteLine("测试AutoMapper：映射出错");
+                }
+            }
+            catch (Exception e)
             {
-                Console.WriteLine("测试AutoMapper：映射出错");
+                Console.WriteLine(e);
             }
 
             stopWatch.Stop();
@@ -147,16 +162,23 @@ namespace MapperLab
 
             stopWatch.Restart();
 
-            var b = new BinaryFormatter();
-            var stream = new MemoryStream();
-
-            b.Serialize(stream, testDatas);
-            stream.Position = 0;
-
-            outs = b.Deserialize(stream) as List<StubClass>;
-            if (!VerifyReferenceIsDeepCopy(testDatas, outs))
+            try
             {
-                Console.WriteLine("测试二进制序列化：映射出错");
+                var b = new BinaryFormatter();
+                var stream = new MemoryStream();
+
+                b.Serialize(stream, testDatas);
+                stream.Position = 0;
+
+                outs = b.Deserialize(stream) as List<StubClass>;
+                if (!VerifyReferenceIsDeepCopy(testDatas, outs))
+                {
+                    Console.WriteLine("测试二进制序列化：映射出错");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
             }
 
             stopWatch.Stop();
@@ -177,12 +199,19 @@ namespace MapperLab
 
             stopWatch.Restart();
 
-            var json = JsonConvert.SerializeObject(testDatas);
-            outs = JsonConvert.DeserializeObject<List<StubClass>>(json);
-
-            if (!VerifyReferenceIsDeepCopy(testDatas, outs))
+            try
             {
-                Console.WriteLine("测试Json序列化：映射出错");
+                var json = JsonConvert.SerializeObject(testDatas);
+                outs = JsonConvert.DeserializeObject<List<StubClass>>(json);
+
+                if (!VerifyReferenceIsDeepCopy(testDatas, outs))
+                {
+                    Console.WriteLine("测试Json序列化：映射出错");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
             }
 
             stopWatch.Stop();
@@ -203,11 +232,18 @@ namespace MapperLab
 
             stopWatch.Restart();
 
-            outs = ManualCopy(testDatas);
-
-            if (!VerifyReferenceIsDeepCopy(testDatas, outs))
+            try
             {
-                Console.WriteLine("测试手动拷贝：映射出错");
+                outs = ManualCopy(testDatas);
+
+                if (!VerifyReferenceIsDeepCopy(testDatas, outs))
+                {
+                    Console.WriteLine("测试手动拷贝：映射出错");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
             }
 
             stopWatch.Stop();
@@ -228,11 +264,18 @@ namespace MapperLab
 
             stopWatch.Restart();
 
-            outs = MemberwiseClone(testDatas);
-
-            if (!VerifyReferenceIsDeepCopy(testDatas, outs))
+            try
             {
-                Console.WriteLine("测试MemberwiseClone：映射出错");
+                outs = MemberwiseClone(testDatas);
+
+                if (!VerifyReferenceIsDeepCopy(testDatas, outs))
+                {
+                    Console.WriteLine("测试MemberwiseClone：映射出错");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
             }
 
             stopWatch.Stop();
