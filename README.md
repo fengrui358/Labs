@@ -1,4 +1,5 @@
 # Labs
+[<img src="https://fengrui358.visualstudio.com/_apis/public/build/definitions/59005c7d-7393-46b7-87ce-9fa7acc16927/3/badge">](https://fengrui358.visualstudio.com/_apis/public/build/definitions/59005c7d-7393-46b7-87ce-9fa7acc16927/3/badge)
 实验室
 
 ## Apps ##
