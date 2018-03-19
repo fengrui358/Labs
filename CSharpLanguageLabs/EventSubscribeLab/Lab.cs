@@ -11,15 +11,15 @@ namespace EventSubscribeLab
         private Subscriber _subscriber;
         private Publisher _publisher;
 
-        private WeakReference<Subscriber> _subscriberWeakReference;
-        private WeakReference<Publisher> _publisherWeakReference;
+        private readonly WeakReference<Subscriber> _subscriberWeakReference;
+        private readonly WeakReference<Publisher> _publisherWeakReference;
 
         public Lab()
         {
             _subscriber = new Subscriber();
             _publisher = new Publisher();
 
-            _subscriber.Subscribe(_publisher);
+            _publisher.TestEvent += _subscriber.PublisherOnTestEvent;
             _subscriberWeakReference = new WeakReference<Subscriber>(_subscriber);
             _publisherWeakReference = new WeakReference<Publisher>(_publisher);
         }
@@ -54,12 +54,11 @@ namespace EventSubscribeLab
     /// </summary>
     class Subscriber
     {
-        public void Subscribe(Publisher publisher)
-        {
-            publisher.TestEvent += PublisherOnTestEvent;   
+        public void Subscribe()
+        { 
         }
 
-        private void PublisherOnTestEvent(object sender, EventArgs eventArgs)
+        public void PublisherOnTestEvent(object sender, EventArgs eventArgs)
         {
         }
     }
