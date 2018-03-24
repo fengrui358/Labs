@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CommandLineUtilsDemo": {
+      "commandName": "Project",
+      "commandLineArgs": "-s asfsafsadf"
+    }
+  }
+}

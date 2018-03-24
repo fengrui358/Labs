@@ -1,12 +1,25 @@
 ﻿using System;
+using McMaster.Extensions.CommandLineUtils;
 
 namespace CommandLineUtilsDemo
 {
-    class Program
+    /// <summary>
+    /// 项目地址：https://github.com/natemcmaster/CommandLineUtils
+    /// https://natemcmaster.github.io/CommandLineUtils/
+    /// </summary>
+    [HelpOption]
+    public class Program
     {
-        static void Main(string[] args)
+        public static int Main(string[] args)
+            => CommandLineApplication.Execute<Program>(args);
+
+        [Option(Description = "The subject")]
+        public string Subject { get; }
+
+        private void OnExecute()
         {
-            Console.WriteLine("Hello World!");
+            var subject = Subject ?? "world";
+            Console.WriteLine($"Hello {subject}!");
         }
     }
 }
