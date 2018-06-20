@@ -40,4 +40,8 @@ DotNet程序集域的加载卸载测试，顺便提供一个小工具检查目�
 
 ## CommandLineUtilsDemo
 
-命令行工具演示
+命令行工具演示（未完成）
+
+## DapperDemo
+
+Dapper ORM 搭配SQLite测试
