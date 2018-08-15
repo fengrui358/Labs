@@ -14,9 +14,12 @@ namespace TaskTest
             await Task.Factory.StartNew(() =>
                 {
                     Console.WriteLine(
-                        $"{DateTime.Now:HH:mm:ss ffff} Parent task begin, id is {Thread.CurrentThread.ManagedThreadId}");
+                        $"{DateTime.Now:HH:mm:ss ffff} Parent inner task begin, id is {Thread.CurrentThread.ManagedThreadId}");
 
                     StartSubTask();
+
+                    Console.WriteLine(
+                        $"{DateTime.Now:HH:mm:ss ffff} Parent inner task end, id is {Thread.CurrentThread.ManagedThreadId}");
                 });
 
             Console.WriteLine(
