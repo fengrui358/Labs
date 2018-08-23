@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GcLab", "GcLab\GcLab.csproj", "{1DEDC2AB-6097-4644-BA58-703458AE1EDA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1DEDC2AB-6097-4644-BA58-703458AE1EDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DEDC2AB-6097-4644-BA58-703458AE1EDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DEDC2AB-6097-4644-BA58-703458AE1EDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DEDC2AB-6097-4644-BA58-703458AE1EDA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CD1467D9-AAB5-4128-B41E-55A739437A0E}
+	EndGlobalSection
+EndGlobal
