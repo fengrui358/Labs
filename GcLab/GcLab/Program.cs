@@ -11,7 +11,7 @@ namespace GcLab
         static void Main(string[] args)
         {
             Create();
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
             GC.Collect();
 
             Print();
@@ -23,6 +23,8 @@ namespace GcLab
             Thread.Sleep(2000);
             GC.Collect();
             
+            Console.WriteLine();
+
             Print();
 
             Console.Read();
