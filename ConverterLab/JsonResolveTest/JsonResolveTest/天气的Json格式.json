@@ -1,0 +1,138 @@
+{
+	"query": {
+		"count": 1,
+		"created": "2018-11-26T15:11:07Z",
+		"lang": "zh-CN",
+		"results": {
+			"channel": {
+				"units": {
+					"distance": "mi",
+					"pressure": "in",
+					"speed": "mph",
+					"temperature": "F"
+				},
+				"title": "Yahoo! Weather - La Paz, La Paz Department, BO",
+				"link": "http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-346057/",
+				"description": "Yahoo! Weather for La Paz, La Paz Department, BO",
+				"language": "en-us",
+				"lastBuildDate": "Mon, 26 Nov 2018 11:11 AM BOT",
+				"ttl": "60",
+				"location": {
+					"city": "La Paz",
+					"country": "Bolivia",
+					"region": " La Paz Department"
+				},
+				"wind": {
+					"chill": "52",
+					"direction": "158",
+					"speed": "7"
+				},
+				"atmosphere": {
+					"humidity": "60",
+					"pressure": "634.0",
+					"rising": "0",
+					"visibility": "16.1"
+				},
+				"astronomy": {
+					"sunrise": "5:50 am",
+					"sunset": "6:50 pm"
+				},
+				"image": {
+					"title": "Yahoo! Weather",
+					"width": "142",
+					"height": "18",
+					"link": "http://weather.yahoo.com",
+					"url": "http://l.yimg.com/a/i/brand/purplelogo//uh/us/news-wea.gif"
+				},
+				"item": {
+					"title": "Conditions for La Paz, La Paz Department, BO at 10:00 AM BOT",
+					"lat": "-16.49901",
+					"long": "-68.146263",
+					"link": "http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-346057/",
+					"pubDate": "Mon, 26 Nov 2018 10:00 AM BOT",
+					"condition": {
+						"code": "28",
+						"date": "Mon, 26 Nov 2018 10:00 AM BOT",
+						"temp": "53",
+						"text": "Mostly Cloudy"
+					},
+					"forecast": [{
+						"code": "47",
+						"date": "26 Nov 2018",
+						"day": "Mon",
+						"high": "57",
+						"low": "42",
+						"text": "Scattered Thunderstorms"
+					}, {
+						"code": "4",
+						"date": "27 Nov 2018",
+						"day": "Tue",
+						"high": "55",
+						"low": "41",
+						"text": "Thunderstorms"
+					}, {
+						"code": "47",
+						"date": "28 Nov 2018",
+						"day": "Wed",
+						"high": "55",
+						"low": "40",
+						"text": "Scattered Thunderstorms"
+					}, {
+						"code": "28",
+						"date": "29 Nov 2018",
+						"day": "Thu",
+						"high": "60",
+						"low": "40",
+						"text": "Mostly Cloudy"
+					}, {
+						"code": "26",
+						"date": "30 Nov 2018",
+						"day": "Fri",
+						"high": "61",
+						"low": "37",
+						"text": "Cloudy"
+					}, {
+						"code": "26",
+						"date": "01 Dec 2018",
+						"day": "Sat",
+						"high": "61",
+						"low": "36",
+						"text": "Cloudy"
+					}, {
+						"code": "26",
+						"date": "02 Dec 2018",
+						"day": "Sun",
+						"high": "57",
+						"low": "43",
+						"text": "Cloudy"
+					}, {
+						"code": "47",
+						"date": "03 Dec 2018",
+						"day": "Mon",
+						"high": "54",
+						"low": "41",
+						"text": "Scattered Thunderstorms"
+					}, {
+						"code": "28",
+						"date": "04 Dec 2018",
+						"day": "Tue",
+						"high": "60",
+						"low": "41",
+						"text": "Mostly Cloudy"
+					}, {
+						"code": "47",
+						"date": "05 Dec 2018",
+						"day": "Wed",
+						"high": "61",
+						"low": "38",
+						"text": "Scattered Thunderstorms"
+					}],
+					"description": "<![CDATA[<img src=\"http://l.yimg.com/a/i/us/we/52/28.gif\"/>\n<BR />\n<b>Current Conditions:</b>\n<BR />Mostly Cloudy\n<BR />\n<BR />\n<b>Forecast:</b>\n<BR /> Mon - Scattered Thunderstorms. High: 57Low: 42\n<BR /> Tue - Thunderstorms. High: 55Low: 41\n<BR /> Wed - Scattered Thunderstorms. High: 55Low: 40\n<BR /> Thu - Mostly Cloudy. High: 60Low: 40\n<BR /> Fri - Cloudy. High: 61Low: 37\n<BR />\n<BR />\n<a href=\"http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-346057/\">Full Forecast at Yahoo! Weather</a>\n<BR />\n<BR />\n<BR />\n]]>",
+					"guid": {
+						"isPermaLink": "false"
+					}
+				}
+			}
+		}
+	}
+}
