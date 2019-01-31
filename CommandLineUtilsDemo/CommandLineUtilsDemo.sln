@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandLineUtilsDemo", "CommandLineUtilsDemo\CommandLineUtilsDemo.csproj", "{92D4CD1F-29F3-4111-9270-B82FDDE1419D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteractiveCommandLineDemo", "InteractiveCommandLineDemo\InteractiveCommandLineDemo.csproj", "{718036FF-C7F2-4F2F-B1DC-67E6208E3049}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InteractiveCommandLineDemo", "InteractiveCommandLineDemo\InteractiveCommandLineDemo.csproj", "{718036FF-C7F2-4F2F-B1DC-67E6208E3049}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandLineParserDemo", "CommandLineParserDemo\CommandLineParserDemo.csproj", "{8CF743F7-2DA6-44BD-B065-48750EFA8239}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{718036FF-C7F2-4F2F-B1DC-67E6208E3049}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{718036FF-C7F2-4F2F-B1DC-67E6208E3049}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{718036FF-C7F2-4F2F-B1DC-67E6208E3049}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CF743F7-2DA6-44BD-B065-48750EFA8239}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CF743F7-2DA6-44BD-B065-48750EFA8239}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CF743F7-2DA6-44BD-B065-48750EFA8239}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CF743F7-2DA6-44BD-B065-48750EFA8239}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
