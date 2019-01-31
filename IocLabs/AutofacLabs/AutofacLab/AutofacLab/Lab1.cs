@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Autofac;
+using Autofac.Core;
 
 namespace AutofacLab
 {
@@ -10,8 +12,11 @@ namespace AutofacLab
         public Lab1()
         {
             var builder = new ContainerBuilder();
+            builder.Register<TodayWriter>((s, t) => new TodayWriter(s.Resolve<IOutput>(), t.Named<string>("test")))
+                .As<IDateWriter>();
+
             builder.RegisterType<ConsoleOutput>().As<IOutput>();
-            builder.RegisterType<TodayWriter>().As<IDateWriter>();
+            //builder.RegisterType<TodayWriter>().As<IDateWriter>();
             _container = builder.Build();
         }
 
@@ -24,7 +29,7 @@ namespace AutofacLab
             // use it, then dispose of the scope.
             using (var scope = _container.BeginLifetimeScope())
             {
-                var writer = scope.Resolve<IDateWriter>();
+                var writer = scope.Resolve<IDateWriter>(new List<Parameter> {new NamedParameter("test", "free")});
                 writer.WriteDate();
             }
 
@@ -73,14 +78,17 @@ namespace AutofacLab
     public class TodayWriter : IDateWriter
     {
         private readonly IOutput _output;
-        public TodayWriter(IOutput output)
+        private readonly string _name;
+
+        public TodayWriter(IOutput output, string name = null)
         {
             _output = output;
+            _name = name;
         }
 
         public void WriteDate()
         {
-            _output.Write(DateTime.Today.ToShortDateString());
+            _output.Write($"{_name} {DateTime.Today.ToShortDateString()}");
         }
     }
 }
