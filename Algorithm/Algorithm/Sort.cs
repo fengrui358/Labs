@@ -102,10 +102,76 @@ namespace Algorithm
         /// <param name="desc"></param>
         public static void SelectedSort(this long[] array, bool desc = false)
         {
-            //已排序部分索引
-            var sortIndex = -1;
-            for (var i = 0; i < array.Length; i++)
+            //未排序部分起始索引
+            var noSortIndex = 0;
+
+            if (!desc)
             {
+                //从小到大
+                //遍历未排序部分
+                while (noSortIndex < array.Length)
+                {
+                    var minValue = array[noSortIndex];
+                    var minValueIndexArray = new List<int> {noSortIndex};
+
+                    for (var i = noSortIndex + 1; i < array.Length; i++)
+                    {
+                        if (array[i] < minValue)
+                        {
+                            minValue = array[i];
+                            minValueIndexArray = new List<int> {i};
+                        }
+                        else if (array[i] == minValue)
+                        {
+                            //相同最小数
+                            minValueIndexArray.Add(i);
+                        }
+                    }
+
+                    for (var i = 0; i < minValueIndexArray.Count; i++)
+                    {
+                        var toBeInsertIndex = minValueIndexArray[i];
+                        var toBeInsert = array[toBeInsertIndex];
+                        var temp = array[noSortIndex];
+                        array[noSortIndex] = toBeInsert;
+                        array[toBeInsertIndex] = temp;
+                        noSortIndex++;
+                    }
+                }
+            }
+            else
+            {
+                //从小到大
+                //遍历未排序部分
+                while (noSortIndex < array.Length)
+                {
+                    var minValue = array[noSortIndex];
+                    var minValueIndexArray = new List<int> { noSortIndex };
+
+                    for (var i = noSortIndex + 1; i < array.Length; i++)
+                    {
+                        if (array[i] > minValue)
+                        {
+                            minValue = array[i];
+                            minValueIndexArray = new List<int> { i };
+                        }
+                        else if (array[i] == minValue)
+                        {
+                            //相同最大数
+                            minValueIndexArray.Add(i);
+                        }
+                    }
+
+                    for (var i = 0; i < minValueIndexArray.Count; i++)
+                    {
+                        var toBeInsertIndex = minValueIndexArray[i];
+                        var toBeInsert = array[toBeInsertIndex];
+                        var temp = array[noSortIndex];
+                        array[noSortIndex] = toBeInsert;
+                        array[toBeInsertIndex] = temp;
+                        noSortIndex++;
+                    }
+                }
             }
         }
 
