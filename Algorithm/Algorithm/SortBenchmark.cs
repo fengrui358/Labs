@@ -18,11 +18,12 @@ namespace Algorithm
             {
                 var random = new Random();
                 var array = new long[Count];
-                for (int j = 0; j < Count; j++)
+                for (long j = 0; j < Count; j++)
                 {
-                    array[j] = (long)random.Next(int.MinValue, int.MaxValue) << 32 + random.Next(int.MinValue, Int32.MaxValue);
+                    array[j] = j;
                 }
-                list.Add(array);
+
+                list.Add(array.OrderBy(s => random.Next(int.MaxValue)).ToArray());
             }
 
             LongNumbers = new List<long[]>(list);
