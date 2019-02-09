@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Algorithm
 {
@@ -129,7 +128,21 @@ namespace Algorithm
                 {
                     //遍历已排序部分，比较
                     var toBeSort = array[i];
-                    var findIndex = Array.BinarySearch(array, 0, noSortIndex - 0, toBeSort);
+                    int findIndex;
+                    if (toBeSort >= array[i - 1])
+                    {
+                        //比已排序部分最大数都大
+                        findIndex = noSortIndex - 1;
+                    }
+                    else if (toBeSort < array[0])
+                    {
+                        //比已排序部分最小数都小
+                        findIndex = -1;
+                    }
+                    else
+                    {
+                        findIndex = Array.BinarySearch(array, 0, noSortIndex - 0, toBeSort);
+                    }
 
                     if (findIndex >= 0)
                     {
@@ -173,8 +186,22 @@ namespace Algorithm
                 {
                     //遍历已排序部分，比较
                     var toBeSort = array[i];
-                    var findIndex =
-                        Array.BinarySearch(array, 0, noSortIndex - 0, toBeSort, new ReverseComparer<long>());
+                    int findIndex;
+                    if (toBeSort <= array[i - 1])
+                    {
+                        //比已排序部分最小数都小
+                        findIndex = noSortIndex - 1;
+                    }
+                    else if (toBeSort > array[0])
+                    {
+                        //比已排序部分最大数都大
+                        findIndex = -1;
+                    }
+                    else
+                    {
+                        findIndex =
+                            Array.BinarySearch(array, 0, noSortIndex - 0, toBeSort, new ReverseComparer<long>());
+                    }
 
                     if (findIndex >= 0)
                     {
