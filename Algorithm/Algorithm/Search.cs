@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Algorithm
+﻿namespace Algorithm
 {
-    class Search
+    public static class Search
     {
     }
 }
