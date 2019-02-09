@@ -8,15 +8,13 @@ namespace Algorithm
     [CoreJob]
     public class SortBenchmark
     {
-        private const int Count = 1000;
-        private const int DataGroupCount = 3;
-
+        private const int Count = 10000;
         public static IEnumerable<long[]> LongNumbers { get; }
 
         static SortBenchmark()
         {
             var list = new List<long[]>();
-            for (int i = 0; i < DataGroupCount; i++)
+            for (int i = 0; i < Program.DataGroupCount; i++)
             {
                 var random = new Random();
                 var array = new long[Count];
@@ -30,48 +28,48 @@ namespace Algorithm
             LongNumbers = new List<long[]>(list);
         }
 
-        //[Benchmark(Description = "O(n2)")]
-        //[ArgumentsSource(nameof(GetLongNumbers))]
-        //public void BubbleSort(long[] numbers)
-        //{
-        //    var t = new long[numbers.Length];
-        //    Array.Copy(numbers, t, numbers.Length);
-        //    t = t.OrderBy(s => s).ToArray();
-
-        //    numbers.BubbleSort();
-        //    if (!t.SequenceEqual(numbers))
-        //    {
-        //        throw new Exception("冒泡排序错误");
-        //    }
-        //}
-
-        //[Benchmark(Description = "O(n2)")]
-        //[ArgumentsSource(nameof(GetLongNumbers))]
-        //public void BubbleSortDesc(long[] numbers)
-        //{
-        //    var t = new long[numbers.Length];
-        //    Array.Copy(numbers, t, numbers.Length);
-        //    t = t.OrderByDescending(s => s).ToArray();
-
-        //    numbers.BubbleSort(true);
-        //    if (!t.SequenceEqual(numbers))
-        //    {
-        //        throw new Exception("冒泡排序错误");
-        //    }
-        //}
-
-        [Benchmark(Baseline = true)]
+        [Benchmark]
         [ArgumentsSource(nameof(LongNumbers))]
-        public void StandardSort(long[] numbers)
+        public void BubbleSort(long[] numbers)
+        {
+            numbers.BubbleSort();
+            var x = numbers.ToArray();
+        }
+
+        [Benchmark]
+        [ArgumentsSource(nameof(LongNumbers))]
+        public void BubbleSortDesc(long[] numbers)
+        {
+            numbers.BubbleSort(true);
+            var x = numbers.ToArray();
+        }
+
+        [Benchmark]
+        [ArgumentsSource(nameof(LongNumbers))]
+        public void StandardOrderBy(long[] numbers)
         {
             numbers = numbers.OrderBy(s => s).ToArray();
         }
 
         [Benchmark]
         [ArgumentsSource(nameof(LongNumbers))]
-        public void StandardSortDesc(long[] numbers)
+        public void StandardOrderByDescending(long[] numbers)
         {
             numbers = numbers.OrderByDescending(s => s).ToArray();
+        }
+
+        [Benchmark(Baseline = true)]
+        [ArgumentsSource(nameof(LongNumbers))]
+        public void StandardSort(long[] numbers)
+        {
+            Array.Sort(numbers);
+        }
+
+        [Benchmark]
+        [ArgumentsSource(nameof(LongNumbers))]
+        public void StandardSortByDescending(long[] numbers)
+        {
+            Array.Sort(numbers, (l, l1) => -l.CompareTo(l1));
         }
     }
 }

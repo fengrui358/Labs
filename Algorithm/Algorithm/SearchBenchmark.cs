@@ -10,14 +10,12 @@ namespace Algorithm
     {
         private const long Target = 5876;
         private const int Count = 10000;
-        private const int DataGroupCount = 3;
-
         public static IEnumerable<long[]> LongNumbers { get; }
 
         static SearchBenchmark()
         {
             var list = new List<long[]>();
-            for (int i = 0; i < DataGroupCount; i++)
+            for (int i = 0; i < Program.DataGroupCount; i++)
             {
                 var random = new Random();
                 var array = new long[Count];
@@ -65,6 +63,17 @@ namespace Algorithm
         public void StandardLastOrDefault(long[] numbers)
         {
             var f = numbers.LastOrDefault(s => s == Target);
+        }
+
+        [Benchmark]
+        [ArgumentsSource(nameof(LongNumbers))]
+        public void StandardBinarySearch(long[] numbers)
+        {
+            var fIndex = Array.BinarySearch(numbers, Target);
+            if (fIndex >= 0)
+            {
+                var f = numbers[fIndex];
+            }
         }
     }
 }
