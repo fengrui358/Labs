@@ -29,6 +29,8 @@ namespace Algorithm
             LongNumbers = new List<long[]>(list);
         }
 
+        #region 冒泡排序
+
         [Benchmark]
         [ArgumentsSource(nameof(LongNumbers))]
         public void BubbleSort(long[] numbers)
@@ -44,6 +46,50 @@ namespace Algorithm
             numbers.BubbleSort(true);
             var x = numbers.ToArray();
         }
+
+        #endregion
+
+        #region 选择排序
+
+        [Benchmark]
+        [ArgumentsSource(nameof(LongNumbers))]
+        public void SelectedSort(long[] numbers)
+        {
+            numbers.SelectedSort();
+            var x = numbers.ToArray();
+        }
+
+        [Benchmark]
+        [ArgumentsSource(nameof(LongNumbers))]
+        public void SelectedSortDesc(long[] numbers)
+        {
+            numbers.SelectedSort(true);
+            var x = numbers.ToArray();
+        }
+
+        #endregion
+
+        #region 插入排序
+
+        [Benchmark]
+        [ArgumentsSource(nameof(LongNumbers))]
+        public void InsertSort(long[] numbers)
+        {
+            numbers.InsertSort();
+            var x = numbers.ToArray();
+        }
+
+        [Benchmark]
+        [ArgumentsSource(nameof(LongNumbers))]
+        public void InsertSortDesc(long[] numbers)
+        {
+            numbers.InsertSort(true);
+            var x = numbers.ToArray();
+        }
+
+        #endregion
+
+        #region 内置排序
 
         [Benchmark]
         [ArgumentsSource(nameof(LongNumbers))]
@@ -72,5 +118,27 @@ namespace Algorithm
         {
             Array.Sort(numbers, (l, l1) => -l.CompareTo(l1));
         }
+
+        #endregion
+
+        #region 归并排序
+
+        [Benchmark]
+        [ArgumentsSource(nameof(LongNumbers))]
+        public void MergeSort(long[] numbers)
+        {
+            numbers.MergeSort();
+            var x = numbers.ToArray();
+        }
+
+        [Benchmark]
+        [ArgumentsSource(nameof(LongNumbers))]
+        public void MergeSortDesc(long[] numbers)
+        {
+            numbers.MergeSort(true);
+            var x = numbers.ToArray();
+        }
+
+        #endregion
     }
 }
