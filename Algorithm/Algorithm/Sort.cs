@@ -520,7 +520,7 @@ namespace Algorithm
             #region 选择pivot
 
             var start = array[startIndex];
-            var midIndex = startIndex + (endIndex - startIndex) >> 1;
+            var midIndex = startIndex + ((endIndex - startIndex) >> 1);
             var mid = array[midIndex];
             var end = array[endIndex];
             if (start > mid)
@@ -758,7 +758,7 @@ namespace Algorithm
         /// 从大到小比较
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        private class ReverseComparer<T> : IComparer<T>
+        public class ReverseComparer<T> : IComparer<T>
         {
             public int Compare(T x, T y)
             {

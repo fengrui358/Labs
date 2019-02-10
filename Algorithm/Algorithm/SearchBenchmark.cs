@@ -12,6 +12,10 @@ namespace Algorithm
         private const int Count = 10000;
         public static IEnumerable<long[]> LongNumbers { get; }
 
+        public static IEnumerable<long[]> LongNumbersSort { get; }
+
+        public static IEnumerable<long[]> LongNumbersSortDesc { get; }
+
         static SearchBenchmark()
         {
             var list = new List<long[]>();
@@ -28,48 +32,62 @@ namespace Algorithm
             }
 
             LongNumbers = new List<long[]>(list);
+
+            LongNumbersSort = new List<long[]> {LongNumbers.First().OrderBy(s => s).ToArray()};
+            LongNumbersSortDesc = new List<long[]> {LongNumbers.First().OrderByDescending(s => s).ToArray()};
         }
 
         [Benchmark(Baseline = true)]
-        [ArgumentsSource(nameof(LongNumbers))]
+        [ArgumentsSource(nameof(LongNumbersSort))]
         public void StandardFind(long[] numbers)
         {
-            var f = Array.Find(numbers,s => s == Target);
+            var f = Array.Find(numbers, s => s == Target);
         }
 
         [Benchmark]
-        [ArgumentsSource(nameof(LongNumbers))]
+        [ArgumentsSource(nameof(LongNumbersSort))]
         public void StandardFirst(long[] numbers)
         {
             var f = numbers.First(s => s == Target);
         }
 
         [Benchmark]
-        [ArgumentsSource(nameof(LongNumbers))]
+        [ArgumentsSource(nameof(LongNumbersSort))]
         public void StandardFirstOrDefault(long[] numbers)
         {
             var f = numbers.FirstOrDefault(s => s == Target);
         }
 
         [Benchmark]
-        [ArgumentsSource(nameof(LongNumbers))]
+        [ArgumentsSource(nameof(LongNumbersSort))]
         public void StandardLast(long[] numbers)
         {
             var f = numbers.Last(s => s == Target);
         }
 
         [Benchmark]
-        [ArgumentsSource(nameof(LongNumbers))]
+        [ArgumentsSource(nameof(LongNumbersSort))]
         public void StandardLastOrDefault(long[] numbers)
         {
             var f = numbers.LastOrDefault(s => s == Target);
         }
 
         [Benchmark]
-        [ArgumentsSource(nameof(LongNumbers))]
+        [ArgumentsSource(nameof(LongNumbersSort))]
         public void StandardBinarySearch(long[] numbers)
         {
             var fIndex = Array.BinarySearch(numbers, Target);
+            if (fIndex >= 0)
+            {
+                var f = numbers[fIndex];
+            }
+        }
+
+        [Benchmark]
+        [ArgumentsSource(nameof(LongNumbersSort))]
+        public void BinarySearch(long[] numbers)
+        {
+            var fIndex = numbers.BinarySearch(Target);
             if (fIndex >= 0)
             {
                 var f = numbers[fIndex];
