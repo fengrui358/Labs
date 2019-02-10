@@ -36,7 +36,6 @@ namespace Algorithm
         public void BubbleSort(long[] numbers)
         {
             numbers.BubbleSort();
-            var x = numbers.ToArray();
         }
 
         [Benchmark]
@@ -44,7 +43,6 @@ namespace Algorithm
         public void BubbleSortDesc(long[] numbers)
         {
             numbers.BubbleSort(true);
-            var x = numbers.ToArray();
         }
 
         #endregion
@@ -56,7 +54,6 @@ namespace Algorithm
         public void SelectedSort(long[] numbers)
         {
             numbers.SelectedSort();
-            var x = numbers.ToArray();
         }
 
         [Benchmark]
@@ -64,7 +61,6 @@ namespace Algorithm
         public void SelectedSortDesc(long[] numbers)
         {
             numbers.SelectedSort(true);
-            var x = numbers.ToArray();
         }
 
         #endregion
@@ -76,7 +72,6 @@ namespace Algorithm
         public void InsertSort(long[] numbers)
         {
             numbers.InsertSort();
-            var x = numbers.ToArray();
         }
 
         [Benchmark]
@@ -84,7 +79,6 @@ namespace Algorithm
         public void InsertSortDesc(long[] numbers)
         {
             numbers.InsertSort(true);
-            var x = numbers.ToArray();
         }
 
         #endregion
@@ -128,7 +122,6 @@ namespace Algorithm
         public void MergeSort(long[] numbers)
         {
             numbers.MergeSort();
-            var x = numbers.ToArray();
         }
 
         [Benchmark]
@@ -136,7 +129,24 @@ namespace Algorithm
         public void MergeSortDesc(long[] numbers)
         {
             numbers.MergeSort(true);
-            var x = numbers.ToArray();
+        }
+
+        #endregion
+
+        #region 快速排序
+
+        [Benchmark]
+        [ArgumentsSource(nameof(LongNumbers))]
+        public void QuickSort(long[] numbers)
+        {
+            numbers.QuickSort();
+        }
+
+        [Benchmark]
+        [ArgumentsSource(nameof(LongNumbers))]
+        public void QuickSortDesc(long[] numbers)
+        {
+            numbers.QuickSort(true);
         }
 
         #endregion

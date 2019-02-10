@@ -14,15 +14,15 @@ namespace Algorithm
             var test2 = new long[] { 56, 1, -34 };
             var test3 = new long[] { 43, 6576, 43, 23, 54, 657, 87, 54, 23, 2, 54, 76, -34, 43, -5435, -43, -546, 43, 0 };
             
-            test.MergeSort(true);
-            test2.MergeSort(true);
-            test3.MergeSort(true);
+            test.BucketSort();
+            test2.BucketSort();
+            test3.BucketSort();
 
             var datas = SortBenchmark.LongNumbers.First();
             var datasCopy = new long[datas.Length];
             datas.CopyTo(datasCopy, 0);
 
-            datas.MergeSort(true);
+            datas.BucketSort(true);
             Array.Sort(datasCopy, (l, l1) => -l.CompareTo(l1));
             if (!datasCopy.SequenceEqual(datas))
             {

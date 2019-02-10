@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Algorithm
 {
     public static class Sort
     {
+        #region 冒泡排序
+
         /// <summary>
         /// 冒泡排序(时间复杂度O(n2),稳定排序,原地排序)
         /// 两两交换数据的原地排序
@@ -94,6 +98,10 @@ namespace Algorithm
             }
         }
 
+        #endregion
+
+        #region 选择排序
+
         /// <summary>
         /// 选择排序(时间复杂度O(n2),非稳定排序,原地排序)
         /// 将待排序数据分为已排序和未排序两部分，从未排序部分找最小值和已排序后一位交换，涉及位置交换，所以是不稳定排序算法
@@ -174,6 +182,10 @@ namespace Algorithm
                 }
             }
         }
+
+        #endregion
+
+        #region 插入排序
 
         /// <summary>
         /// 插入排序(时间复杂度O(n2),稳定排序,原地排序)
@@ -305,6 +317,10 @@ namespace Algorithm
             }
         }
 
+        #endregion
+
+        #region 归并排序
+
         /// <summary>
         /// 归并排序(时间复杂度O(n),稳定排序,非原地排序)
         /// 将数据规模除2，分步排序，最后合并，合并时需要额外存储空间O(n)，非原地排序
@@ -317,7 +333,8 @@ namespace Algorithm
         }
 
         /// <summary>
-        /// 归并排序内部递归操作
+        /// 归并排序内部递归操作(时间复杂度O(nlogn),稳定排序,非原地排序)
+        /// 将数据规模除2，分步排序，最后合并，合并时需要额外存储空间O(n)，非原地排序
         /// </summary>
         /// <param name="array"></param>
         /// <param name="startIndex"></param>
@@ -465,6 +482,232 @@ namespace Algorithm
                 mergeTemp.CopyTo(array, startIndex);
             }
         }
+
+        #endregion
+
+        #region 快速排序
+
+        /// <summary>
+        /// 快速排序(时间复杂度O(nlogn),非稳定排序,原地排序)
+        /// 选择任意pivot分区点，不停的分区迭代，涉及数据交换，非稳定排序
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="desc"></param>
+        public static void QuickSort(this long[] array, bool desc = false)
+        {
+            QuickSortInner(array, 0, array.Length - 1, desc);
+        }
+
+        /// <summary>
+        /// 快速排序(时间复杂度O(nlogn),非稳定排序,原地排序)
+        /// 选择任意pivot分区点，不停的分区迭代，涉及数据交换，非稳定排序
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="startIndex"></param>
+        /// <param name="endIndex"></param>
+        /// <param name="desc"></param>
+        private static void QuickSortInner(this long[] array, int startIndex, int endIndex, bool desc = false)
+        {
+            if (startIndex >= endIndex)
+            {
+                return;
+            }
+
+            //使用三点法选择pivot
+            long pivotValue;
+            int pivotIndex;
+
+            #region 选择pivot
+
+            var start = array[startIndex];
+            var midIndex = startIndex + (endIndex - startIndex) >> 1;
+            var mid = array[midIndex];
+            var end = array[endIndex];
+            if (start > mid)
+            {
+                if (mid > end)
+                {
+                    //选mid
+                    pivotValue = mid;
+                    pivotIndex = midIndex;
+                }
+                else
+                {
+                    if (start > end)
+                    {
+                        //选end
+                        pivotValue = end;
+                        pivotIndex = endIndex;
+                    }
+                    else
+                    {
+                        //选Start
+                        pivotValue = start;
+                        pivotIndex = startIndex;
+                    }
+                }
+            }
+            else
+            {
+                if (start > end)
+                {
+                    //选start
+                    pivotValue = start;
+                    pivotIndex = startIndex;
+                }
+                else
+                {
+                    if (end > mid)
+                    {
+                        //选mid
+                        pivotValue = mid;
+                        pivotIndex = midIndex;
+                    }
+                    else
+                    {
+                        //选end
+                        pivotValue = end;
+                        pivotIndex = endIndex;
+                    }
+                }
+            }
+
+            //将pivot放到最后
+            array[pivotIndex] = end;
+            array[endIndex] = pivotValue;
+
+            #endregion
+
+            //已处理数据索引
+            var handedIndex = startIndex;
+
+            //未处理数据索引
+            var unHandedIndex = startIndex;
+
+            if (!desc)
+            {
+                for (int i = unHandedIndex; i < endIndex; i++)
+                {
+                    if (array[unHandedIndex] <= pivotValue)
+                    {
+                        //进行数据交换
+                        var temp = array[i];
+                        array[i] = array[handedIndex];
+                        array[handedIndex] = temp;
+
+                        handedIndex++;
+                        unHandedIndex++;
+                    }
+                    else
+                    {
+                        unHandedIndex++;
+                    }
+                }
+
+                //直接交换元素
+                array[endIndex] = array[handedIndex];
+                array[handedIndex] = pivotValue;
+                pivotIndex = handedIndex;
+            }
+            else
+            {
+                for (int i = unHandedIndex; i < endIndex; i++)
+                {
+                    if (array[unHandedIndex] >= pivotValue)
+                    {
+                        //进行数据交换
+                        var temp = array[i];
+                        array[i] = array[handedIndex];
+                        array[handedIndex] = temp;
+
+                        handedIndex++;
+                        unHandedIndex++;
+                    }
+                    else
+                    {
+                        unHandedIndex++;
+                    }
+                }
+
+                //直接交换元素
+                array[endIndex] = array[handedIndex];
+                array[handedIndex] = pivotValue;
+                pivotIndex = handedIndex;
+            }
+
+            //处理完毕，递归
+            QuickSortInner(array, startIndex, pivotIndex - 1, desc);
+            QuickSortInner(array, pivotIndex + 1, endIndex, desc);
+        }
+
+        #endregion
+
+        #region 桶排序
+
+        /// <summary>
+        /// 桶排序(时间复杂度O(logn),稳定排序,非原地排序)
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="desc"></param>
+        public static void BucketSort(this long[] array, bool desc = false)
+        {
+            //必须要知道数据大小，已知数据范围：0~10000
+            //分成10个桶
+            var buckets = new List<long>[10];
+            var rules = new Tuple<long, long, int>[10];
+            for (var i = 0; i < rules.Length; i++)
+            {
+                rules[i] = new Tuple<long, long, int>(10000L / 10 * i, 10000L / 10 * (i + 1), i);
+            }
+
+            for (var i = 0; i < buckets.Length; i++)
+            {
+                buckets[i] = new List<long>();
+            }
+
+            for (var i = 0; i < array.Length; i++)
+            {
+                for (var j = 0; j < rules.Length; j++)
+                {
+                    if (array[i] >= rules[j].Item1 && array[i] < rules[j].Item2)
+                    {
+                        buckets[rules[j].Item3].Add(array[i]);
+                        break;
+                    }
+                }
+            }
+
+            if (!desc)
+            {
+                Parallel.ForEach(buckets, list =>
+                {
+                    list.Sort();
+                });
+
+                var index = 0;
+                foreach (var bucket in buckets)
+                {
+                    bucket.CopyTo(array, index);
+                    index = index + bucket.Count;
+                }
+            }
+            else
+            {
+                Parallel.ForEach(buckets, list =>
+                {
+                    list.Sort(new ReverseComparer<long>());
+                });
+
+                var index = 0;
+                foreach (var bucket in buckets.Reverse())
+                {
+                    bucket.CopyTo(array, index);
+                    index = index + bucket.Count;
+                }
+            }
+        }
+
+        #endregion
 
         /// <summary>
         /// 从大到小比较
