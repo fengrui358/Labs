@@ -709,6 +709,51 @@ namespace Algorithm
 
         #endregion
 
+        #region 计数排序
+
+        /// <summary>
+        /// 计数排序(时间复杂度O(n+k)k是数据范围,非稳定排序,原地排序)
+        /// 适用于数据量很大，但是数据范围不大的数据，需要数据都是非负数
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="desc"></param>
+        public static void CountSort(this long[] array, bool desc = false)
+        {
+            //必须要知道数据大小，已知数据范围：0~10000
+            var countArrary = new long[10000];
+            for (var i = 0; i < array.Length; i++)
+            {
+                countArrary[array[i]]++;
+            }
+
+            if (!desc)
+            {
+                var index = 0;
+                for (var i = 0; i < countArrary.Length; i++)
+                {
+                    for (int j = 0; j < countArrary[i]; j++)
+                    {
+                        array[index] = i;
+                        index++;
+                    }
+                }
+            }
+            else
+            {
+                var index = 10000 - 1;
+                for (var i = 0; i < countArrary.Length; i++)
+                {
+                    for (int j = 0; j < countArrary[i]; j++)
+                    {
+                        array[index] = i;
+                        index--;
+                    }
+                }
+            }
+        }
+
+        #endregion
+
         /// <summary>
         /// 从大到小比较
         /// </summary>

@@ -22,7 +22,7 @@ namespace Algorithm
             var datasCopy = new long[datas.Length];
             datas.CopyTo(datasCopy, 0);
 
-            datas.BucketSort(true);
+            datas.CountSort();
             Array.Sort(datasCopy, (l, l1) => -l.CompareTo(l1));
             if (!datasCopy.SequenceEqual(datas))
             {

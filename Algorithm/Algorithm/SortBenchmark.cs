@@ -150,5 +150,41 @@ namespace Algorithm
         }
 
         #endregion
+
+        #region 桶排序
+
+        [Benchmark]
+        [ArgumentsSource(nameof(LongNumbers))]
+        public void BucketSort(long[] numbers)
+        {
+            numbers.BucketSort();
+        }
+
+        [Benchmark]
+        [ArgumentsSource(nameof(LongNumbers))]
+        public void BucketSortDesc(long[] numbers)
+        {
+            numbers.BucketSort(true);
+        }
+
+        #endregion
+
+        #region 计数排序
+
+        [Benchmark]
+        [ArgumentsSource(nameof(LongNumbers))]
+        public void CountSort(long[] numbers)
+        {
+            numbers.CountSort();
+        }
+
+        [Benchmark]
+        [ArgumentsSource(nameof(LongNumbers))]
+        public void CountSortDesc(long[] numbers)
+        {
+            numbers.CountSort(true);
+        }
+
+        #endregion
     }
 }
