@@ -21,6 +21,16 @@ namespace AutofacLab
             lab3.WriteDate();
             lab3.WriteSelfDate();
 
+            Console.WriteLine();
+
+            //var lab4 = new Lab4();
+            //lab4.WriteString();
+
+            var lab5 = new Lab5();
+            lab5.WriteString();
+
+            Console.WriteLine();
+
             //Console.WriteLine("Hello World!");
             Console.ReadLine();
         }
