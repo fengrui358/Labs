@@ -31,6 +31,10 @@ namespace AutofacLab
             lab6.WriteString();
             Console.WriteLine();
 
+            var lab7 = new Lab7();
+            lab7.WriteString();
+            Console.WriteLine();
+
             //Console.WriteLine("Hello World!");
             Console.ReadLine();
         }
