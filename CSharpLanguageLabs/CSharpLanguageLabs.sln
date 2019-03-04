@@ -21,7 +21,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CmdLabs", "CmdLabs\CmdLabs.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArrayAndLinkedListCompare", "ArrayAndLinkedListCompare\ArrayAndLinkedListCompare.csproj", "{09B30A60-9BF6-478A-A482-59D03535E15F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitOperateLab", "BitOperateLab\BitOperateLab.csproj", "{C55F7FCB-F22E-4E4A-B463-9412D534C7AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitOperateLab", "BitOperateLab\BitOperateLab.csproj", "{C55F7FCB-F22E-4E4A-B463-9412D534C7AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgorithmPerformanceDemo", "AlgorithmPerformanceDemo\AlgorithmPerformanceDemo.csproj", "{21AE7960-B012-40DE-BA50-70001FEC2323}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{C55F7FCB-F22E-4E4A-B463-9412D534C7AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C55F7FCB-F22E-4E4A-B463-9412D534C7AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C55F7FCB-F22E-4E4A-B463-9412D534C7AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21AE7960-B012-40DE-BA50-70001FEC2323}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21AE7960-B012-40DE-BA50-70001FEC2323}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21AE7960-B012-40DE-BA50-70001FEC2323}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21AE7960-B012-40DE-BA50-70001FEC2323}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
