@@ -11,6 +11,7 @@ namespace AlgorithmPerformanceDemo
         [GlobalSetup]
         public void GlobalSetup()
         {
+            DatasProvider.Create();
             _algorithmCreate = new AlgorithmCreate();
 
             _algorithmCreate.CreateList();
@@ -25,7 +26,7 @@ namespace AlgorithmPerformanceDemo
             _algorithmCreate.CreateLinkedList();
         }
 
-        [Benchmark]
+        //[Benchmark]
         public void AddList()
         {
             _algorithmCreate.List.Add(DatasProvider.NewTarget);
@@ -34,7 +35,7 @@ namespace AlgorithmPerformanceDemo
         [Benchmark]
         public void AddArray()
         {
-            var newArray = new string[DatasProvider.Count + 1];
+            var newArray = new Guid[DatasProvider.Count + 1];
             _algorithmCreate.Array.CopyTo(newArray, 0);
             newArray[DatasProvider.Count] = DatasProvider.NewTarget;
         }

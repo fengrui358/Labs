@@ -3,6 +3,24 @@ using BenchmarkDotNet.Attributes;
 
 namespace AlgorithmPerformanceDemo
 {
+    #region Count:10
+
+    /* Count:10
+|                     Method |      Mean |     Error |    StdDev |
+|--------------------------- |----------:|----------:|----------:|
+|                 RemoveList | 10.762 ns | 0.1865 ns | 0.1745 ns |
+|                RemoveArray |  1.242 ns | 0.0231 ns | 0.0193 ns |
+|              RemoveHashSet |  4.298 ns | 0.0939 ns | 0.0879 ns |
+|           RemoveDictionary |  3.820 ns | 0.0327 ns | 0.0306 ns |
+|           RemoveSortedList | 21.124 ns | 0.3028 ns | 0.2832 ns |
+|            RemoveSortedSet |  4.860 ns | 0.0887 ns | 0.0830 ns |
+|     RemoveSortedDictionary |  9.361 ns | 0.1447 ns | 0.1353 ns |
+| RemoveConcurrentDictionary | 33.147 ns | 0.4669 ns | 0.4139 ns |
+|           RemoveLinkedList |  5.064 ns | 0.0630 ns | 0.0589 ns |
+     */
+
+    #endregion
+
     public class AlgorithmRemove
     {
         private AlgorithmCreate _algorithmCreate;
@@ -10,6 +28,7 @@ namespace AlgorithmPerformanceDemo
         [GlobalSetup]
         public void GlobalSetup()
         {
+            DatasProvider.Create();
             _algorithmCreate = new AlgorithmCreate();
 
             _algorithmCreate.CreateList();
@@ -45,7 +64,7 @@ namespace AlgorithmPerformanceDemo
 
             if (index > 0)
             {
-                var newArray = new string[DatasProvider.Count - 1];
+                var newArray = new Guid[DatasProvider.Count - 1];
 
                 Array.Copy(_algorithmCreate.Array, 0, newArray, 0, index);
                 Array.Copy(_algorithmCreate.Array, index + 1, newArray, index, newArray.Length - index);
