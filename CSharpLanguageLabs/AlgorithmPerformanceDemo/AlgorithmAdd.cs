@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using BenchmarkDotNet.Attributes;
 
 namespace AlgorithmPerformanceDemo

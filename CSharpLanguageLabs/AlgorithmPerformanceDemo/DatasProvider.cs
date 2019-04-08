@@ -4,7 +4,7 @@ namespace AlgorithmPerformanceDemo
 {
     public class DatasProvider
     {
-        private static object _async = new object();
+        private static readonly object Async = new object();
         private static bool _isCreated;
 
         public static int Count;
@@ -17,7 +17,7 @@ namespace AlgorithmPerformanceDemo
 
         public static void Create()
         {
-            lock (_async)
+            lock (Async)
             {
                 if (_isCreated)
                 {
