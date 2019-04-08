@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Reflection;
 using BenchmarkDotNet.Attributes;
 
 namespace AlgorithmPerformanceDemo
@@ -28,6 +30,8 @@ namespace AlgorithmPerformanceDemo
         [GlobalSetup]
         public void GlobalSetup()
         {
+            var sw = Stopwatch.StartNew();
+
             DatasProvider.Create();
             _algorithmCreate = new AlgorithmCreate();
 
@@ -41,17 +45,27 @@ namespace AlgorithmPerformanceDemo
             _algorithmCreate.CreateConcurrentBag();
             _algorithmCreate.CreateConcurrentDictionary();
             _algorithmCreate.CreateLinkedList();
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void RemoveList()
         {
+            var sw = Stopwatch.StartNew();
+
             _algorithmCreate.List.Remove(DatasProvider.SearchTarget);
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void RemoveArray()
         {
+            var sw = Stopwatch.StartNew();
+
             var index = -1;
             for (var i = 0; i < _algorithmCreate.Array.Length; i++)
             {
@@ -69,48 +83,86 @@ namespace AlgorithmPerformanceDemo
                 Array.Copy(_algorithmCreate.Array, 0, newArray, 0, index);
                 Array.Copy(_algorithmCreate.Array, index + 1, newArray, index, newArray.Length - index);
             }
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void RemoveHashSet()
         {
+            var sw = Stopwatch.StartNew();
+
             _algorithmCreate.HashSet.Remove(DatasProvider.SearchTarget);
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void RemoveDictionary()
         {
+            var sw = Stopwatch.StartNew();
+
             _algorithmCreate.Dictionary.Remove(DatasProvider.SearchTarget);
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void RemoveSortedList()
         {
+            var sw = Stopwatch.StartNew();
+
             _algorithmCreate.SortedList.Remove(DatasProvider.SearchTarget);
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void RemoveSortedSet()
         {
+            var sw = Stopwatch.StartNew();
+
             _algorithmCreate.SortedSet.Remove(DatasProvider.SearchTarget);
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void RemoveSortedDictionary()
         {
+            var sw = Stopwatch.StartNew();
+
             _algorithmCreate.SortedDictionary.Remove(DatasProvider.SearchTarget);
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void RemoveConcurrentDictionary()
         {
+            var sw = Stopwatch.StartNew();
+
             _algorithmCreate.ConcurrentDictionary.TryRemove(DatasProvider.SearchTarget, out _);
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void RemoveLinkedList()
         {
+            var sw = Stopwatch.StartNew();
+
             _algorithmCreate.LinkedList.Remove(DatasProvider.SearchTarget);
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
     }
 }

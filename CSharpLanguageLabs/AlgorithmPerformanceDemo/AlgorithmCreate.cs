@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
 using BenchmarkDotNet.Attributes;
 
 namespace AlgorithmPerformanceDemo
@@ -40,107 +42,162 @@ namespace AlgorithmPerformanceDemo
         [GlobalSetup]
         public void GlobalSetup()
         {
+            var sw = Stopwatch.StartNew();
+
             DatasProvider.Create();
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void CreateList()
         {
+            var sw = Stopwatch.StartNew();
+
             List = new List<Guid>();
             for (var i = 0; i < DatasProvider.DataSource.Length; i++)
             {
                 List.Add(DatasProvider.DataSource[i]);
             }
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void CreateArray()
         {
+            var sw = Stopwatch.StartNew();
+
             Array = new Guid[DatasProvider.Count];
             for (var i = 0; i < DatasProvider.DataSource.Length; i++)
             {
                 Array[i] = DatasProvider.DataSource[i];
             }
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void CreateHashSet()
         {
+            var sw = Stopwatch.StartNew();
+
             HashSet = new HashSet<Guid>();
             for (var i = 0; i < DatasProvider.DataSource.Length; i++)
             {
                 HashSet.Add(DatasProvider.DataSource[i]);
             }
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void CreateDictionary()
         {
+            var sw = Stopwatch.StartNew();
+
             Dictionary = new Dictionary<Guid, Guid>();
             for (var i = 0; i < DatasProvider.DataSource.Length; i++)
             {
                 Dictionary.TryAdd(DatasProvider.DataSource[i], DatasProvider.DataSource[i]);
             }
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void CreateSortedList()
         {
+            var sw = Stopwatch.StartNew();
+
             SortedList = new SortedList<Guid, Guid>();
             for (var i = 0; i < DatasProvider.DataSource.Length; i++)
             {
                 SortedList.TryAdd(DatasProvider.DataSource[i], DatasProvider.DataSource[i]);
             }
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void CreateSortedSet()
         {
+            var sw = Stopwatch.StartNew();
+
             SortedSet = new SortedSet<Guid>();
             for (var i = 0; i < DatasProvider.DataSource.Length; i++)
             {
                 SortedSet.Add(DatasProvider.DataSource[i]);
             }
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void CreateSortedDictionary()
         {
+            var sw = Stopwatch.StartNew();
+
             SortedDictionary = new SortedDictionary<Guid, Guid>();
             for (var i = 0; i < DatasProvider.DataSource.Length; i++)
             {
                 SortedDictionary.TryAdd(DatasProvider.DataSource[i], DatasProvider.DataSource[i]);
             }
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void CreateConcurrentBag()
         {
+            var sw = Stopwatch.StartNew();
+
             ConcurrentBag = new ConcurrentBag<Guid>();
             for (var i = 0; i < DatasProvider.DataSource.Length; i++)
             {
                 ConcurrentBag.Add(DatasProvider.DataSource[i]);
             }
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void CreateConcurrentDictionary()
         {
+            var sw = Stopwatch.StartNew();
+
             ConcurrentDictionary = new ConcurrentDictionary<Guid, Guid>();
             for (var i = 0; i < DatasProvider.DataSource.Length; i++)
             {
                 ConcurrentDictionary.TryAdd(DatasProvider.DataSource[i], DatasProvider.DataSource[i]);
             }
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void CreateLinkedList()
         {
+            var sw = Stopwatch.StartNew();
+
             LinkedList = new LinkedList<Guid>();
             for (var i = 0; i < DatasProvider.DataSource.Length; i++)
             {
                 LinkedList.AddLast(DatasProvider.DataSource[i]);
             }
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
     }
 }

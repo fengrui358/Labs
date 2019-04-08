@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using BenchmarkDotNet.Attributes;
 
 namespace AlgorithmPerformanceDemo
@@ -29,6 +31,8 @@ namespace AlgorithmPerformanceDemo
         [GlobalSetup]
         public void GlobalSetup()
         {
+            var sw = Stopwatch.StartNew();
+
             DatasProvider.Create();
             _algorithmCreate = new AlgorithmCreate();
 
@@ -42,76 +46,129 @@ namespace AlgorithmPerformanceDemo
             _algorithmCreate.CreateConcurrentBag();
             _algorithmCreate.CreateConcurrentDictionary();
             _algorithmCreate.CreateLinkedList();
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void ToListList()
         {
+            var sw = Stopwatch.StartNew();
+
             var x = _algorithmCreate.List.ToList();
             GC.KeepAlive(x);
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void ToListArray()
         {
+            var sw = Stopwatch.StartNew();
+
             var x = _algorithmCreate.Array.ToList();
             GC.KeepAlive(x);
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void ToListHashSet()
         {
+            var sw = Stopwatch.StartNew();
+
             var x = _algorithmCreate.HashSet.ToList();
             GC.KeepAlive(x);
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void ToListDictionary()
         {
+            var sw = Stopwatch.StartNew();
+
             var x = _algorithmCreate.Dictionary.ToList();
             GC.KeepAlive(x);
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void ToListSortedList()
         {
+            var sw = Stopwatch.StartNew();
+
             var x = _algorithmCreate.SortedList.ToList();
             GC.KeepAlive(x);
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void ToListSortedSet()
         {
+            var sw = Stopwatch.StartNew();
+
             var x = _algorithmCreate.SortedSet.ToList();
             GC.KeepAlive(x);
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void ToListSortedDictionary()
         {
+            var sw = Stopwatch.StartNew();
+
             var x = _algorithmCreate.SortedDictionary.ToList();
             GC.KeepAlive(x);
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void ToListConcurrentBag()
         {
+            var sw = Stopwatch.StartNew();
+
             var x = _algorithmCreate.ConcurrentBag.ToList();
             GC.KeepAlive(x);
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void ToListConcurrentDictionary()
         {
+            var sw = Stopwatch.StartNew();
+
             var x = _algorithmCreate.ConcurrentDictionary.ToList();
             GC.KeepAlive(x);
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void ToListLinkedList()
         {
+            var sw = Stopwatch.StartNew();
+
             var x = _algorithmCreate.LinkedList.ToList();
             GC.KeepAlive(x);
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using BenchmarkDotNet.Attributes;
 
 namespace AlgorithmPerformanceDemo
@@ -31,6 +33,8 @@ namespace AlgorithmPerformanceDemo
         [GlobalSetup]
         public void GlobalSetup()
         {
+            var sw = Stopwatch.StartNew();
+
             DatasProvider.Create();
             _algorithmCreate = new AlgorithmCreate();
 
@@ -44,17 +48,27 @@ namespace AlgorithmPerformanceDemo
             _algorithmCreate.CreateConcurrentBag();
             _algorithmCreate.CreateConcurrentDictionary();
             _algorithmCreate.CreateLinkedList();
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void FindList()
         {
+            var sw = Stopwatch.StartNew();
+
             _algorithmCreate.List.Find(s => s == DatasProvider.SearchTarget);
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void FindArray()
         {
+            var sw = Stopwatch.StartNew();
+
             for (var i = 0; i < _algorithmCreate.Array.Length; i++)
             {
                 if (_algorithmCreate.Array[i] == DatasProvider.SearchTarget)
@@ -62,68 +76,111 @@ namespace AlgorithmPerformanceDemo
                     break;
                 }
             }
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void FindHashSet()
         {
+            var sw = Stopwatch.StartNew();
+
             var i = 0;
             if (_algorithmCreate.HashSet.Contains(DatasProvider.NewTarget))
             {
                 GC.KeepAlive(i);
             }
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void FindDictionary()
         {
+            var sw = Stopwatch.StartNew();
+
             var i = 0;
             if (_algorithmCreate.Dictionary.TryGetValue(DatasProvider.SearchTarget, out _))
             {
                 GC.KeepAlive(i);
             }
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void FindSortedList()
         {
+            var sw = Stopwatch.StartNew();
+
             var i = _algorithmCreate.SortedList.IndexOfKey(DatasProvider.SearchTarget);
             GC.KeepAlive(i);
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void FindSortedSet()
         {
+            var sw = Stopwatch.StartNew();
+
             var i = _algorithmCreate.SortedSet.TryGetValue(DatasProvider.SearchTarget, out _);
             GC.KeepAlive(i);
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void FindSortedDictionary()
         {
+            var sw = Stopwatch.StartNew();
+
             var i = _algorithmCreate.SortedDictionary.TryGetValue(DatasProvider.SearchTarget, out _);
             GC.KeepAlive(i);
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void FindConcurrentBag()
         {
+            var sw = Stopwatch.StartNew();
+
             var i = _algorithmCreate.ConcurrentBag.FirstOrDefault(s => s == DatasProvider.SearchTarget);
             GC.KeepAlive(i);
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void FindConcurrentDictionary()
         {
+            var sw = Stopwatch.StartNew();
+
             var i = _algorithmCreate.ConcurrentDictionary.TryGetValue(DatasProvider.SearchTarget, out _);
             GC.KeepAlive(i);
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
 
         [Benchmark]
         public void FindLinkedList()
         {
+            var sw = Stopwatch.StartNew();
+
             var i = _algorithmCreate.LinkedList.Find(DatasProvider.SearchTarget);
             GC.KeepAlive(i);
+
+            sw.Stop();
+            Console.WriteLine($"{MethodBase.GetCurrentMethod().Name}--{sw.ElapsedTicks}");
         }
     }
 }
