@@ -27,7 +27,7 @@ namespace AlgorithmPerformanceDemo
             _algorithmCreate.CreateLinkedList();
         }
 
-        //[Benchmark]
+        [Benchmark]
         public void AddList()
         {
             _algorithmCreate.List.Add(DatasProvider.NewTarget);
