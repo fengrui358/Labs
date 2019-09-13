@@ -2,11 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-using SharpCompress.Common;
 
 namespace ZipLabs
 {
@@ -14,15 +9,12 @@ namespace ZipLabs
     {
         static void Main(string[] args)
         {
-            ArchiveEncoding.Default = Encoding.Default;
-
             ClearLastTestDir();
 
             var zipFiles =
                 new DirectoryInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestFiles")).GetFiles();
 
-            var zips = new List<ZipBase>();
-            zips.Add(new SharpCompress());
+            var zips = new List<ZipBase> {new SharpCompress()};
 
             foreach (var zipBase in zips)
             {

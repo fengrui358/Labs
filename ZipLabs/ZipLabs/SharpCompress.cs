@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SharpCompress.Archive.Rar;
-using SharpCompress.Archive.Zip;
+using SharpCompress.Archives.Rar;
+using SharpCompress.Archives.Zip;
 using SharpCompress.Common;
-using SharpCompress.Reader;
-using SharpCompress.Reader.Rar;
-using SharpCompress.Reader.Zip;
+using SharpCompress.Readers;
+using SharpCompress.Readers.Rar;
+using SharpCompress.Readers.Zip;
 using ZipLabs.VerifyStrategies;
 
 namespace ZipLabs
@@ -34,11 +30,11 @@ namespace ZipLabs
                     {
                         if (ZipArchive.IsZipFile(filePath))
                         {
-                            reader = ZipReader.Open(stream, "123");
+                            reader = ZipReader.Open(stream, new ReaderOptions {Password = "123"});
                         }
                         else if (RarArchive.IsRarFile(filePath))
                         {
-                            reader = RarReader.Open(stream, "123");
+                            reader = RarReader.Open(stream, new ReaderOptions {Password = "123"});
                         }
                     }
                     else
@@ -57,7 +53,7 @@ namespace ZipLabs
                             if (!reader.Entry.IsDirectory)
                             {
                                 reader.WriteEntryToDirectory(subGuidDir.FullName,
-                                    ExtractOptions.ExtractFullPath | ExtractOptions.Overwrite);
+                                    new ExtractionOptions {ExtractFullPath = true, Overwrite = true});
                             }
                         }
 
