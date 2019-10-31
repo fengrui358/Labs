@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ConfigurationDemo": {
+      "commandName": "Project",
+      "commandLineArgs": "name=\"hello free\" age=\"45\""
+    }
+  }
+}
