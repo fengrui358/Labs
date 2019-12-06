@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
+using AutoMapper.Configuration;
 using Xunit;
 
 namespace AutoMapperLab
@@ -8,10 +11,15 @@ namespace AutoMapperLab
     {
         static void Main(string[] args)
         {
-            var mapper = new Mapper(new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<A, A>();
-            }));
+            var cfg = new MapperConfigurationExpression();
+            cfg.CreateMap<B, A>();
+            cfg.CreateMap<A, B>();
+            cfg.CreateMap<A, A>();
+
+            var configuration = new MapperConfiguration(cfg);
+            var executionPlan = configuration.BuildExecutionPlan(typeof(A), typeof(A));
+
+            var mapper = new Mapper(configuration);
 
             #region 直接Copy
 
@@ -28,6 +36,31 @@ namespace AutoMapperLab
 
             #region 驼峰转换
 
+            var b = new B
+            {
+                aString = "daf34f"
+            };
+
+            var a3 = mapper.Map<A>(b);
+            Assert.Equal(b.aString, a3.AString);
+            Assert.Equal(b.aString, a3.astRiNg);
+
+            a3.AString = "sdafasf";
+            var b3 = mapper.Map<B>(a3);
+            Assert.Equal(a3.AString, b3.aString);
+
+            #endregion
+
+            #region 名称一样，不同类型映射
+
+            var b4 = new B {TestNumber = "56"};
+            var a4 = mapper.Map<A>(b4);
+            Assert.Equal(56,a4.TesTNumber);
+
+            #endregion
+
+            #region 枚举和Int转换
+
 
 
             #endregion
@@ -38,9 +71,10 @@ namespace AutoMapperLab
 
             #endregion
 
-            #region 枚举和Int转换
+            #region 官方Demo
 
-            
+            var flattening = new Flattening();
+            flattening.Test();
 
             #endregion
 
@@ -51,12 +85,20 @@ namespace AutoMapperLab
     class A
     {
         public string AString { get; set; }
+        public string astRiNg { get; set; }
+
+        public int TesTNumber { get; set; }
     }
 
     class B
     {
         public string aString { get; set; }
+
+        public string TestNumber { get; set; }
     }
 
-
+    class BProfile: Profile
+    {
+        
+    }
 }
