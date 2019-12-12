@@ -13,9 +13,11 @@ namespace AutoMapperLab
         public void Test()
         {
             var cfg = new MapperConfigurationExpression();
-            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
+            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource).ReverseMap();
             cfg.CreateMap<InnerSource, Destination>(MemberList.None);
             cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
+            cfg.CreateMap<Destination, InnerSource>(MemberList.None);
+            cfg.CreateMap<Destination, OtherInnerSource>(MemberList.None);
 
             var source = new Source
             {
@@ -29,9 +31,16 @@ namespace AutoMapperLab
             var mapper = new Mapper(configuration);
 
             var destination = mapper.Map<Destination>(source);
+
             Assert.Equal("name", destination.Name);
-            Assert.Equal("description", destination.Name);
+            Assert.Equal("description", destination.Description);
             Assert.Equal("title", destination.Title);
+
+            var source2 = mapper.Map<Source>(destination);
+            Assert.Equal("name", source2.Name);
+            Assert.Equal("description", source2.InnerSource.Description);
+            Assert.Equal("title", source2.OtherInnerSource.Title);
+
         }
     }
 

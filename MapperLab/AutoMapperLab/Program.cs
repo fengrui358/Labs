@@ -14,8 +14,9 @@ namespace AutoMapperLab
         {
             var cfg = new MapperConfigurationExpression();
             cfg.CreateMap<B, A>();
-            cfg.CreateMap<A, B>();
+            cfg.CreateMap<A, B>().ForMember(d => d.TestStrNumber, expression => expression.MapFrom(s => s.TesTNumber));
             cfg.CreateMap<A, A>();
+            cfg.CreateMap<A, C>().ForPath(d => d.BString, expression => expression.MapFrom(s => s.AString)).ReverseMap();
 
             var configuration = new MapperConfiguration(cfg);
             var executionPlan = configuration.BuildExecutionPlan(typeof(A), typeof(A));
@@ -75,7 +76,36 @@ namespace AutoMapperLab
 
             #region 属性名转换
 
+            var a7 = new A {TesTNumber = 435};
+            var b7 = mapper.Map<B>(a7);
+            Assert.Equal("435", b7.TestStrNumber);
 
+            var a10 = new A {AString = "ddd"};
+            var c = mapper.Map<C>(a10);
+            Assert.Equal("ddd", c.BString);
+
+            c.AString = null;
+            var a11 = mapper.Map<A>(c);
+            Assert.Equal("ddd", a11.AString);
+
+            #endregion
+
+            #region 空属性转换
+
+            var a8 = new A
+            {
+                AString = "ggg",
+                astRiNg = "ttt",
+                bString = "jjj"
+            };
+
+            var a9 = new A
+            {
+                AString = ""
+            };
+            mapper.Map(a9, a8);
+            Assert.Equal(string.Empty, a8.AString);
+            Assert.Equal(null, a8.bString);
 
             #endregion
 
@@ -87,6 +117,9 @@ namespace AutoMapperLab
             var includeMembers = new IncludeMembers();
             includeMembers.Test();
 
+            var reverseMappingAndUnflattening = new ReverseMappingAndUnflattening();
+            reverseMappingAndUnflattening.Test();
+
             #endregion
 
             Console.ReadLine();
@@ -97,6 +130,8 @@ namespace AutoMapperLab
     {
         public string AString { get; set; }
         public string astRiNg { get; set; }
+
+        public string bString { get; set; }
 
         public int TesTNumber { get; set; }
 
@@ -110,6 +145,14 @@ namespace AutoMapperLab
         public string TestNumber { get; set; }
 
         public int Sex { get; set; }
+
+        public string TestStrNumber { get; set; }
+    }
+
+    class C
+    {
+        public string AString { get; set; }
+        public string BString { get; set; }
     }
 
     enum TestSex
