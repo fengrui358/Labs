@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using AutoMapper;
 using AutoMapper.Configuration;
 using Xunit;
@@ -61,7 +62,14 @@ namespace AutoMapperLab
 
             #region 枚举和Int转换
 
+            var b5 = new B {Sex = 6};
+            var a5 = mapper.Map<A>(b5);
+            Assert.Equal(TestSex.Female, a5.Sex);
 
+            var b6 = new B {Sex = 8};
+            var a6 = mapper.Map<A>(b6);
+            Assert.NotEqual(TestSex.Male, a6.Sex);
+            Assert.NotEqual(TestSex.Female, a6.Sex);
 
             #endregion
 
@@ -76,6 +84,9 @@ namespace AutoMapperLab
             var flattening = new Flattening();
             flattening.Test();
 
+            var includeMembers = new IncludeMembers();
+            includeMembers.Test();
+
             #endregion
 
             Console.ReadLine();
@@ -88,6 +99,8 @@ namespace AutoMapperLab
         public string astRiNg { get; set; }
 
         public int TesTNumber { get; set; }
+
+        public TestSex Sex { get; set; }
     }
 
     class B
@@ -95,6 +108,15 @@ namespace AutoMapperLab
         public string aString { get; set; }
 
         public string TestNumber { get; set; }
+
+        public int Sex { get; set; }
+    }
+
+    enum TestSex
+    {
+        Male = 4,
+
+        Female = 6
     }
 
     class BProfile: Profile
