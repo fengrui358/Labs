@@ -120,6 +120,9 @@ namespace AutoMapperLab
             var reverseMappingAndUnflattening = new ReverseMappingAndUnflattening();
             reverseMappingAndUnflattening.Test();
 
+            var projection = new Projection();
+            projection.Test();
+
             #endregion
 
             Console.ReadLine();
