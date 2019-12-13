@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Runtime.InteropServices;
 using AutoMapper;
 using AutoMapper.Configuration;
 using Xunit;
@@ -122,6 +123,9 @@ namespace AutoMapperLab
 
             var projection = new Projection();
             projection.Test();
+
+            var configurationValidationcs = new ConfigurationValidationcs.ConfigurationValidationcs();
+            configurationValidationcs.Test();
 
             #endregion
 
