@@ -14,7 +14,7 @@ namespace AutoMapperLab
         static void Main(string[] args)
         {
             var cfg = new MapperConfigurationExpression();
-            cfg.CreateMap<B, A>();
+            cfg.CreateMap<B, A>().ForMember(d=>d.astRiNg, expression => expression.Ignore());
             cfg.CreateMap<A, B>().ForMember(d => d.TestStrNumber, expression => expression.MapFrom(s => s.TesTNumber));
             cfg.CreateMap<A, A>();
             cfg.CreateMap<A, C>().ForPath(d => d.BString, expression => expression.MapFrom(s => s.AString)).ReverseMap();
@@ -46,7 +46,7 @@ namespace AutoMapperLab
 
             var a3 = mapper.Map<A>(b);
             Assert.Equal(b.aString, a3.AString);
-            Assert.Equal(b.aString, a3.astRiNg);
+            Assert.NotEqual(b.aString, a3.astRiNg);
 
             a3.AString = "sdafasf";
             var b3 = mapper.Map<B>(a3);
