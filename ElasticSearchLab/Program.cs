@@ -9,7 +9,7 @@ namespace ElasticSearchLab
     {
         static void Main(string[] args)
         {
-            var uri = "http://txy.frhello.com:9200";
+            var uri = "http://10.15.9.113:9200";
             var nodes = uri.Split(',', StringSplitOptions.RemoveEmptyEntries).Select(url => new Uri(url));
             IConnectionPool connectionPool = new StaticConnectionPool(nodes);
             var config = new ConnectionConfiguration(connectionPool);
@@ -17,8 +17,11 @@ namespace ElasticSearchLab
 
             IElasticLowLevelClient client = new ElasticLowLevelClient(config);
 
+
+
             var document = new Dictionary<string, object>
             {
+                {"source", "wpf"},
                 {"@timestamp", DateTime.Now},
                 {"level", "Info"},
                 {"message", "test.log"}
@@ -26,7 +29,7 @@ namespace ElasticSearchLab
 
             document["traceId"] = "testTraceId";
 
-            object documentInfo = new {index = new {_index = "springboot-elk"}};
+            object documentInfo = new { index = new { _index = "wpf-client" } };
             var payload = new List<object> {documentInfo, document};
             var postData = PostData.MultiJson(payload);
 
