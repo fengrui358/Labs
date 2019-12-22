@@ -130,6 +130,9 @@ namespace AutoMapperLab
             var listsAndArrarys = new ListsAndArrays();
             listsAndArrarys.Test();
 
+            var customTypeConverters = new CustomTypeConverters();
+            customTypeConverters.Test();
+
             #endregion
 
             Console.WriteLine("Over");
