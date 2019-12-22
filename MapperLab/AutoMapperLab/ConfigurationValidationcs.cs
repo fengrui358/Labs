@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
+using Xunit;
 
 // ReSharper disable once CheckNamespace
 namespace AutoMapperLab.ConfigurationValidationcs
@@ -10,7 +12,8 @@ namespace AutoMapperLab.ConfigurationValidationcs
             var configuration = new MapperConfiguration(cfg =>
                 cfg.CreateMap<Source, Destination>());
 
-            configuration.AssertConfigurationIsValid();
+            //下面这一句由于目标类型中属性不能够全部被映射校验会报错
+            //Assert.Throws(typeof(AutoMapperConfigurationException), () => configuration.AssertConfigurationIsValid());
         }
     }
 

@@ -127,8 +127,12 @@ namespace AutoMapperLab
             var configurationValidationcs = new ConfigurationValidationcs.ConfigurationValidationcs();
             configurationValidationcs.Test();
 
+            var listsAndArrarys = new ListsAndArrays();
+            listsAndArrarys.Test();
+
             #endregion
 
+            Console.WriteLine("Over");
             Console.ReadLine();
         }
     }
