@@ -133,6 +133,9 @@ namespace AutoMapperLab
             var customTypeConverters = new CustomTypeConverters();
             customTypeConverters.Test();
 
+            var customValueResolverscs = new CustomValueResolvers.CustomValueResolverscs();
+            customValueResolverscs.Test();
+
             #endregion
 
             Console.WriteLine("Over");
