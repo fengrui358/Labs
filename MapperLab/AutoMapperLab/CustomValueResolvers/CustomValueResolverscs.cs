@@ -28,7 +28,7 @@ namespace AutoMapperLab.CustomValueResolvers
         {
             var configuration = new MapperConfiguration(cfg =>
                 cfg.CreateMap<Source, Destination>()
-                    .ForMember(dest => dest.Total, opt => opt.MapFrom<MultBy2Resolver>()));
+                    .ForMember(dest => dest.Total, opt => opt.MapFrom(new MultBy2Resolver())));
             configuration.AssertConfigurationIsValid();
 
             var source = new Source

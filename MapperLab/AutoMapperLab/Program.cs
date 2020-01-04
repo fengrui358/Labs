@@ -138,6 +138,9 @@ namespace AutoMapperLab
             customValueResolverscs.Test();
             customValueResolverscs.Test2();
 
+            var resolversAndConditions = new ResolversAndConditions();
+            resolversAndConditions.Test();
+
             #endregion
 
             Console.WriteLine("Over");
