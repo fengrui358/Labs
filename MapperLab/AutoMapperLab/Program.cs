@@ -141,6 +141,9 @@ namespace AutoMapperLab
             var resolversAndConditions = new ResolversAndConditions();
             resolversAndConditions.Test();
 
+            var nullSubstitution = new NullSubstitution();
+            nullSubstitution.Test();
+
             #endregion
 
             Console.WriteLine("Over");
