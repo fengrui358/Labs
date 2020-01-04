@@ -14,10 +14,11 @@ namespace AutoMapperLab
         static void Main(string[] args)
         {
             var cfg = new MapperConfigurationExpression();
-            cfg.CreateMap<B, A>().ForMember(d=>d.astRiNg, expression => expression.Ignore());
+            cfg.CreateMap<B, A>().ForMember(d => d.astRiNg, expression => expression.Ignore());
             cfg.CreateMap<A, B>().ForMember(d => d.TestStrNumber, expression => expression.MapFrom(s => s.TesTNumber));
             cfg.CreateMap<A, A>();
-            cfg.CreateMap<A, C>().ForPath(d => d.BString, expression => expression.MapFrom(s => s.AString)).ReverseMap();
+            cfg.CreateMap<A, C>().ForPath(d => d.BString, expression => expression.MapFrom(s => s.AString))
+                .ReverseMap();
 
             var configuration = new MapperConfiguration(cfg);
             var executionPlan = configuration.BuildExecutionPlan(typeof(A), typeof(A));
@@ -58,7 +59,7 @@ namespace AutoMapperLab
 
             var b4 = new B {TestNumber = "56"};
             var a4 = mapper.Map<A>(b4);
-            Assert.Equal(56,a4.TesTNumber);
+            Assert.Equal(56, a4.TesTNumber);
 
             #endregion
 
@@ -135,6 +136,7 @@ namespace AutoMapperLab
 
             var customValueResolverscs = new CustomValueResolvers.CustomValueResolverscs();
             customValueResolverscs.Test();
+            customValueResolverscs.Test2();
 
             #endregion
 
@@ -179,8 +181,7 @@ namespace AutoMapperLab
         Female = 6
     }
 
-    class BProfile: Profile
+    class BProfile : Profile
     {
-        
     }
 }
