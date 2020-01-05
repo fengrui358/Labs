@@ -111,6 +111,23 @@ namespace AutoMapperLab
 
             #endregion
 
+            #region Profile配置
+
+            var cfgProfile = new MapperConfigurationExpression();
+            cfgProfile.AddMaps(typeof(Program));
+
+            var cfgMapperProfile = new MapperConfiguration(cfgProfile);
+            var plan = cfgMapperProfile.BuildExecutionPlan(typeof(ProfileClassA), typeof(ProfileClassB));
+
+            var mapperProfile = new Mapper(cfgMapperProfile);
+
+            var sourceProfile = new ProfileClassA("test", "privateTest") {Test = "free"};
+            ProfileClassB destProfile = mapperProfile.Map<ProfileClassB>(sourceProfile);
+
+            Assert.Equal("free", destProfile.Test);
+
+            #endregion
+
             #region 官方Demo
 
             var flattening = new Flattening();
