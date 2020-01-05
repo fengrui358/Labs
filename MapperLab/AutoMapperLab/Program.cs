@@ -161,6 +161,9 @@ namespace AutoMapperLab
             var nullSubstitution = new NullSubstitution();
             nullSubstitution.Test();
 
+            var construction = new Construction();
+            construction.Test();
+
             #endregion
 
             Console.WriteLine("Over");
