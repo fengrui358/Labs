@@ -16,7 +16,7 @@ namespace AutoMapperLab
             var cfg = new MapperConfigurationExpression();
             cfg.CreateMap<B, A>().ForMember(d => d.astRiNg, expression => expression.Ignore());
             cfg.CreateMap<A, B>().ForMember(d => d.TestStrNumber, expression => expression.MapFrom(s => s.TesTNumber));
-            cfg.CreateMap<A, A>();
+            cfg.CreateMap<A, A>().ForAllMembers(d => d.Condition((s, d, v) => v != null));
             cfg.CreateMap<A, C>().ForPath(d => d.BString, expression => expression.MapFrom(s => s.AString))
                 .ReverseMap();
 
