@@ -19,5 +19,8 @@ namespace AspNetCoreMini
             var buffer = Encoding.UTF8.GetBytes(contents);
             return response.Body.WriteAsync(buffer, 0, buffer.Length);
         }
+
+        public static IWebHostBuilder UseHttpListener(this IWebHostBuilder builder, params string[] urls)
+            => builder.UseServer(new HttpListenerServer(urls));
     }
 }
