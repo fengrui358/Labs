@@ -23,6 +23,12 @@ namespace AspNetCoreMini
             while (true)
             {
                 var listenerContext = await _httpListener.GetContextAsync();
+                // 打印状态行: 请求方法, URL, 协议版本
+                Console.WriteLine("{0} {1} HTTP/{2}",
+                    listenerContext.Request.HttpMethod,
+                    listenerContext.Request.RawUrl,
+                    listenerContext.Request.ProtocolVersion);
+
                 var feature = new HttpListenerFeature(listenerContext);
                 var features = new FeatureCollection()
                     .Set<IHttpRequestFeature>(feature)

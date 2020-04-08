@@ -3,4 +3,7 @@ using System.Collections.Generic;
 
 namespace AspNetCoreMini
 {
-    public class FeatureCollection : Dictionary<Type, object>, IFe
+    public class FeatureCollection : Dictionary<Type, object>, IFeatureCollection
+    {
+    }
+}
