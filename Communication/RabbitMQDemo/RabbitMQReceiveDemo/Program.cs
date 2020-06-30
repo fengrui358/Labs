@@ -21,11 +21,13 @@ namespace RabbitMQReceiveDemo
 
             using var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();
-            channel.QueueDeclare(queue: "hello",
+            channel.QueueDeclare(queue: "free",
                 durable: false,
                 exclusive: false,
                 autoDelete: true,
                 arguments: null);
+
+            channel.QueueBind("free", "CAD_CLIENT_MSG", "*.free");
 
             var consumer = new EventingBasicConsumer(channel);
             consumer.Received += (model, ea) =>
@@ -34,7 +36,7 @@ namespace RabbitMQReceiveDemo
                 var message = Encoding.UTF8.GetString(body);
                 Console.WriteLine(" [x] Received {0}", message);
             };
-            channel.BasicConsume(queue: "hello",
+            channel.BasicConsume(queue: "free",
                 autoAck: true,
                 consumer: consumer);
 

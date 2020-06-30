@@ -17,7 +17,7 @@ namespace RabbitMQSendDemo
             using var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();
             //声明一个队列
-            channel.QueueDeclare(queue: "hello", durable: false, exclusive: false, autoDelete: true, arguments: null);
+            //channel.QueueDeclare(queue: "hello", durable: false, exclusive: false, autoDelete: true, arguments: null);
 
             Task.Run(async () =>
             {
@@ -26,8 +26,8 @@ namespace RabbitMQSendDemo
                     string message = "Hello World!";
                     var body = Encoding.UTF8.GetBytes(message);
 
-                    channel.BasicPublish(exchange: "",
-                        routingKey: "hello",
+                    channel.BasicPublish(exchange: "CAD_CLIENT_MSG",
+                        routingKey: "*.free",
                         basicProperties: null,
                         body: body);
 
