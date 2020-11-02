@@ -50,10 +50,14 @@ Dapper ORM 搭配 SQLite 测试
 
 200 行代码，7 个对象——了解 ASP.NET Core 框架的本质<https://www.cnblogs.com/artech/p/inside-asp-net-core-framework.html>
 
+## JsonLabs
+
+Json序列化Demo
+
 ## LockLab
 
 锁性能测试代码
 
 ## InjectProcessLab
-注入运行时进程修改代码，使用自己的代码覆盖第三方程序中的方法函数。 <https://mp.weixin.qq.com/s/Xbt9NDO6q0zi0HkK2OKlog>
 
+注入运行时进程修改代码，使用自己的代码覆盖第三方程序中的方法函数。 <https://mp.weixin.qq.com/s/Xbt9NDO6q0zi0HkK2OKlog>
