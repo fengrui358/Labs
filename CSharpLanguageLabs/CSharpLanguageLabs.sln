@@ -25,7 +25,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitOperateLab", "BitOperate
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgorithmPerformanceDemo", "AlgorithmPerformanceDemo\AlgorithmPerformanceDemo.csproj", "{21AE7960-B012-40DE-BA50-70001FEC2323}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumericalSizeLab", "NumericalSizeLab\NumericalSizeLab.csproj", "{A899196C-A9A7-4E4B-BA33-C99EE30BCD6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NumericalSizeLab", "NumericalSizeLab\NumericalSizeLab.csproj", "{A899196C-A9A7-4E4B-BA33-C99EE30BCD6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp9Lab", "CSharp9Lab\CSharp9Lab.csproj", "{33D45481-8443-4994-929F-CC4505E20F42}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,10 @@ Global
 		{A899196C-A9A7-4E4B-BA33-C99EE30BCD6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A899196C-A9A7-4E4B-BA33-C99EE30BCD6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A899196C-A9A7-4E4B-BA33-C99EE30BCD6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33D45481-8443-4994-929F-CC4505E20F42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33D45481-8443-4994-929F-CC4505E20F42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33D45481-8443-4994-929F-CC4505E20F42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33D45481-8443-4994-929F-CC4505E20F42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
