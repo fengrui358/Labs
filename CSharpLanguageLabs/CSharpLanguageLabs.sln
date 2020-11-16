@@ -27,7 +27,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgorithmPerformanceDemo", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NumericalSizeLab", "NumericalSizeLab\NumericalSizeLab.csproj", "{A899196C-A9A7-4E4B-BA33-C99EE30BCD6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp9Lab", "CSharp9Lab\CSharp9Lab.csproj", "{33D45481-8443-4994-929F-CC4505E20F42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharp9Lab", "CSharp9Lab\CSharp9Lab.csproj", "{33D45481-8443-4994-929F-CC4505E20F42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpanLab", "SpanLab\SpanLab.csproj", "{7FC2B1DD-9900-4ED7-93E6-CD3D07A33020}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,10 @@ Global
 		{33D45481-8443-4994-929F-CC4505E20F42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33D45481-8443-4994-929F-CC4505E20F42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33D45481-8443-4994-929F-CC4505E20F42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FC2B1DD-9900-4ED7-93E6-CD3D07A33020}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FC2B1DD-9900-4ED7-93E6-CD3D07A33020}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FC2B1DD-9900-4ED7-93E6-CD3D07A33020}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FC2B1DD-9900-4ED7-93E6-CD3D07A33020}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
