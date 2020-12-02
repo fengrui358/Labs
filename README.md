@@ -61,3 +61,7 @@ Json序列化Demo
 ## InjectProcessLab
 
 注入运行时进程修改代码，使用自己的代码覆盖第三方程序中的方法函数。 <https://mp.weixin.qq.com/s/Xbt9NDO6q0zi0HkK2OKlog>
+
+## Globalization
+
+国际化相关测试
