@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json;
 using System.Threading;
 using Newtonsoft.Json;
 
@@ -44,7 +45,28 @@ namespace TimeZoneLab
 
             Console.WriteLine($"now: {t.TestTime}   start second: {StartTime}");
             Console.WriteLine($"now utc time: {TimeZoneInfo.ConvertTimeToUtc(t.TestTime)}   start utc time: {TimeZoneInfo.ConvertTimeToUtc(StartTime)}");
-            Console.WriteLine($"now json: {JsonConvert.SerializeObject(t)}");
+
+            //测试结论3：各种不同的时间格式
+            /*
+            "\"\\/Date(1335205592410)\\/\""         .NET JavaScriptSerializer
+            "\"\\/Date(1335205592410-0500)\\/\"".NET DataContractJsonSerializer
+            "2012-04-23T18:25:43.511Z"              JavaScript built-in JSON object
+            "2012-04-21T18:25:43-05:00"             ISO 8601
+            */
+
+            //Console.WriteLine($"now json: {JsonConvert.SerializeObject(t)}"); //json 序列化默认时间格式IsoDateFormat{"TestTime":"2020-12-02T23:37:57.5804267+08:00"}
+
+            var dateTimeSerializerSettings = new JsonSerializerSettings
+            {
+                DateTimeZoneHandling = DateTimeZoneHandling.Utc
+            };
+            Console.WriteLine($"now json: {JsonConvert.SerializeObject(t, dateTimeSerializerSettings)}");//json 使用Utc标准时间格式{"TestTime":"2020-12-02T15:40:09.0625343Z"}
+
+            //var dateTimeSerializerSettings = new JsonSerializerSettings
+            //{
+            //    DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
+            //};
+            //Console.WriteLine($"now json: {JsonConvert.SerializeObject(t, dateTimeSerializerSettings)}");//json 使用MicrosoftDateFormat{"TestTime":"\/Date(1606923766013+0800)\/"}
             Console.WriteLine();
         }
     }
