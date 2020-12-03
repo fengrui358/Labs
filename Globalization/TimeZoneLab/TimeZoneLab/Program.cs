@@ -29,6 +29,13 @@ namespace TimeZoneLab
 
             ManualVerify();
 
+            //测试非夏令时转换多出的一小时怎么处理，以及夏令时少了一个小时
+            Console.WriteLine();
+            Console.WriteLine("测试非夏令时转换多出的一小时怎么处理，以及夏令时少了一个小时");
+            PrintTimeList();
+            Console.WriteLine();
+
+
             Console.WriteLine("循环测试开始：");
             Console.WriteLine();
             var time = new Timer(Callback);
@@ -143,6 +150,33 @@ namespace TimeZoneLab
             var 正常时差 = 正常时间4 - 正常时间3; //结果为1小时1分，时间差值没有考虑时区的不一样，所以得到的值不正确
             var 正常时差2 = new DateTimeOffset(正常时间4) - new DateTimeOffset(正常时间3); //相差1秒，结果正确
             var 正常时差3 = TimeZoneInfo.ConvertTimeToUtc(正常时间4) - TimeZoneInfo.ConvertTimeToUtc(正常时间3); //相差1秒，结果正确
+        }
+
+        private static void PrintTimeList()
+        {
+            Console.WriteLine("进入夏令时测试：");
+
+            var summerStart = new DateTimeOffset(new DateTime(2020, 4, 4, 23, 0, 0, DateTimeKind.Local));
+            
+            //前进8个小时
+            for (int i = 0; i < 8; i++)
+            {
+                Console.WriteLine($"local time: {summerStart.LocalDateTime}   utc time: {summerStart.UtcDateTime}");
+                summerStart = summerStart.AddHours(1);
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("退出夏令时测试");
+
+            var exitSummerStart = new DateTimeOffset(new DateTime(2020, 10, 24, 23, 0, 0, DateTimeKind.Local));
+            //前进8个小时
+            for (int i = 0; i < 8; i++)
+            {
+                Console.WriteLine($"local time: {exitSummerStart.LocalDateTime}   utc time: {exitSummerStart.UtcDateTime}");
+                exitSummerStart = exitSummerStart.AddHours(1);
+            }
+
+            Console.WriteLine();
         }
     }
 }
