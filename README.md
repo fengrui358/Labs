@@ -52,7 +52,7 @@ Dapper ORM 搭配 SQLite 测试
 
 ## JsonLabs
 
-Json序列化Demo
+Json 序列化 Demo
 
 ## LockLab
 
@@ -65,3 +65,11 @@ Json序列化Demo
 ## Globalization
 
 国际化相关测试
+
+## ReverseEngineering
+
+使用 DnSpy 反编译
+
+## StrongNameLab
+
+强签名测试
