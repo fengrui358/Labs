@@ -47,6 +47,7 @@ namespace TimeZoneLab
 
         private static DateTime T_1_59_59;
         private static DateTime T_1_0_0;
+        private static DateTime T_2_0_0;
 
         private static void Callback(object? state)
         {
@@ -63,20 +64,46 @@ namespace TimeZoneLab
             }
 
             //切换2020-10-25 01：59：59会记录这两个时间进行比较
-            if (t.TestTime.Second == 59)
+            if (t.TestTime.Second == 59 && T_1_59_59 == DateTime.MinValue)
             {
                 T_1_59_59 = t.TestTime;
             }
 
-            if (t.TestTime.Second == 0)
+            if (t.TestTime.Second == 0 && T_1_0_0 == DateTime.MinValue)
             {
+                //手动构造，测试时间差值，无法还原
+                var m1 = new DateTime(2020,10,25,1,59,59, DateTimeKind.Local);
+                var m2 = new DateTime(2020, 10, 25, 1, 0, 0, DateTimeKind.Local);
+                var md1 = m2.Subtract(m1);
+                var mo1 = new DateTimeOffset(m1);
+                var mo2 = new DateTimeOffset(m2);
+                var md2 = mo2.Subtract(mo1);
+
                 T_1_0_0 = t.TestTime;
                 var diff = T_1_0_0.Subtract(T_1_59_59);
-                var diff2 = new DateTimeOffset(T_1_0_0) - new DateTimeOffset(T_1_59_59); //构造DateTimeOffset会判断是否位UTC时间，如果不是会使用本地时区来生成偏移时区
+
+                var T_Offset_1_0_0 = new DateTimeOffset(T_1_0_0);
+                var T_Offset_1_59_59 = new DateTimeOffset(T_1_59_59);
+                var diff2 = T_Offset_1_0_0 - T_Offset_1_59_59; //构造DateTimeOffset会判断是否位UTC时间，如果不是会使用本地时区来生成偏移时区
+            }
+
+            if (t.TestTime.Second == 0 && t.TestTime.Hour == 2 && T_2_0_0 == DateTime.MinValue)
+            {
+                //很神奇的是DateTime.Now构造的时间它可以很清楚的知道时区该如何转换
+                T_2_0_0 = t.TestTime;
+                var diff1 = T_2_0_0.Subtract(T_1_0_0);
+                var diff2 = T_2_0_0.Subtract(T_1_59_59);
+
+                var d2 = new DateTimeOffset(T_2_0_0);
+                var d1 = new DateTimeOffset(T_1_0_0);
+                var d159 = new DateTimeOffset(T_1_59_59);
+
+                var offset1 = d2.Subtract(d1);
+                var offset2 = d2.Subtract(d159);
             }
 
             Console.WriteLine($"now: {t.TestTime}   start second: {StartTime}");
-            Console.WriteLine($"now utc time: {TimeZoneInfo.ConvertTimeToUtc(t.TestTime)}   start utc time: {TimeZoneInfo.ConvertTimeToUtc(StartTime)}");
+            Console.WriteLine($"now utc time: {TimeZoneInfo.ConvertTimeToUtc(t.TestTime)}({ToUnixTime(t.TestTime)})   start utc time: {TimeZoneInfo.ConvertTimeToUtc(StartTime)}({ToUnixTime(StartTime)})");
 
             //测试结论3：各种不同的时间格式
             /*
@@ -177,6 +204,14 @@ namespace TimeZoneLab
             }
 
             Console.WriteLine();
+        }
+
+        private static readonly DateTime Time19700101 = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+
+        private static long ToUnixTime(DateTime time)
+        {
+            return (long)(Math.Round(time.ToUniversalTime().Subtract(Time19700101).TotalMilliseconds,
+                MidpointRounding.AwayFromZero) / 1000);
         }
     }
 }
