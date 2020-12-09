@@ -139,7 +139,7 @@ namespace TimeZoneLab
             var t2 = new DateTime(2020, 4, 5, 2, 0, 0, DateTimeKind.Local);
             var t3 = new DateTime(2020, 4, 5, 2, 0, 0);
 
-            //消失的一个消失，推论 墨西哥城不会存在2020年4月5日2点到2020年4月5日2点59分的任何时间值。
+            //消失的一个小时，推论 墨西哥城不会存在2020年4月5日2点到2020年4月5日2点59分的任何时间值。
             //不能生成时间成功，这个时间会成为一个无效时间，在带时区的时间显示中，你会看见它无法显示
             var 不正常时间1 = new DateTime(2020, 4, 5, 2, 0, 0, DateTimeKind.Local);
             var 不正常时间2 = new DateTime(2020, 4, 5, 2, 59, 59, DateTimeKind.Local);
