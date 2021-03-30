@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkCoreLab", "E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkCoreLab.WPF", "EntityFrameworkCoreLab.WPF\EntityFrameworkCoreLab.WPF.csproj", "{C61BF54C-C942-44FE-B86E-EE619BE9DAC4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManyToManyLab", "ManyToManyLab\ManyToManyLab.csproj", "{0F815DD6-D8F9-423C-9A32-5D59EA2CD7AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C61BF54C-C942-44FE-B86E-EE619BE9DAC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C61BF54C-C942-44FE-B86E-EE619BE9DAC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C61BF54C-C942-44FE-B86E-EE619BE9DAC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F815DD6-D8F9-423C-9A32-5D59EA2CD7AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F815DD6-D8F9-423C-9A32-5D59EA2CD7AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F815DD6-D8F9-423C-9A32-5D59EA2CD7AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F815DD6-D8F9-423C-9A32-5D59EA2CD7AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

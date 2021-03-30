@@ -11,6 +11,16 @@ namespace EntityFrameworkCoreLab
             using (var db = new BloggingContext())
             {
                 // Note: This sample requires the database to be created before running.
+                var blogs = db.Blogs.ToList();
+                foreach (var blog1 in blogs)
+                {
+                    db.Entry(blog1).Collection(s=>s.Posts).Load();
+
+                    foreach (var blog1Post in blog1.Posts)
+                    {
+                        db.Entry(blog1Post).Collection(s=>s.Tags).Load();
+                    }
+                }
 
                 // Create
                 Console.WriteLine("Inserting a new blog");
