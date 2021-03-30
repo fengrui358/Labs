@@ -13,6 +13,8 @@ namespace EntityFrameworkCoreLab
     {
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Post> Posts { get; set; }
+
+        public DbSet<Tag> Tags { get; set; }
         // The following configures EF to create a Sqlite database file as `C:\blogging.db`.
         // For Mac or Linux, change this to `/tmp/blogging.db` or any other absolute path.
 
@@ -32,5 +34,16 @@ namespace EntityFrameworkCoreLab
         public string Content { get; set; }
         public int BlogId { get; set; }
         public Blog Blog { get; set; }
+
+        public ICollection<Tag> Tags { get; set; }
+    }
+
+    public class Tag
+    {
+        public int Id { get; set; }
+
+        public string Text { get; set; }
+
+        public ICollection<Post> Posts { get; set; }
     }
 }
