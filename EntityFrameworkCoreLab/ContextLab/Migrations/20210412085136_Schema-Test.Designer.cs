@@ -3,14 +3,16 @@ using System;
 using ContextLab.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ContextLab.Migrations
 {
     [DbContext(typeof(DefaultDbContext))]
-    partial class DefaultDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210412085136_Schema-Test")]
+    partial class SchemaTest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,8 +27,7 @@ namespace ContextLab.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4")
-                        .HasComment("名字");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Title")
                         .HasMaxLength(30)
@@ -35,9 +36,6 @@ namespace ContextLab.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("BlogAuthorTable");
-
-                    b
-                        .HasComment("作者");
 
                     b.HasData(
                         new
@@ -99,8 +97,8 @@ namespace ContextLab.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("46d68bbb-0865-4b78-bf7b-0476c77917de"),
-                            TestString = "46d68bbb08654b78bf7b0476c77917de"
+                            Id = new Guid("de7f49b9-20c7-4898-a2fd-8b408af30613"),
+                            TestString = "de7f49b920c74898a2fd8b408af30613"
                         });
                 });
 

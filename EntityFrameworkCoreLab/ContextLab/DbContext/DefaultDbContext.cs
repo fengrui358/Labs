@@ -11,6 +11,8 @@ namespace ContextLab.DbContext
 
         public DbSet<Blog> Blogs { get; set; }
 
+        public DbSet<Other> Others { get; set; }
+
         public DefaultDbContext(DbContextOptions<DefaultDbContext> options, IConfiguration configuration)
         {
             _configuration = configuration;
