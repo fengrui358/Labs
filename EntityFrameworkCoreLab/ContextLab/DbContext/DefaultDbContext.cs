@@ -1,4 +1,5 @@
-﻿using ContextLab.Entities;
+﻿using System.Collections.Generic;
+using ContextLab.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -21,6 +22,23 @@ namespace ContextLab.DbContext
             optionsBuilder.UseMySql(_configuration.GetConnectionString("Default"), MySqlServerVersion.LatestSupportedServerVersion);
             optionsBuilder.EnableDetailedErrors();
             optionsBuilder.EnableSensitiveDataLogging();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Author>(s => s.ToTable("BlogAuthorTable"));
+
+            modelBuilder.Entity<Author>().HasData(new Author
+            {
+                Id = 1,
+                Name = "test"
+            });
+
+            modelBuilder.Entity<Blog>().HasData(new List<Blog>
+            {
+                new Blog {BlogId = 1, Url = "test1", AuthorId = 1},
+                new Blog {BlogId = 2, Url = "test2", AuthorId = 1}
+            });
         }
     }
 }

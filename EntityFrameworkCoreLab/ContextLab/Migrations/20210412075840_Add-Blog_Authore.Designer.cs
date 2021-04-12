@@ -2,14 +2,16 @@
 using ContextLab.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ContextLab.Migrations
 {
     [DbContext(typeof(DefaultDbContext))]
-    partial class DefaultDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210412075840_Add-Blog_Authore")]
+    partial class AddBlog_Authore
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,13 +30,6 @@ namespace ContextLab.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("BlogAuthorTable");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            Name = "test"
-                        });
                 });
 
             modelBuilder.Entity("ContextLab.Entities.Blog", b =>
@@ -54,36 +49,17 @@ namespace ContextLab.Migrations
                     b.HasIndex("AuthorId");
 
                     b.ToTable("Blogs");
-
-                    b.HasData(
-                        new
-                        {
-                            BlogId = 1,
-                            AuthorId = 1L,
-                            Url = "test1"
-                        },
-                        new
-                        {
-                            BlogId = 2,
-                            AuthorId = 1L,
-                            Url = "test2"
-                        });
                 });
 
             modelBuilder.Entity("ContextLab.Entities.Blog", b =>
                 {
                     b.HasOne("ContextLab.Entities.Author", "Author")
-                        .WithMany("Blogs")
+                        .WithMany()
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Author");
-                });
-
-            modelBuilder.Entity("ContextLab.Entities.Author", b =>
-                {
-                    b.Navigation("Blogs");
                 });
 #pragma warning restore 612, 618
         }
