@@ -39,6 +39,12 @@ namespace ContextLab.DbContext
                 new Blog {BlogId = 1, Url = "test1", AuthorId = 1},
                 new Blog {BlogId = 2, Url = "test2", AuthorId = 1}
             });
+
+            modelBuilder.Entity<Blog>(s =>
+            {
+                s.Property(blog => blog.AuthorId).IsRequired();
+                s.Property(blog => blog.Url).HasMaxLength(255).IsRequired();
+            });
         }
     }
 }
