@@ -9,6 +9,7 @@ namespace ContextLab.Entities
     {
         public Guid Id { get; set; }
 
+        [Column("change_new_column_name")]
         [Required]
         public string TestString { get; set; }
     }
