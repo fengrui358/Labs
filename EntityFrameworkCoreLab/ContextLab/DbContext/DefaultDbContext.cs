@@ -45,6 +45,8 @@ namespace ContextLab.DbContext
                 s.Property(blog => blog.AuthorId).IsRequired();
                 s.Property(blog => blog.Url).HasMaxLength(255).IsRequired();
             });
+
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(DefaultDbContext).Assembly);
         }
     }
 }
