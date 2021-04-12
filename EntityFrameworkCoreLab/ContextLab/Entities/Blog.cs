@@ -1,4 +1,6 @@
-﻿namespace ContextLab.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ContextLab.Entities
 {
     public class Blog
     {
@@ -12,5 +14,10 @@
         /// 作者
         /// </summary>
         public Author Author { get; set; }
+
+        public double Price { get; set; }
+
+        [Column(TypeName = "decimal(5, 2)")]
+        public decimal PriceDecimal { get; set; }
     }
 }

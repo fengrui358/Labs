@@ -39,7 +39,7 @@ namespace ContextLab.DbContext
             modelBuilder.Entity<Blog>().HasData(new List<Blog>
             {
                 new Blog {BlogId = 1, Url = "test1", AuthorId = 1},
-                new Blog {BlogId = 2, Url = "test2", AuthorId = 1}
+                new Blog {BlogId = 2, Url = "test2", AuthorId = 1, Price = 12.545443, PriceDecimal = 125.454M}
             });
 
             modelBuilder.Entity<Blog>(s =>

@@ -3,14 +3,16 @@ using System;
 using ContextLab.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ContextLab.Migrations
 {
     [DbContext(typeof(DefaultDbContext))]
-    partial class DefaultDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210412090539_Add-Blog-Price")]
+    partial class AddBlogPrice
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,8 +88,8 @@ namespace ContextLab.Migrations
                         {
                             BlogId = 2,
                             AuthorId = 1L,
-                            Price = 12.545443000000001,
-                            PriceDecimal = 125.454m,
+                            Price = 0.0,
+                            PriceDecimal = 0m,
                             Url = "test2"
                         });
                 });
@@ -110,8 +112,8 @@ namespace ContextLab.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a82d4414-ac32-480d-8813-4bbc6b9bf643"),
-                            TestString = "a82d4414ac32480d88134bbc6b9bf643"
+                            Id = new Guid("7d56ad6e-8d94-451e-be27-3e85485243c8"),
+                            TestString = "7d56ad6e8d94451ebe273e85485243c8"
                         });
                 });
 
