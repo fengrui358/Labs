@@ -12,5 +12,11 @@ namespace ContextLab.Entities
         [Column("change_new_column_name", TypeName = "varchar(200)")]
         [Required]
         public string TestString { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTimeOffset LastUpdatedDateTimeOffset { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime LastUpdated { get; set; }
     }
 }

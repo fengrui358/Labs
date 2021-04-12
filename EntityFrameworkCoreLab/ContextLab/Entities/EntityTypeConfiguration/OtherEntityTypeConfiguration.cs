@@ -12,7 +12,9 @@ namespace ContextLab.Entities.EntityTypeConfiguration
             builder.HasData(new Other
             {
                 Id = guid,
-                TestString = guid.ToString("N")
+                TestString = guid.ToString("N"),
+                LastUpdatedDateTimeOffset = new DateTimeOffset(2021,4,12,17,28,35, TimeSpan.FromMilliseconds(256)),
+                LastUpdated = new DateTime(2021, 4, 12, 17, 28, 35)
             });
         }
     }

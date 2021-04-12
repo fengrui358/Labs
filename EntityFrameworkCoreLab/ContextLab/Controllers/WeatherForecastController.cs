@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using ContextLab.DbContext;
+using ContextLab.Entities;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
@@ -34,6 +35,14 @@ namespace ContextLab.Controllers
         {
             var blogs = await _dbContext.Blogs.ToListAsync();
             Console.WriteLine(JsonConvert.SerializeObject(blogs));
+
+            await _dbContext.AddRangeAsync(new List<Other>
+            {
+                new() {Id = Guid.NewGuid(), TestString = "Insert_1"},
+                new() {Id = Guid.NewGuid(), TestString = "Insert_2"}
+            });
+            await _dbContext.AddAsync(new Other {Id = Guid.NewGuid(), TestString = "Insert"});
+            await _dbContext.SaveChangesAsync();
 
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
