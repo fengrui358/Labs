@@ -3,14 +3,16 @@ using System;
 using ContextLab.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ContextLab.Migrations
 {
     [DbContext(typeof(DefaultDbContext))]
-    partial class DefaultDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210413084326_Add-Order")]
+    partial class AddOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -232,25 +234,6 @@ namespace ContextLab.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ContextLab.Entities.PostTag", b =>
-                {
-                    b.Property<long>("PostId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TagId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.Property<DateTime>("PublicationDate")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("PostId", "TagId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("PostTag");
-                });
-
             modelBuilder.Entity("ContextLab.Entities.RecordOfSale", b =>
                 {
                     b.Property<int>("RecordOfSaleId")
@@ -271,16 +254,6 @@ namespace ContextLab.Migrations
                     b.HasIndex("CarLicensePlate");
 
                     b.ToTable("CarHistories");
-                });
-
-            modelBuilder.Entity("ContextLab.Entities.Tag", b =>
-                {
-                    b.Property<string>("TagId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.HasKey("TagId");
-
-                    b.ToTable("Tag");
                 });
 
             modelBuilder.Entity("ContextLab.Entities.Blog", b =>
@@ -345,25 +318,6 @@ namespace ContextLab.Migrations
                     b.Navigation("Blog");
                 });
 
-            modelBuilder.Entity("ContextLab.Entities.PostTag", b =>
-                {
-                    b.HasOne("ContextLab.Entities.Post", "Post")
-                        .WithMany("PostTags")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ContextLab.Entities.Tag", "Tag")
-                        .WithMany("PostTags")
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Post");
-
-                    b.Navigation("Tag");
-                });
-
             modelBuilder.Entity("ContextLab.Entities.RecordOfSale", b =>
                 {
                     b.HasOne("ContextLab.Entities.Car", "Car")
@@ -390,16 +344,6 @@ namespace ContextLab.Migrations
             modelBuilder.Entity("ContextLab.Entities.Car", b =>
                 {
                     b.Navigation("SaleHistory");
-                });
-
-            modelBuilder.Entity("ContextLab.Entities.Post", b =>
-                {
-                    b.Navigation("PostTags");
-                });
-
-            modelBuilder.Entity("ContextLab.Entities.Tag", b =>
-                {
-                    b.Navigation("PostTags");
                 });
 #pragma warning restore 612, 618
         }

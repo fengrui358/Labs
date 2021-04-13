@@ -3,14 +3,16 @@ using System;
 using ContextLab.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ContextLab.Migrations
 {
     [DbContext(typeof(DefaultDbContext))]
-    partial class DefaultDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210413080406_Add-Blog-Image")]
+    partial class AddBlogImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -136,20 +138,6 @@ namespace ContextLab.Migrations
                     b.ToTable("Cars");
                 });
 
-            modelBuilder.Entity("ContextLab.Entities.Order", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Order");
-                });
-
             modelBuilder.Entity("ContextLab.Entities.Other", b =>
                 {
                     b.Property<Guid>("Id")
@@ -232,25 +220,6 @@ namespace ContextLab.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ContextLab.Entities.PostTag", b =>
-                {
-                    b.Property<long>("PostId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TagId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.Property<DateTime>("PublicationDate")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("PostId", "TagId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("PostTag");
-                });
-
             modelBuilder.Entity("ContextLab.Entities.RecordOfSale", b =>
                 {
                     b.Property<int>("RecordOfSaleId")
@@ -271,16 +240,6 @@ namespace ContextLab.Migrations
                     b.HasIndex("CarLicensePlate");
 
                     b.ToTable("CarHistories");
-                });
-
-            modelBuilder.Entity("ContextLab.Entities.Tag", b =>
-                {
-                    b.Property<string>("TagId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.HasKey("TagId");
-
-                    b.ToTable("Tag");
                 });
 
             modelBuilder.Entity("ContextLab.Entities.Blog", b =>
@@ -305,34 +264,6 @@ namespace ContextLab.Migrations
                     b.Navigation("Blog");
                 });
 
-            modelBuilder.Entity("ContextLab.Entities.Order", b =>
-                {
-                    b.OwnsOne("ContextLab.Entities.ShippingAddress", "ShippingAddress", b1 =>
-                        {
-                            b1.Property<long>("OrderId")
-                                .HasColumnType("bigint");
-
-                            b1.Property<string>("City")
-                                .IsRequired()
-                                .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                            b1.Property<string>("Street")
-                                .IsRequired()
-                                .HasColumnType("longtext CHARACTER SET utf8mb4")
-                                .HasColumnName("Street");
-
-                            b1.HasKey("OrderId");
-
-                            b1.ToTable("Order");
-
-                            b1.WithOwner()
-                                .HasForeignKey("OrderId");
-                        });
-
-                    b.Navigation("ShippingAddress")
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("ContextLab.Entities.Post", b =>
                 {
                     b.HasOne("ContextLab.Entities.Blog", "Blog")
@@ -343,25 +274,6 @@ namespace ContextLab.Migrations
                         .IsRequired();
 
                     b.Navigation("Blog");
-                });
-
-            modelBuilder.Entity("ContextLab.Entities.PostTag", b =>
-                {
-                    b.HasOne("ContextLab.Entities.Post", "Post")
-                        .WithMany("PostTags")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ContextLab.Entities.Tag", "Tag")
-                        .WithMany("PostTags")
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Post");
-
-                    b.Navigation("Tag");
                 });
 
             modelBuilder.Entity("ContextLab.Entities.RecordOfSale", b =>
@@ -390,16 +302,6 @@ namespace ContextLab.Migrations
             modelBuilder.Entity("ContextLab.Entities.Car", b =>
                 {
                     b.Navigation("SaleHistory");
-                });
-
-            modelBuilder.Entity("ContextLab.Entities.Post", b =>
-                {
-                    b.Navigation("PostTags");
-                });
-
-            modelBuilder.Entity("ContextLab.Entities.Tag", b =>
-                {
-                    b.Navigation("PostTags");
                 });
 #pragma warning restore 612, 618
         }

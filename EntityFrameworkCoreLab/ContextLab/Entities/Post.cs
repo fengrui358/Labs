@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ContextLab.Entities
 {
@@ -17,5 +18,9 @@ namespace ContextLab.Entities
         public int BlogId { get; set; }
 
         public Blog Blog { get; set; }
+
+        public List<Tag> Tags { get; set; }
+
+        public List<PostTag> PostTags { get; set; }
     }
 }

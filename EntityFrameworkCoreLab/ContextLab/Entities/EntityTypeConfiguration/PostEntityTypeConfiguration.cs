@@ -16,6 +16,15 @@ namespace ContextLab.Entities.EntityTypeConfiguration
                 new() {BlogId = 1, PostId = 2, Title = "Post2", Content = "PostC2"},
                 new() {BlogId = 2, PostId = 3, Title = "Post3", Content = "PostC3"}
             });
+
+            //EFCore p207
+            builder.HasMany(s => s.Tags).WithMany(s => s.Posts).UsingEntity<PostTag>(
+                s => s.HasOne(t => t.Tag).WithMany(t => t.PostTags).HasForeignKey(t => t.TagId),
+                s => s.HasOne(t => t.Post).WithMany(t => t.PostTags).HasForeignKey(t => t.PostId), s =>
+                {
+                    s.Property(t => t.PublicationDate).ValueGeneratedOnAddOrUpdate();
+                    s.HasKey(t => new {t.PostId, t.TagId});
+                });
         }
     }
 }
