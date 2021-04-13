@@ -13,6 +13,10 @@ namespace ContextLab.DbContext
 
         public DbSet<Other> Others { get; set; }
 
+        public DbSet<Car> Cars { get; set; }
+
+        public DbSet<RecordOfSale> CarHistories { get; set; }
+
         public DefaultDbContext(DbContextOptions<DefaultDbContext> options, IConfiguration configuration)
         {
             _configuration = configuration;
