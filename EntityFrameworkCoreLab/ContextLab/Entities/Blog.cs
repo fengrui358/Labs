@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ContextLab.Entities
 {
@@ -19,5 +20,7 @@ namespace ContextLab.Entities
 
         [Column(TypeName = "decimal(5, 2)")]
         public decimal PriceDecimal { get; set; }
+
+        public List<Post> Posts { get; set; }
     }
 }

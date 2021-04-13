@@ -13,7 +13,7 @@ namespace ContextLab.Entities.EntityTypeConfiguration
             {
                 Id = guid,
                 TestString = guid.ToString("N"),
-                LastUpdatedDateTimeOffset = new DateTimeOffset(2021,4,12,17,28,35, TimeSpan.FromMilliseconds(256)),
+                LastUpdatedDateTimeOffset = new DateTimeOffset(2021,4,12,17,28,35, TimeSpan.FromHours(8)),
                 LastUpdated = new DateTime(2021, 4, 12, 17, 28, 35)
             });
         }
