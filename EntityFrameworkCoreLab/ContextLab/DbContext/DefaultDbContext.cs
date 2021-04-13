@@ -46,6 +46,9 @@ namespace ContextLab.DbContext
             {
                 s.Property(blog => blog.AuthorId).IsRequired();
                 s.Property(blog => blog.Url).HasMaxLength(255).IsRequired();
+
+                s.HasMany(s => s.Posts).WithOne(s => s.Blog);
+                s.Navigation(s => s.Posts).UsePropertyAccessMode(PropertyAccessMode.Property);
             });
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DefaultDbContext).Assembly);

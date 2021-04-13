@@ -9,7 +9,7 @@ namespace ContextLab.Entities.EntityTypeConfiguration
         public void Configure(EntityTypeBuilder<Post> builder)
         {
             //EFCore p197
-            builder.HasOne(s => s.Blog).WithMany(s => s.Posts);
+            builder.HasOne(s => s.Blog).WithMany(s => s.Posts).HasForeignKey(s => s.BlogId).HasConstraintName("ConstraintForeignKeyForBlogId");
             builder.HasData(new List<Post>
             {
                 new() {BlogId = 1, PostId = 1, Title = "Post1", Content = "PostC1"},

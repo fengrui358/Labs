@@ -8,7 +8,7 @@ namespace ContextLab.Entities.EntityTypeConfiguration
     {
         public void Configure(EntityTypeBuilder<Other> builder)
         {
-            var guid = Guid.NewGuid();
+            var guid = Guid.Parse("1379c923-3595-468c-8b41-ecc3d8d6f455");
             builder.HasData(new Other
             {
                 Id = guid,
