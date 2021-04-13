@@ -55,6 +55,14 @@ namespace ContextLab.DbContext
                 s.Navigation(s => s.Posts).UsePropertyAccessMode(PropertyAccessMode.Property);
             });
 
+            //EFCore p209
+            modelBuilder.Entity<PostTag2>(s =>
+            {
+                s.HasKey(t => new {t.PostId, t.TagId});
+                s.HasOne(t => t.Post).WithMany(t => t.PostTags2).HasForeignKey(t => t.PostId);
+                s.HasOne(t => t.Tag).WithMany(t => t.PostTags2).HasForeignKey(t => t.TagId);
+            });
+
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DefaultDbContext).Assembly);
         }
     }

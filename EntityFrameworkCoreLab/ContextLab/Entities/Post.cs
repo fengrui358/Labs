@@ -22,5 +22,9 @@ namespace ContextLab.Entities
         public List<Tag> Tags { get; set; }
 
         public List<PostTag> PostTags { get; set; }
+
+        public List<Tag2> Tags2 { get; set; }
+
+        public List<PostTag2> PostTags2 { get; set; }
     }
 }
