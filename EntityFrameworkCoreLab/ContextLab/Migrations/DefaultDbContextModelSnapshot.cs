@@ -136,6 +136,20 @@ namespace ContextLab.Migrations
                     b.ToTable("Cars");
                 });
 
+            modelBuilder.Entity("ContextLab.Entities.Order", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Order");
+                });
+
             modelBuilder.Entity("ContextLab.Entities.Other", b =>
                 {
                     b.Property<Guid>("Id")
@@ -260,6 +274,34 @@ namespace ContextLab.Migrations
                         .IsRequired();
 
                     b.Navigation("Blog");
+                });
+
+            modelBuilder.Entity("ContextLab.Entities.Order", b =>
+                {
+                    b.OwnsOne("ContextLab.Entities.ShippingAddress", "ShippingAddress", b1 =>
+                        {
+                            b1.Property<long>("OrderId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("City")
+                                .IsRequired()
+                                .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                            b1.Property<string>("Street")
+                                .IsRequired()
+                                .HasColumnType("longtext CHARACTER SET utf8mb4")
+                                .HasColumnName("Street");
+
+                            b1.HasKey("OrderId");
+
+                            b1.ToTable("Order");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderId");
+                        });
+
+                    b.Navigation("ShippingAddress")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ContextLab.Entities.Post", b =>
