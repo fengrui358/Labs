@@ -92,6 +92,29 @@ namespace ContextLab.Migrations
                         });
                 });
 
+            modelBuilder.Entity("ContextLab.Entities.BlogImage", b =>
+                {
+                    b.Property<int>("BlogImageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("BlogId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Caption")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("longblob");
+
+                    b.HasKey("BlogImageId");
+
+                    b.HasIndex("BlogId")
+                        .IsUnique();
+
+                    b.ToTable("BlogImage");
+                });
+
             modelBuilder.Entity("ContextLab.Entities.Car", b =>
                 {
                     b.Property<int>("CarId")
@@ -228,6 +251,17 @@ namespace ContextLab.Migrations
                     b.Navigation("Author");
                 });
 
+            modelBuilder.Entity("ContextLab.Entities.BlogImage", b =>
+                {
+                    b.HasOne("ContextLab.Entities.Blog", "Blog")
+                        .WithOne("BlogImage")
+                        .HasForeignKey("ContextLab.Entities.BlogImage", "BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Blog");
+                });
+
             modelBuilder.Entity("ContextLab.Entities.Post", b =>
                 {
                     b.HasOne("ContextLab.Entities.Blog", "Blog")
@@ -258,6 +292,8 @@ namespace ContextLab.Migrations
 
             modelBuilder.Entity("ContextLab.Entities.Blog", b =>
                 {
+                    b.Navigation("BlogImage");
+
                     b.Navigation("Posts");
                 });
 

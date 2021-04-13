@@ -22,5 +22,7 @@ namespace ContextLab.Entities
         public decimal PriceDecimal { get; set; }
 
         public List<Post> Posts { get; set; }
+
+        public BlogImage BlogImage { get; set; }
     }
 }
