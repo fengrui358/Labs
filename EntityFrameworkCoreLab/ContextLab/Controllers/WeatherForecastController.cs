@@ -44,6 +44,9 @@ namespace ContextLab.Controllers
             await _dbContext.AddAsync(new Other {Id = Guid.NewGuid(), TestString = "Insert"});
             await _dbContext.SaveChangesAsync();
 
+            await _dbContext.AddAsync(new RssBlog {AuthorId = 1, Url = $"ManualAddBlog_{Guid.NewGuid():N}", RssUrl = "ManualAddRssUrl"});
+            await _dbContext.SaveChangesAsync();
+
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ContextLab.Entities;
+using ContextLab.Entities.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -17,6 +19,8 @@ namespace ContextLab.DbContext
 
         public DbSet<RecordOfSale> CarHistories { get; set; }
 
+        public DbSet<RssBlog> RssBlogs { get; set; }
+
         public DefaultDbContext(DbContextOptions<DefaultDbContext> options, IConfiguration configuration)
         {
             _configuration = configuration;
@@ -28,6 +32,7 @@ namespace ContextLab.DbContext
             optionsBuilder.UseMySql(_configuration.GetConnectionString("Default"), MySqlServerVersion.LatestSupportedServerVersion);
             optionsBuilder.EnableDetailedErrors();
             optionsBuilder.EnableSensitiveDataLogging();
+            optionsBuilder.LogTo(Console.WriteLine);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -55,6 +60,9 @@ namespace ContextLab.DbContext
                 s.Navigation(blog => blog.Posts).UsePropertyAccessMode(PropertyAccessMode.Property);
                 //EFCore p212
                 s.HasIndex(blog => blog.Url).IsUnique().HasFilter(null);
+
+                //EFCore p214
+                s.HasDiscriminator(blog => blog.BlogType).HasValue<Blog>(BlogType.Blog).HasValue<RssBlog>(BlogType.RssBlog);
             });
 
             //EFCore p209
