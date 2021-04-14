@@ -63,6 +63,10 @@ namespace ContextLab.DbContext
 
                 //EFCore p214
                 s.HasDiscriminator(blog => blog.BlogType).HasValue<Blog>(BlogType.Blog).HasValue<RssBlog>(BlogType.RssBlog);
+
+                //EFCore p220
+                s.Property("_backField");
+
             });
 
             //EFCore p209

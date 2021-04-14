@@ -11,6 +11,8 @@ namespace ContextLab.Entities
     [Index(nameof(Url), IsUnique = true, Name = "Index_BlogUrl")]
     public class Blog
     {
+        private string _backField;
+
         public int BlogId { get; set; }
 
         public string Url { get; set; }
@@ -33,5 +35,18 @@ namespace ContextLab.Entities
         public List<Post> Posts { get; set; }
 
         public BlogImage BlogImage { get; set; }
+
+        public string GetBackField()
+        {
+            return _backField;
+        }
+
+        public void SetBackField(string backField)
+        {
+            if (string.IsNullOrEmpty(backField))
+            {
+                _backField = backField;
+            }
+        }
     }
 }
