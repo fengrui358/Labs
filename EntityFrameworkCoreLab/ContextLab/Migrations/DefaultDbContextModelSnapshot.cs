@@ -71,6 +71,9 @@ namespace ContextLab.Migrations
 
                     b.HasIndex("AuthorId");
 
+                    b.HasIndex("Url")
+                        .IsUnique();
+
                     b.HasIndex(new[] { "Url" }, "Index_BlogUrl")
                         .IsUnique();
 

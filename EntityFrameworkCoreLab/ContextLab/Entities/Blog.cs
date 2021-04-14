@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ContextLab.Entities
 {
+    /// <summary>
+    /// EFCore p211
+    /// </summary>
     [Index(nameof(Url), IsUnique = true, Name = "Index_BlogUrl")]
     public class Blog
     {

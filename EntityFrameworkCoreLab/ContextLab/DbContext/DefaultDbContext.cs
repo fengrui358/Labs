@@ -42,8 +42,8 @@ namespace ContextLab.DbContext
 
             modelBuilder.Entity<Blog>().HasData(new List<Blog>
             {
-                new Blog {BlogId = 1, Url = "test1", AuthorId = 1},
-                new Blog {BlogId = 2, Url = "test2", AuthorId = 1, Price = 12.545443, PriceDecimal = 125.454M}
+                new() {BlogId = 1, Url = "test1", AuthorId = 1},
+                new() {BlogId = 2, Url = "test2", AuthorId = 1, Price = 12.545443, PriceDecimal = 125.454M}
             });
 
             modelBuilder.Entity<Blog>(s =>
@@ -51,8 +51,10 @@ namespace ContextLab.DbContext
                 s.Property(blog => blog.AuthorId).IsRequired();
                 s.Property(blog => blog.Url).HasMaxLength(255).IsRequired();
 
-                s.HasMany(s => s.Posts).WithOne(s => s.Blog);
-                s.Navigation(s => s.Posts).UsePropertyAccessMode(PropertyAccessMode.Property);
+                s.HasMany(blog => blog.Posts).WithOne(post => post.Blog);
+                s.Navigation(blog => blog.Posts).UsePropertyAccessMode(PropertyAccessMode.Property);
+                //EFCore p212
+                s.HasIndex(blog => blog.Url).IsUnique().HasFilter(null);
             });
 
             //EFCore p209
