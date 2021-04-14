@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace ContextLab.Entities
 {
+    [Index(nameof(Url), IsUnique = true, Name = "Index_BlogUrl")]
     public class Blog
     {
         public int BlogId { get; set; }
