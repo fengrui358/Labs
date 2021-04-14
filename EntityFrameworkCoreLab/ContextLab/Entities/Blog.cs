@@ -27,6 +27,7 @@ namespace ContextLab.Entities
         [Column(TypeName = "decimal(5, 2)")]
         public decimal PriceDecimal { get; set; }
 
+        [Comment("BlogType: 0-Blog; 1-RssBlog")]
         public BlogType BlogType { get; set; }
 
         public List<Post> Posts { get; set; }
