@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
 using ContextLab.Entities;
 using ContextLab.Entities.Enums;
+using ContextLab.Entities.Structs;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Configuration;
 
 namespace ContextLab.DbContext
@@ -66,6 +70,12 @@ namespace ContextLab.DbContext
 
                 //EFCore p220
                 s.Property("_backField");
+
+                //EFCore p231
+                s.Property(blog => blog.Finances).HasConversion(f => JsonSerializer.Serialize(f, null),
+                    f => JsonSerializer.Deserialize<List<AnnualFinance>>(f, null),
+                    new ValueComparer<IList<AnnualFinance>>((c1, c2) => c1.SequenceEqual(c2),
+                        c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())), c => (IList<AnnualFinance>) c.ToList()));
 
             });
 

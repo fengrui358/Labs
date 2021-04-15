@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using ContextLab.Entities.Enums;
+using ContextLab.Entities.Structs;
 using Microsoft.EntityFrameworkCore;
 
 namespace ContextLab.Entities
@@ -35,6 +36,8 @@ namespace ContextLab.Entities
         public List<Post> Posts { get; set; }
 
         public BlogImage BlogImage { get; set; }
+
+        public IList<AnnualFinance> Finances { get; set; }
 
         public string GetBackField()
         {

@@ -3,12 +3,11 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json.Serialization;
+using System.Text.Json;
 using System.Threading.Tasks;
 using ContextLab.DbContext;
 using ContextLab.Entities;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 
 namespace ContextLab.Controllers
 {
@@ -34,7 +33,7 @@ namespace ContextLab.Controllers
         public async Task<IEnumerable<WeatherForecast>> Get()
         {
             var blogs = await _dbContext.Blogs.ToListAsync();
-            Console.WriteLine(JsonConvert.SerializeObject(blogs));
+            Console.WriteLine(JsonSerializer.Serialize(blogs));
 
             await _dbContext.AddRangeAsync(new List<Other>
             {
