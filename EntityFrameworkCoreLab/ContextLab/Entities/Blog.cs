@@ -39,6 +39,8 @@ namespace ContextLab.Entities
 
         public IList<AnnualFinance> Finances { get; set; }
 
+        //public ulong Version { get; set; }
+
         public string GetBackField()
         {
             return _backField;

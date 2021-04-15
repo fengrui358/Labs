@@ -32,7 +32,7 @@ namespace ContextLab.Controllers
         [HttpGet]
         public async Task<IEnumerable<WeatherForecast>> Get()
         {
-            var blogs = await _dbContext.Blogs.ToListAsync();
+            var blogs = await _dbContext.Blogs.Where(s=>s.Url.Contains("manual", StringComparison.Ordinal)).ToListAsync();
             Console.WriteLine(JsonSerializer.Serialize(blogs));
 
             await _dbContext.AddRangeAsync(new List<Other>
