@@ -16,6 +16,9 @@ namespace ContextLab.Entities.EntityTypeConfiguration
             });
             builder.Navigation(s => s.ShippingAddress).IsRequired();
             builder.HasOne(s => s.DetailedOrder).WithOne().HasForeignKey<DetailedOrder>(s => s.Id);
+
+            //EFCore P252
+            builder.Property<byte[]>(nameof(DetailedOrder.Version)).IsRowVersion().HasColumnName(nameof(DetailedOrder.Version));
         }
     }
 
@@ -25,6 +28,9 @@ namespace ContextLab.Entities.EntityTypeConfiguration
         {
             builder.ToTable("Orders");
             builder.Property(s => s.Status).HasColumnName(nameof(Order.Status));
+
+            //EFCore P252
+            builder.Property(s => s.Version).IsRowVersion().HasColumnName(nameof(DetailedOrder.Version));
         }
     }
 }
