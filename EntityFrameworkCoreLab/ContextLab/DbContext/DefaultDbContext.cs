@@ -57,6 +57,9 @@ namespace ContextLab.DbContext
 
             modelBuilder.Entity<Blog>(s =>
             {
+                //EFCore p271 排除表的 Migration
+                s.ToTable("blog", blog => blog.ExcludeFromMigrations());
+
                 s.Property(blog => blog.AuthorId).IsRequired();
                 s.Property(blog => blog.Url).HasMaxLength(255).IsRequired();
 
