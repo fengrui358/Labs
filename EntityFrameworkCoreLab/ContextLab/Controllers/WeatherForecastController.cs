@@ -33,7 +33,12 @@ namespace ContextLab.Controllers
         public async Task<IEnumerable<WeatherForecast>> Get()
         {
             //EFCore p305
-            var blogsEagerLoading = await _dbContext.Blogs.Include(s => s.Posts).Include(s => s.Author).ToListAsync();
+            //var blogsEagerLoading = await _dbContext.Blogs.Include(s => s.Posts).Include(s => s.Author).ToListAsync();
+
+            //EFCore p310
+            var blogsExplicitLoading = await _dbContext.Blogs.SingleOrDefaultAsync(s => s.BlogId == 1);
+            await _dbContext.Entry(blogsExplicitLoading).Collection(s => s.Posts).LoadAsync();
+            await _dbContext.Entry(blogsExplicitLoading).Reference(s => s.Author).LoadAsync();
 
             var blogs = await _dbContext.Blogs.Where(s=>s.Url.Contains("manual", StringComparison.Ordinal)).ToListAsync();
             Console.WriteLine(JsonSerializer.Serialize(blogs));
