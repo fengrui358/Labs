@@ -19,14 +19,14 @@ namespace ContextLab.Entities
 
         public int BlogId { get; set; }
 
-        public Blog Blog { get; set; }
+        public virtual Blog Blog { get; set; }
 
-        public List<Tag> Tags { get; set; }
+        public virtual List<Tag> Tags { get; set; }
 
-        public List<PostTag> PostTags { get; set; }
+        public virtual List<PostTag> PostTags { get; set; }
 
-        public List<Tag2> Tags2 { get; set; }
+        public virtual List<Tag2> Tags2 { get; set; }
 
-        public List<PostTag2> PostTags2 { get; set; }
+        public virtual List<PostTag2> PostTags2 { get; set; }
     }
 }

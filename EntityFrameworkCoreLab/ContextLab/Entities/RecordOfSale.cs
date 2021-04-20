@@ -9,6 +9,6 @@ namespace ContextLab.Entities
         public decimal Price { get; set; }
 
         public string CarLicensePlate { get; set; }
-        public Car Car { get; set; }
+        public virtual Car Car { get; set; }
     }
 }

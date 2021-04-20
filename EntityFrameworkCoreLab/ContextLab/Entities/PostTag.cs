@@ -8,8 +8,8 @@ namespace ContextLab.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime PublicationDate { get; set; }
         public long PostId { get; set; }
-        public Post Post { get; set; }
+        public virtual Post Post { get; set; }
         public string TagId { get; set; }
-        public Tag Tag { get; set; }
+        public virtual Tag Tag { get; set; }
     }
 }

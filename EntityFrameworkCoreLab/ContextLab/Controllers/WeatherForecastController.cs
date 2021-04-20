@@ -36,9 +36,12 @@ namespace ContextLab.Controllers
             //var blogsEagerLoading = await _dbContext.Blogs.Include(s => s.Posts).Include(s => s.Author).ToListAsync();
 
             //EFCore p310
-            var blogsExplicitLoading = await _dbContext.Blogs.SingleOrDefaultAsync(s => s.BlogId == 1);
-            await _dbContext.Entry(blogsExplicitLoading).Collection(s => s.Posts).LoadAsync();
-            await _dbContext.Entry(blogsExplicitLoading).Reference(s => s.Author).LoadAsync();
+            //var blogsExplicitLoading = await _dbContext.Blogs.SingleOrDefaultAsync(s => s.BlogId == 1);
+            //await _dbContext.Entry(blogsExplicitLoading).Collection(s => s.Posts).LoadAsync();
+            //await _dbContext.Entry(blogsExplicitLoading).Reference(s => s.Author).LoadAsync();
+
+            //EFCore p312 Lazy Loading
+            var blogsLazyLoading = await _dbContext.Blogs.ToListAsync();
 
             var blogs = await _dbContext.Blogs.Where(s=>s.Url.Contains("manual", StringComparison.Ordinal)).ToListAsync();
             Console.WriteLine(JsonSerializer.Serialize(blogs));

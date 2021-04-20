@@ -9,7 +9,7 @@
         public ShippingAddress ShippingAddress { get; set; }
 
         public OrderStatus? Status { get; set; }
-        public DetailedOrder DetailedOrder { get; set; }
+        public virtual DetailedOrder DetailedOrder { get; set; }
 
     }
 

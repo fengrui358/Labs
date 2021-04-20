@@ -23,7 +23,7 @@ namespace ContextLab.Entities
         /// <summary>
         /// 作者
         /// </summary>
-        public Author Author { get; set; }
+        public virtual Author Author { get; set; }
 
         public double Price { get; set; }
 
@@ -33,9 +33,9 @@ namespace ContextLab.Entities
         [Comment("BlogType: 0-Blog; 1-RssBlog")]
         public BlogType BlogType { get; set; }
 
-        public List<Post> Posts { get; set; }
+        public virtual List<Post> Posts { get; set; }
 
-        public BlogImage BlogImage { get; set; }
+        public virtual BlogImage BlogImage { get; set; }
 
         public IList<AnnualFinance> Finances { get; set; }
 

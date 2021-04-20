@@ -12,7 +12,7 @@ namespace ContextLab.Entities
         [Comment("名字")]
         public string Name { get; set; }
 
-        public ICollection<Blog> Blogs { get; set; }
+        public virtual ICollection<Blog> Blogs { get; set; }
 
         [MaxLength(30)]
         public string Title { get; set; }

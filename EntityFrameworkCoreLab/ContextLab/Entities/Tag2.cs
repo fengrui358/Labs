@@ -8,6 +8,6 @@ namespace ContextLab.Entities
     public class Tag2
     {
         public string Id { get; set; }
-        public List<PostTag2> PostTags2 { get; set; }
+        public virtual List<PostTag2> PostTags2 { get; set; }
     }
 }
