@@ -32,6 +32,9 @@ namespace ContextLab.Controllers
         [HttpGet]
         public async Task<IEnumerable<WeatherForecast>> Get()
         {
+            //EFCore p305
+            var blogsEagerLoading = await _dbContext.Blogs.Include(s => s.Posts).Include(s => s.Author).ToListAsync();
+
             var blogs = await _dbContext.Blogs.Where(s=>s.Url.Contains("manual", StringComparison.Ordinal)).ToListAsync();
             Console.WriteLine(JsonSerializer.Serialize(blogs));
 
