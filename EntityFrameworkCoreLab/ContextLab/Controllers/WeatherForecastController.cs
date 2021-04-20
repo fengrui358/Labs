@@ -42,6 +42,9 @@ namespace ContextLab.Controllers
 
             //EFCore p312 Lazy Loading
             var blogsLazyLoading = await _dbContext.Blogs.ToListAsync();
+            
+            //EFCore p316 Serialization
+            //var blogsJson = JsonSerializer.Serialize(blogsLazyLoading);
 
             var blogs = await _dbContext.Blogs.Where(s=>s.Url.Contains("manual", StringComparison.Ordinal)).ToListAsync();
             Console.WriteLine(JsonSerializer.Serialize(blogs));
