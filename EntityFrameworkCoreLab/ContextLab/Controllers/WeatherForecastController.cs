@@ -39,7 +39,7 @@ namespace ContextLab.Controllers
             //var blogsExplicitLoading = await _dbContext.Blogs.SingleOrDefaultAsync(s => s.BlogId == 1);
             //await _dbContext.Entry(blogsExplicitLoading).Collection(s => s.Posts).LoadAsync();
             //await _dbContext.Entry(blogsExplicitLoading).Reference(s => s.Author).LoadAsync();
-
+            
             //EFCore p312 Lazy Loading
             var blogsLazyLoading = await _dbContext.Blogs.ToListAsync();
             
@@ -68,6 +68,52 @@ namespace ContextLab.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        /// <summary>
+        /// EFCore P367 （在mysql中没有出现并发问题）
+        /// </summary>
+        /// <returns></returns>
+        [Route(nameof(ConcurrencyTest))]
+        [HttpGet]
+        public async Task<int> ConcurrencyTest()
+        {
+            var blog = await _dbContext.Blogs.SingleOrDefaultAsync(s => s.BlogId == 1);
+            blog.Price += 1;
+
+            // change data simulate a concurrency conflict
+            await _dbContext.Database.ExecuteSqlRawAsync($"update blogs set blogs.Url = '{Guid.NewGuid()}' where blogs.BlogId = 1;");
+
+            var saved = false;
+            while (!saved)
+            {
+                try
+                {
+                    // Attempt to save changes to the database
+                    var result = _dbContext.SaveChanges();
+                    saved = true;
+
+                    return result;
+                }
+                catch (DbUpdateConcurrencyException e)
+                {
+                    foreach (var entry in e.Entries)
+                    {
+                        var proposedValues = entry.CurrentValues;
+                        var databaseValues = entry.GetDatabaseValues();
+
+                        foreach (var property in proposedValues.Properties)
+                        {
+                            var proposedValue = proposedValues[property];
+                            var databaseValue = databaseValues[property];
+                        }
+
+                        entry.OriginalValues.SetValues(databaseValues);
+                    }
+                }
+            }
+
+            return 0;
         }
     }
 }
