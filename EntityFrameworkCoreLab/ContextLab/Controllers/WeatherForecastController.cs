@@ -79,7 +79,7 @@ namespace ContextLab.Controllers
         public async Task<int> ConcurrencyTest()
         {
             var blog = await _dbContext.Blogs.SingleOrDefaultAsync(s => s.BlogId == 1);
-            blog.Price += 1;
+            blog.Url = Guid.NewGuid().ToString();
 
             // change data simulate a concurrency conflict
             await _dbContext.Database.ExecuteSqlRawAsync($"update blogs set blogs.Url = '{Guid.NewGuid()}' where blogs.BlogId = 1;");
