@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
 using AspnetCoreWebApiLab.Controllers.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace AspnetCoreWebApiLab
@@ -54,6 +55,11 @@ namespace AspnetCoreWebApiLab
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapGet("/", async context =>
+                {
+                    await context.Response.WriteAsync("Hello");
+                }).AllowAnonymous();
+
                 endpoints.MapControllers();
             });
         }
