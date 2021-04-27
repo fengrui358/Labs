@@ -7,7 +7,7 @@ namespace AspnetCoreWebApiLab
     {
         public DbSet<TodoItem> TodoItems { get; set; }
 
-        public TodoContext(DbContextOptions<TodoContext> options)
+        public TodoContext(DbContextOptions<TodoContext> options) : base(options)
         {
         }
 
