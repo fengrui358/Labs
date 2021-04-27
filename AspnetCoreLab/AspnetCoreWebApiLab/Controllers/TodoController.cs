@@ -82,5 +82,33 @@ namespace AspnetCoreWebApiLab.Controllers
 
             return CreatedAtRoute(nameof(GetActionResultById), new {id = todoItem.Id}, todoItem);
         }
+
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(long id, [FromBody] CreateOrUpdateTodoItemDto item)
+        {
+            if (item == null || id == 0)
+            {
+                return BadRequest();
+            }
+
+            var todoItem = await _context.TodoItems.FirstOrDefaultAsync(s => s.Id == id);
+            if (todoItem == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(item, todoItem);
+
+            _context.TodoItems.Update(todoItem);
+            await _context.SaveChangesAsync();
+
+            return new NoContentResult();
+        }
     }
 }
