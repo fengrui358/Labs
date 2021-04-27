@@ -8,11 +8,11 @@
         /// <summary>
         /// Id
         /// </summary>
-        public long Id { get; set; }
+        public virtual long Id { get; set; }
 
         /// <summary>
         /// 名称
         /// </summary>
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
     }
 }

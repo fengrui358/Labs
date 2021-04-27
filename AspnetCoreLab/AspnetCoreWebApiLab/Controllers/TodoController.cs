@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AspnetCoreWebApiLab.Controllers.Models;
 using AspnetCoreWebApiLab.Entities;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,10 +15,12 @@ namespace AspnetCoreWebApiLab.Controllers
     public class TodoController : Controller
     {
         private readonly TodoContext _context;
+        private readonly IMapper _mapper;
 
-        public TodoController(TodoContext context)
+        public TodoController(TodoContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -56,6 +60,27 @@ namespace AspnetCoreWebApiLab.Controllers
             }
 
             return new ObjectResult(item);
+        }
+
+        /// <summary>
+        /// 添加待办项
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateOrUpdateTodoItemDto item)
+        {
+            if (item == null)
+            {
+                return BadRequest();
+            }
+
+            var todoItem = _mapper.Map<CreateOrUpdateTodoItemDto, TodoItem>(item);
+
+            await _context.TodoItems.AddAsync(todoItem);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtRoute(nameof(GetActionResultById), new {id = todoItem.Id}, todoItem);
         }
     }
 }

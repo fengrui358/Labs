@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
+using AspnetCoreWebApiLab.Controllers.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace AspnetCoreWebApiLab
@@ -31,6 +32,8 @@ namespace AspnetCoreWebApiLab
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AspnetCoreWebApiLab", Version = "v1" });
                 c.IncludeXmlComments(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"{typeof(Startup).Assembly.GetName().Name}.xml"), true);
             });
+
+            services.AddAutoMapper(configAction => configAction.AddProfile<AspnetCoreWebApiLabAutoMapperProfile>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
