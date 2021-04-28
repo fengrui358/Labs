@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
 using AspnetCoreWebApiLab.Controllers.Models;
+using AspnetCoreWebApiLab.EntityFramework;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,7 +27,13 @@ namespace AspnetCoreWebApiLab
         {
             var connectionString = Configuration.GetConnectionString("Default");
 
-            services.AddDbContext<TodoContext>(options => options.UseMySql(connectionString, MySqlServerVersion.LatestSupportedServerVersion));
+            services.AddDbContext<TodoContext>(options =>
+            {
+                options.UseMySql(connectionString, MySqlServerVersion.LatestSupportedServerVersion);
+                options.LogTo(Console.WriteLine);
+                options.EnableDetailedErrors();
+                options.EnableSensitiveDataLogging();
+            });
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

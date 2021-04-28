@@ -1,7 +1,7 @@
 ﻿using AspnetCoreWebApiLab.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace AspnetCoreWebApiLab
+namespace AspnetCoreWebApiLab.EntityFramework
 {
     public class TodoContext : DbContext
     {

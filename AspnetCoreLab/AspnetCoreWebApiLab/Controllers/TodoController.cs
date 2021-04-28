@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using AspnetCoreWebApiLab.Controllers.Models;
 using AspnetCoreWebApiLab.Entities;
+using AspnetCoreWebApiLab.EntityFramework;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

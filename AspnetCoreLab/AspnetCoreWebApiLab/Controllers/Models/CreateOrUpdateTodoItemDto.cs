@@ -1,4 +1,6 @@
-﻿namespace AspnetCoreWebApiLab.Controllers.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace AspnetCoreWebApiLab.Controllers.Models
 {
     /// <summary>
     /// 创建TodoItem
@@ -8,6 +10,7 @@
         /// <summary>
         /// 名称
         /// </summary>
+        [Required]
         public string Name { get; set; }
     }
 }
