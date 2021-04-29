@@ -8,6 +8,7 @@ using System;
 using System.IO;
 using AspnetCoreWebApiLab.Controllers.Models;
 using AspnetCoreWebApiLab.EntityFramework;
+using AspnetCoreWebApiLab.SignalR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,8 @@ namespace AspnetCoreWebApiLab
 {
     public class Startup
     {
+        private readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -42,6 +45,16 @@ namespace AspnetCoreWebApiLab
             });
 
             services.AddAutoMapper(configAction => configAction.AddProfile<AspnetCoreWebApiLabAutoMapperProfile>());
+            services.AddSignalR();
+
+            // ÔÊÐí¿çÓò
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins, builder =>
+                {
+                    builder.SetIsOriginAllowed(s => true).WithOrigins("http://127.0.0.1").AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +73,8 @@ namespace AspnetCoreWebApiLab
 
             app.UseAuthorization();
 
+            app.UseCors(MyAllowSpecificOrigins);
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context =>
@@ -68,6 +83,7 @@ namespace AspnetCoreWebApiLab
                 }).AllowAnonymous();
 
                 endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("/chatHub");
             });
         }
     }

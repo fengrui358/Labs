@@ -37,22 +37,10 @@ namespace AspnetCoreWebApiLab.Controllers
         /// <summary>
         /// 根据Id获取待办事项
         /// </summary>
-        /// <param name="id">Id</param>
-        /// <returns></returns>
-        [HttpGet("{id}", Name = "GetTodo")]
-        public async Task<TodoItem> GetById(long id)
-        {
-            var item = await _context.TodoItems.FirstOrDefaultAsync(s => s.Id == id);
-            return item;
-        }
-
-        /// <summary>
-        /// GetActionResultById
-        /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("result/{id}", Name = "GetActionResultById")]
-        public async Task<IActionResult> GetActionResultById(long id)
+        [HttpGet("{id}", Name = "GetTodo")]
+        public async Task<ActionResult<TodoItem>> GetActionResultById(long id)
         {
             var item = await _context.TodoItems.FirstOrDefaultAsync(s => s.Id == id);
             if (item == null)
@@ -91,6 +79,7 @@ namespace AspnetCoreWebApiLab.Controllers
         /// <param name="item"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(long id, [FromBody] CreateOrUpdateTodoItemDto item)
         {
             if (item == null || id == 0)
