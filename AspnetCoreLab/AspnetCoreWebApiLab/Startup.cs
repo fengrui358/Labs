@@ -17,10 +17,20 @@ namespace AspnetCoreWebApiLab
     public class Startup
     {
         private readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IHostEnvironment _hostEnvironment;
 
-        public Startup(IConfiguration configuration)
+        /// <summary>
+        /// Startup 可注入三个服务，参考 https://docs.microsoft.com/en-us/aspnet/core/fundamentals/startup?view=aspnetcore-5.0
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <param name="webHostEnvironment"></param>
+        /// <param name="hostEnvironment"></param>
+        public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment, IHostEnvironment hostEnvironment)
         {
             Configuration = configuration;
+            _webHostEnvironment = webHostEnvironment;
+            _hostEnvironment = hostEnvironment;
         }
 
         public IConfiguration Configuration { get; }
