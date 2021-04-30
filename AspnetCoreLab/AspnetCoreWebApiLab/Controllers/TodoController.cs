@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AspnetCoreWebApiLab.Controllers.Models;
 using AspnetCoreWebApiLab.Entities;
 using AspnetCoreWebApiLab.EntityFramework;
+using AspnetCoreWebApiLab.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,11 +18,15 @@ namespace AspnetCoreWebApiLab.Controllers
     {
         private readonly TodoContext _context;
         private readonly IMapper _mapper;
+        private readonly IMyService _myService;
 
-        public TodoController(TodoContext context, IMapper mapper)
+        public TodoController(TodoContext context, IMapper mapper, IMyService myService)
         {
             _context = context;
             _mapper = mapper;
+
+            _myService = myService;
+            _myService.WriteMessage("Todo controller construct.");
         }
 
         /// <summary>

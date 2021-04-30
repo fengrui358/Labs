@@ -8,6 +8,8 @@ using System;
 using System.IO;
 using AspnetCoreWebApiLab.Controllers.Models;
 using AspnetCoreWebApiLab.EntityFramework;
+using AspnetCoreWebApiLab.Interfaces;
+using AspnetCoreWebApiLab.Services;
 using AspnetCoreWebApiLab.SignalR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -65,6 +67,8 @@ namespace AspnetCoreWebApiLab
                     builder.SetIsOriginAllowed(s => true).WithOrigins("http://127.0.0.1").AllowAnyHeader().AllowAnyMethod().AllowCredentials();
                 });
             });
+
+            services.AddScoped<IMyService, MyService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
