@@ -13,6 +13,7 @@ using AspnetCoreWebApiLab.Services;
 using AspnetCoreWebApiLab.SignalR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace AspnetCoreWebApiLab
 {
@@ -68,11 +69,11 @@ namespace AspnetCoreWebApiLab
                 });
             });
 
-            services.AddScoped<IMyService, MyService>();
+            services.AddMyServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> _logger)
         {
             if (env.IsDevelopment())
             {
@@ -80,6 +81,11 @@ namespace AspnetCoreWebApiLab
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AspnetCoreWebApiLab v1"));
             }
+
+            //app.Run(async context =>
+            //{
+            //    await context.Response.WriteAsync("Hello");
+            //});
 
             app.UseHttpsRedirection();
 
@@ -99,6 +105,20 @@ namespace AspnetCoreWebApiLab
                 endpoints.MapControllers();
                 endpoints.MapHub<ChatHub>("/chatHub");
             });
+
+            app.Use(async (context, next) =>
+            {
+                // Do work that doesn't write to the Response.
+                await next.Invoke(); //如果不调用 next.Invoke() 则形成短路请求直接返回
+                // Do logging or other work that doesn't write to the Response.
+            });
+
+            app.Run(async context =>
+            {
+                await context.Response.WriteAsync("Hello from 2nd delegate.");
+            });
+
+            _logger.LogInformation("Startup finished");
         }
     }
 }
