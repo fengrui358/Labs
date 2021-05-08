@@ -56,6 +56,9 @@ namespace AspnetCoreWebApiLab
                     };
 
                     config.AddCommandLine(args, switchMappings);
+
+                    // µ¥ÎÄ¼þÅäÖÃ
+                    //config.AddKeyPerFile()
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
