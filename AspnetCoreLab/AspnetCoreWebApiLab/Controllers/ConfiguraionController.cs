@@ -1,4 +1,5 @@
-﻿using AspnetCoreWebApiLab.Controllers.Models;
+﻿using System;
+using AspnetCoreWebApiLab.Controllers.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
@@ -9,7 +10,7 @@ namespace AspnetCoreWebApiLab.Controllers
     /// 配置服务
     /// </summary>
     [Route("api/[controller]")]
-    public class ConfiguraionController
+    public class ConfiguraionController : Controller
     {
         private readonly IConfiguration _configuration;
         private readonly IOptions<ConfigurationTestModel> _configurationTestModelOptions;
@@ -65,6 +66,31 @@ namespace AspnetCoreWebApiLab.Controllers
             var x = _configuration.GetSection("ConfigurationTest").Get<ConfigurationTestModel>();
 
             return x;
+        }
+
+        /// <summary>
+        /// 获取指定配置节点的子项
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet(nameof(GetConfigurationChildren))]
+        public ActionResult<string> GetConfigurationChildren(string sectionKey)
+        {
+            var selection = _configuration.GetSection(sectionKey);
+            if (!selection.Exists())
+            {
+                return new ActionResult<string>($"指定节点 {sectionKey} 不存在");
+            }
+
+            var children = selection.GetChildren();
+
+            var s = "";
+            int i = 0;
+
+            foreach (var subSection in children)
+            {
+                s += $"key{++i}, key:{subSection.Key}，value:{subSection.Value}{Environment.NewLine}";
+            }
+            return Content(s);
         }
     }
 }
