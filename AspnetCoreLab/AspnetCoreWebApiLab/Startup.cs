@@ -70,6 +70,9 @@ namespace AspnetCoreWebApiLab
             });
 
             services.AddMyServices();
+
+            // ◊¢»Î≈‰÷√
+            services.Configure<ConfigurationTestModel>(Configuration.GetSection("ConfigurationTest"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

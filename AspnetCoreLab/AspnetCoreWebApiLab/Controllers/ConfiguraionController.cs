@@ -1,6 +1,7 @@
 ﻿using AspnetCoreWebApiLab.Controllers.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace AspnetCoreWebApiLab.Controllers
 {
@@ -11,10 +12,14 @@ namespace AspnetCoreWebApiLab.Controllers
     public class ConfiguraionController
     {
         private readonly IConfiguration _configuration;
+        private readonly IOptions<ConfigurationTestModel> _configurationTestModelOptions;
 
-        public ConfiguraionController(IConfiguration configuration)
+        public ConfiguraionController(IConfiguration configuration, IOptions<ConfigurationTestModel> configurationTestModelOptions)
         {
             _configuration = configuration;
+
+            // 注入配置，注入之后的配置不会变化
+            _configurationTestModelOptions = configurationTestModelOptions;
         }
 
         /// <summary>
@@ -57,7 +62,9 @@ namespace AspnetCoreWebApiLab.Controllers
 
             //return configurationTestModel;
 
-            return _configuration.GetSection("ConfigurationTest").Get<ConfigurationTestModel>();
+            var x = _configuration.GetSection("ConfigurationTest").Get<ConfigurationTestModel>();
+
+            return x;
         }
     }
 }
