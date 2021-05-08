@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspnetCoreWebApiLab.Controllers.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
 namespace AspnetCoreWebApiLab.Controllers
@@ -42,6 +43,21 @@ namespace AspnetCoreWebApiLab.Controllers
         public string GetConfiguration(string key)
         {
             return _configuration[key];
+        }
+
+        /// <summary>
+        /// 获取配置的 ConfigurationTest 节点配置的 Json 对象
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet(nameof(GetConfigurationTestModel))]
+        public ConfigurationTestModel GetConfigurationTestModel()
+        {
+            //var configurationTestModel = new ConfigurationTestModel();
+            //_configuration.GetSection("ConfigurationTest").Bind(configurationTestModel);
+
+            //return configurationTestModel;
+
+            return _configuration.GetSection("ConfigurationTest").Get<ConfigurationTestModel>();
         }
     }
 }
