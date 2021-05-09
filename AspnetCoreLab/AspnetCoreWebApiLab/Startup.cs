@@ -38,8 +38,28 @@ namespace AspnetCoreWebApiLab
 
         public IConfiguration Configuration { get; }
 
+        public void ConfigureDevelopmentServices(IServiceCollection services)
+        {
+            ConfigureBaseServices(services);
+        }
+
+        public void ConfigureProductionServices(IServiceCollection services)
+        {
+            ConfigureBaseServices(services);
+        }
+
+        public void ConfigureStagingServices(IServiceCollection services)
+        {
+            ConfigureBaseServices(services);
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
+        {
+            ConfigureBaseServices(services);
+        }
+
+        private void ConfigureBaseServices(IServiceCollection services)
         {
             var connectionString = Configuration.GetConnectionString("Default");
 
@@ -76,7 +96,18 @@ namespace AspnetCoreWebApiLab
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> _logger)
+        public void ConfigureDevelopment(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
+        {
+            ConfigureBase(app, env, logger);
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
+        {
+            ConfigureBase(app, env, logger);
+        }
+
+        private void ConfigureBase(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
             //if (env.IsDevelopment())
             {
@@ -121,7 +152,7 @@ namespace AspnetCoreWebApiLab
                 await context.Response.WriteAsync("Hello from 2nd delegate.");
             });
 
-            _logger.LogInformation("Startup finished");
+            logger.LogInformation("Startup finished");
         }
     }
 }

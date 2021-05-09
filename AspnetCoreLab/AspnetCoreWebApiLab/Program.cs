@@ -38,6 +38,8 @@ namespace AspnetCoreWebApiLab
                 }
             }
 #endif
+            var hostEnvironment = host.Services.GetService<IHostEnvironment>();
+            Console.WriteLine($"The host environment is {hostEnvironment?.EnvironmentName}");
 
             await host.RunAsync();
         }
