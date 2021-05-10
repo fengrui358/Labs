@@ -17,9 +17,10 @@ namespace AspnetCoreWebApiLab
             var host = CreateHostBuilder(args).Build();
 
             var config = host.Services.GetRequiredService<IConfiguration>();
+            var logger = host.Services.GetRequiredService<ILogger<Program>>();
             foreach (var c in config.AsEnumerable())
             {
-                Console.WriteLine(c.Key + " = " + c.Value);
+                logger.LogInformation("{key}={value}", c.Key, c.Value);
             }
 
 #if DEBUG
@@ -33,13 +34,12 @@ namespace AspnetCoreWebApiLab
                 }
                 catch (Exception ex)
                 {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex, "An error occurred seeding the DB.");
                 }
             }
 #endif
             var hostEnvironment = host.Services.GetService<IHostEnvironment>();
-            Console.WriteLine($"The host environment is {hostEnvironment?.EnvironmentName}");
+            logger.LogInformation("The host environment is {hostEnvironment}", hostEnvironment?.EnvironmentName);
 
             await host.RunAsync();
         }
