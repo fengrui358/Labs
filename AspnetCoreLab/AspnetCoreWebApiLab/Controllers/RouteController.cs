@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace AspnetCoreWebApiLab.Controllers
@@ -20,8 +21,18 @@ namespace AspnetCoreWebApiLab.Controllers
         public IActionResult GetRouteValues(string test, int testNum)
         {
             var values = JsonConvert.SerializeObject(new {route = Request.RouteValues, query = Request.Query});
-
             return Content(values);
+        }
+
+        /// <summary>
+        /// 获取终结点
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet(nameof(GetEndPoint))]
+        public ActionResult<string> GetEndPoint()
+        {
+            var endpoint = HttpContext.GetEndpoint();
+            return endpoint?.DisplayName;
         }
     }
 }

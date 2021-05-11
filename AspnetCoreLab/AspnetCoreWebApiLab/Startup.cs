@@ -136,6 +136,8 @@ namespace AspnetCoreWebApiLab
                     await context.Response.WriteAsync("Hello");
                 }).AllowAnonymous();
 
+                //endpoints.MapHealthChecks("/health");
+
                 endpoints.MapControllers();
                 endpoints.MapHub<ChatHub>("/chatHub");
             });
