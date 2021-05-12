@@ -121,6 +121,8 @@ namespace AspnetCoreWebApiLab
             //    await context.Response.WriteAsync("Hello");
             //});
 
+            app.UseStatusCodePages();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -149,10 +151,10 @@ namespace AspnetCoreWebApiLab
                 // Do logging or other work that doesn't write to the Response.
             });
 
-            app.Run(async context =>
-            {
-                await context.Response.WriteAsync("Hello from 2nd delegate.");
-            });
+            //app.Run(async context =>
+            //{
+            //    await context.Response.WriteAsync("Hello from 2nd delegate.");
+            //});
 
             logger.LogInformation("Startup finished");
         }
