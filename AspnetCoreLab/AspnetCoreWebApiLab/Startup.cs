@@ -10,6 +10,7 @@ using AspnetCoreWebApiLab.Controllers.Models;
 using AspnetCoreWebApiLab.EntityFramework;
 using AspnetCoreWebApiLab.Interfaces;
 using AspnetCoreWebApiLab.Services;
+using AspnetCoreWebApiLab.Services.HttpClients;
 using AspnetCoreWebApiLab.SignalR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -61,6 +62,14 @@ namespace AspnetCoreWebApiLab
 
         private void ConfigureBaseServices(IServiceCollection services)
         {
+            services.AddHttpClient("github", c =>
+            {
+                c.BaseAddress = new Uri("https://github.com/");
+                c.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3+json");
+                c.DefaultRequestHeaders.Add("User-Agent", "HttpClientFactory");
+            });
+            services.AddHttpClient<GitHubService>();
+
             var connectionString = Configuration.GetConnectionString("Default");
 
             services.AddDbContext<TodoContext>(options =>
