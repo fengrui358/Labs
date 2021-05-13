@@ -63,12 +63,16 @@ namespace AspnetCoreWebApiLab
 
         private void ConfigureBaseServices(IServiceCollection services)
         {
+            services.AddScoped<IOperationScoped, OperationScoped>();
+            services.AddTransient<OperationHandler>();
+            services.AddTransient<OperationResponseHandler>();
+
             services.AddHttpClient("github", c =>
             {
                 c.BaseAddress = new Uri("https://github.com/");
                 c.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3+json");
                 c.DefaultRequestHeaders.Add("User-Agent", "HttpClientFactory");
-            }).AddTypedClient<GitHubService>();
+            }).AddTypedClient<GitHubService>().AddHttpMessageHandler<OperationHandler>().AddHttpMessageHandler<OperationResponseHandler>().SetHandlerLifetime(TimeSpan.FromSeconds(1));
 
             services.AddHttpClient("github", c =>
             {
