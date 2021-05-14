@@ -1,6 +1,5 @@
-﻿using System;
-using System.IO;
-using System.Net.Mime;
+﻿using System.IO;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +11,7 @@ namespace AspnetCoreWebApiLab.Controllers
     /// 路由信息
     /// </summary>
     [Route("api/[controller]")]
-    public class RouteController : Controller
+    public class RouteController : ControllerBase
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
 
@@ -31,7 +30,7 @@ namespace AspnetCoreWebApiLab.Controllers
 
         public IActionResult GetRouteValues(string test, int testNum)
         {
-            return Json(new { route = Request.RouteValues, query = Request.Query });
+            return Content(JsonConvert.SerializeObject(new {route = Request.RouteValues, query = Request.Query}));
         }
 
         /// <summary>
@@ -51,6 +50,8 @@ namespace AspnetCoreWebApiLab.Controllers
         /// <param name="fileName"></param>
         /// <returns></returns>
         [HttpGet(nameof(GetFile))]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetFile(string fileName = null)
         {
             if (string.IsNullOrEmpty(fileName))
@@ -76,6 +77,8 @@ namespace AspnetCoreWebApiLab.Controllers
         /// <param name="fileName"></param>
         /// <returns></returns>
         [HttpGet(nameof(GetPhysicalFile))]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetPhysicalFile(string fileName = null)
         {
             if (string.IsNullOrEmpty(fileName))

@@ -11,7 +11,7 @@ namespace AspnetCoreWebApiLab.Controllers
     /// HttpClient Test
     /// </summary>
     [Microsoft.AspNetCore.Components.Route("api/[controller]")]
-    public class HttpClientController : Controller
+    public class HttpClientController : ControllerBase
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly GitHubService _gitHubService;

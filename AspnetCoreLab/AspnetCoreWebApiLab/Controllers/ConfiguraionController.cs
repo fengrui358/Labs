@@ -10,7 +10,7 @@ namespace AspnetCoreWebApiLab.Controllers
     /// 配置服务
     /// </summary>
     [Route("api/[controller]")]
-    public class ConfiguraionController : Controller
+    public class ConfiguraionController : ControllerBase
     {
         private readonly IConfiguration _configuration;
         private readonly IOptions<ConfigurationTestModel> _configurationTestModelOptions;
