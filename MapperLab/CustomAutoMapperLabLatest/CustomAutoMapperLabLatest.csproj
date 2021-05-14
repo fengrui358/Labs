@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\CustomAutoMapperLab\Department.cs" Link="Department.cs" />
+    <Compile Include="..\CustomAutoMapperLab\OrgPerson.cs" Link="OrgPerson.cs" />
+    <Compile Include="..\CustomAutoMapperLab\Program.cs" Link="Program.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+  </ItemGroup>
+
+</Project>

@@ -5,7 +5,11 @@ VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapperPerformanceLab", "MapperPerformanceLab\MapperPerformanceLab.csproj", "{FB06A9F8-FD93-49FC-BC22-0B42015805A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoMapperLab", "AutoMapperLab\AutoMapperLab.csproj", "{7F3C5DDB-DF51-47AF-945D-5BA0FE9C52FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoMapperLab", "AutoMapperLab\AutoMapperLab.csproj", "{7F3C5DDB-DF51-47AF-945D-5BA0FE9C52FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomAutoMapperLab", "CustomAutoMapperLab\CustomAutoMapperLab.csproj", "{6D878819-521E-42F8-B5A5-30900D3BF5AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomAutoMapperLabLatest", "CustomAutoMapperLabLatest\CustomAutoMapperLabLatest.csproj", "{F57ACEF5-306A-442C-A1AF-DB10CD566DCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{7F3C5DDB-DF51-47AF-945D-5BA0FE9C52FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F3C5DDB-DF51-47AF-945D-5BA0FE9C52FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F3C5DDB-DF51-47AF-945D-5BA0FE9C52FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D878819-521E-42F8-B5A5-30900D3BF5AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D878819-521E-42F8-B5A5-30900D3BF5AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D878819-521E-42F8-B5A5-30900D3BF5AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D878819-521E-42F8-B5A5-30900D3BF5AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F57ACEF5-306A-442C-A1AF-DB10CD566DCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F57ACEF5-306A-442C-A1AF-DB10CD566DCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F57ACEF5-306A-442C-A1AF-DB10CD566DCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F57ACEF5-306A-442C-A1AF-DB10CD566DCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
