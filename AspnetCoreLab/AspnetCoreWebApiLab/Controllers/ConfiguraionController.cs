@@ -9,6 +9,7 @@ namespace AspnetCoreWebApiLab.Controllers
     /// <summary>
     /// 配置服务
     /// </summary>
+    [ApiController]
     [Route("api/[controller]")]
     public class ConfiguraionController : ControllerBase
     {

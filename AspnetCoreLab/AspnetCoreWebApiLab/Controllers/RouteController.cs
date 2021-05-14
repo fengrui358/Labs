@@ -1,15 +1,15 @@
 ﻿using System.IO;
-using System.Text.Json.Serialization;
+using System.Net.Mime;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace AspnetCoreWebApiLab.Controllers
 {
     /// <summary>
     /// 路由信息
     /// </summary>
+    [ApiController]
     [Route("api/[controller]")]
     public class RouteController : ControllerBase
     {
@@ -30,7 +30,7 @@ namespace AspnetCoreWebApiLab.Controllers
 
         public IActionResult GetRouteValues(string test, int testNum)
         {
-            return Content(JsonConvert.SerializeObject(new {route = Request.RouteValues, query = Request.Query}));
+            return Content(System.Text.Json.JsonSerializer.Serialize(new { route = Request.RouteValues, query = Request.Query }));
         }
 
         /// <summary>
@@ -62,12 +62,12 @@ namespace AspnetCoreWebApiLab.Controllers
             var path = Path.Combine(_webHostEnvironment.ContentRootPath, "MyStaticFiles", fileName);
             if (System.IO.File.Exists(path))
             {
-                //return File(System.IO.File.ReadAllBytes(path), "text/xml");
-                return File(System.IO.File.OpenRead(path), "text/xml", true);
+                //return File(System.IO.File.ReadAllBytes(path), MediaTypeNames.Text.Plain);
+                return File(System.IO.File.OpenRead(path), MediaTypeNames.Text.Plain, true);
             }
             else
             {
-                return NotFound();
+                return NotFound(new ProblemDetails{Title = "找不到-Title", Detail = "找不到-Detail", Instance = "找不到-Instance", Type = "找不到-Type"});
             }
         }
 
@@ -89,7 +89,7 @@ namespace AspnetCoreWebApiLab.Controllers
             var path = Path.Combine(_webHostEnvironment.ContentRootPath, "MyStaticFiles", fileName);
             if (System.IO.File.Exists(path))
             {
-                return PhysicalFile(Path.Combine(_webHostEnvironment.ContentRootPath, "MyStaticFiles", fileName), "text/xml");
+                return PhysicalFile(Path.Combine(_webHostEnvironment.ContentRootPath, "MyStaticFiles", fileName), MediaTypeNames.Text.Plain);
             }
             else
             {

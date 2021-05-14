@@ -10,6 +10,7 @@ namespace AspnetCoreWebApiLab.Controllers
     /// <summary>
     /// HttpClient Test
     /// </summary>
+    [ApiController]
     [Microsoft.AspNetCore.Components.Route("api/[controller]")]
     public class HttpClientController : ControllerBase
     {

@@ -14,6 +14,7 @@ namespace AspnetCoreWebApiLab.Controllers
     /// <summary>
     /// 待处置列表控制器
     /// </summary>
+    [ApiController]
     [Route("api/[controller]")]
     public class TodoController : Controller
     {

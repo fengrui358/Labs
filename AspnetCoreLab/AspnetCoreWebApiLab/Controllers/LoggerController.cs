@@ -6,6 +6,7 @@ namespace AspnetCoreWebApiLab.Controllers
     /// <summary>
     /// 日志控制器
     /// </summary>
+    [ApiController]
     [Route("api/[controller]")]
     public class LoggerController
     {
