@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using AspnetCoreWebApiLab.Controllers.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -29,16 +30,12 @@ namespace AspnetCoreWebApiLab.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("GetProviders")]
-        public string GetProviders()
+        public IEnumerable<string> GetProviders()
         {
-            var result = "";
-
-            foreach (var configurationProvider in ((IConfigurationRoot)_configuration).Providers)
+            foreach (var configurationProvider in ((IConfigurationRoot) _configuration).Providers)
             {
-                result += configurationProvider.ToString();
+                yield return configurationProvider.ToString();
             }
-
-            return result;
         }
 
         /// <summary>

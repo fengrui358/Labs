@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using AspnetCoreWebApiLab.Controllers.Models;
 using AspnetCoreWebApiLab.Entities;
@@ -16,6 +17,7 @@ namespace AspnetCoreWebApiLab.Controllers
     /// </summary>
     [ApiController]
     [Route("api/[controller]")]
+    [Produces(MediaTypeNames.Application.Json)]
     public class TodoController : Controller
     {
         private readonly TodoContext _context;

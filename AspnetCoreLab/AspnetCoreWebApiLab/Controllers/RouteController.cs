@@ -67,7 +67,7 @@ namespace AspnetCoreWebApiLab.Controllers
             }
             else
             {
-                return NotFound(new ProblemDetails{Title = "找不到-Title", Detail = "找不到-Detail", Instance = "找不到-Instance", Type = "找不到-Type"});
+                return NotFound(new ProblemDetails { Title = "找不到-Title", Detail = "找不到-Detail", Instance = "找不到-Instance", Type = "找不到-Type" });
             }
         }
 
