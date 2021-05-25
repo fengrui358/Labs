@@ -18,6 +18,7 @@ namespace BaiduAi.Demo
                 {
                     services.Configure<ApiConfig>(hostContext.Configuration.GetSection("Baidu"));
                     services.AddSingleton<Orc>();
+                    services.AddSingleton<FaceRecognition>();
 
                     services.AddHostedService<BaiduAi>();
                 });

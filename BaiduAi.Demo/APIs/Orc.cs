@@ -15,7 +15,7 @@ namespace BaiduAi.Demo.APIs
         public Orc(IOptions<ApiConfig> apiConfig, ILogger<Orc> logger)
         {
             _logger = logger;
-            _client = new Baidu.Aip.Ocr.Ocr(apiConfig.Value.API_KEY, apiConfig.Value.SECRET_KEY);
+            _client = new Baidu.Aip.Ocr.Ocr(apiConfig.Value.API_KEY, apiConfig.Value.SECRET_KEY) {Timeout = 60000};
         }
 
         public async Task<string> OrcBasic(string filePath)
