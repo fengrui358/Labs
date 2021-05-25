@@ -16,9 +16,10 @@ namespace BaiduAi.Demo
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
+                    services.Configure<ApiConfig>(hostContext.Configuration.GetSection("Baidu"));
                     services.AddSingleton<Orc>();
 
-                    services.AddHostedService<Baidu>();
+                    services.AddHostedService<BaiduAi>();
                 });
     }
 }

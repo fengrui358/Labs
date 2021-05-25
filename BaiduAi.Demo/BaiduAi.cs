@@ -10,12 +10,12 @@ using Microsoft.Extensions.Logging;
 
 namespace BaiduAi.Demo
 {
-    public class Baidu : BackgroundService
+    public class BaiduAi : BackgroundService
     {
-        private readonly ILogger<Baidu> _logger;
+        private readonly ILogger<BaiduAi> _logger;
         private readonly Orc _orc;
 
-        public Baidu(ILogger<Baidu> logger, Orc orc)
+        public BaiduAi(ILogger<BaiduAi> logger, Orc orc)
         {
             _logger = logger;
             _orc = orc;
@@ -23,7 +23,8 @@ namespace BaiduAi.Demo
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            
+            var orcBasicResult = _orc.OrcBasic(@"Resources\OrcImage1.png");
+            _logger.LogInformation($"Orc 识别文字: {orcBasicResult}");
 
             //while (!stoppingToken.IsCancellationRequested)
             //{
