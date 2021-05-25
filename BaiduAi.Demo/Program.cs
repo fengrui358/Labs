@@ -1,4 +1,5 @@
 ﻿using System;
+using BaiduAi.Demo.APIs;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -15,6 +16,8 @@ namespace BaiduAi.Demo
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
+                    services.AddSingleton<Orc>();
+
                     services.AddHostedService<Baidu>();
                 });
     }
