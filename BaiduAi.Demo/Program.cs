@@ -22,6 +22,7 @@ namespace BaiduAi.Demo
                     services.AddSingleton<BodyAnalysis>();
                     services.AddSingleton<Speech>();
                     services.AddSingleton<ImageClassify>();
+                    services.AddSingleton<ImageSearch>();
 
                     services.AddHostedService<BaiduAi>();
                 });
