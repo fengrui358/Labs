@@ -24,6 +24,7 @@ namespace BaiduAi.Demo
                     services.AddSingleton<ImageClassify>();
                     services.AddSingleton<ImageSearch>();
                     services.AddSingleton<ImageEffects>();
+                    services.AddSingleton<Nlp>();
 
                     services.AddHostedService<BaiduAi>();
                 });
