@@ -20,6 +20,7 @@ namespace BaiduAi.Demo
                     services.AddSingleton<Orc>();
                     services.AddSingleton<FaceRecognition>();
                     services.AddSingleton<BodyAnalysis>();
+                    services.AddSingleton<Speech>();
 
                     services.AddHostedService<BaiduAi>();
                 });

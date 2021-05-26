@@ -16,13 +16,15 @@ namespace BaiduAi.Demo
         private readonly Orc _orc;
         private readonly FaceRecognition _faceRecognition;
         private readonly BodyAnalysis _bodyAnalysis;
+        private readonly Speech _speech;
 
-        public BaiduAi(ILogger<BaiduAi> logger, Orc orc, FaceRecognition faceRecognition, BodyAnalysis bodyAnalysis)
+        public BaiduAi(ILogger<BaiduAi> logger, Orc orc, FaceRecognition faceRecognition, BodyAnalysis bodyAnalysis, Speech speech)
         {
             _logger = logger;
             _orc = orc;
             _faceRecognition = faceRecognition;
             _bodyAnalysis = bodyAnalysis;
+            _speech = speech;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -33,9 +35,11 @@ namespace BaiduAi.Demo
             //var faceRecognitionResult = await _faceRecognition.FaceDetect(@"Resources\FaceRecognition1.jpeg");
             //_logger.LogInformation($"人脸识别: {faceRecognitionResult}");
 
-            var bodyDetectResult = await _bodyAnalysis.BodyDetect(@"Resources\BodyAnalysis1.jpeg");
-            _logger.LogInformation($"人体识别: {bodyDetectResult}");
+            //var bodyDetectResult = await _bodyAnalysis.BodyDetect(@"Resources\BodyAnalysis1.jpeg");
+            //_logger.LogInformation($"人体识别: {bodyDetectResult}");
 
+            //var speechResult = await _speech.Tts();
+            //_logger.LogInformation($"语音合成: {speechResult}");
         }
     }
 }
