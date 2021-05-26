@@ -19,9 +19,10 @@ namespace BaiduAi.Demo
         private readonly Speech _speech;
         private readonly ImageClassify _imageClassify;
         private readonly ImageSearch _imageSearch;
+        private readonly ImageEffects _imageEffects;
 
         public BaiduAi(ILogger<BaiduAi> logger, Orc orc, FaceRecognition faceRecognition, BodyAnalysis bodyAnalysis, Speech speech,
-            ImageClassify imageClassify, ImageSearch imageSearch)
+            ImageClassify imageClassify, ImageSearch imageSearch, ImageEffects imageEffects)
         {
             _logger = logger;
             _orc = orc;
@@ -30,6 +31,7 @@ namespace BaiduAi.Demo
             _speech = speech;
             _imageClassify = imageClassify;
             _imageSearch = imageSearch;
+            _imageEffects = imageEffects;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -49,8 +51,11 @@ namespace BaiduAi.Demo
             //var imageClassifyResult = await _imageClassify.ImageClassifyDetect(@"Resources\ImageClassify1.jpg");
             //_logger.LogInformation($"图像识别: {imageClassifyResult}");
 
-            var imageSearchResult = await _imageSearch.ImageSearchDetect(@"Resources\ImageSearch1.jpg");
-            _logger.LogInformation($"图像搜索: {imageSearchResult}");
+            //var imageSearchResult = await _imageSearch.ImageSearchDetect(@"Resources\ImageSearch1.jpg");
+            //_logger.LogInformation($"图像搜索: {imageSearchResult}");
+
+            var imageEffectsResult = await _imageEffects.ImageQualityEnhance(@"Resources\ImageEffects1.jpg");
+            _logger.LogInformation($"无损放大: {imageEffectsResult}");
         }
     }
 }
