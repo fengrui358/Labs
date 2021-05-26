@@ -15,27 +15,27 @@ namespace BaiduAi.Demo
         private readonly ILogger<BaiduAi> _logger;
         private readonly Orc _orc;
         private readonly FaceRecognition _faceRecognition;
+        private readonly BodyAnalysis _bodyAnalysis;
 
-        public BaiduAi(ILogger<BaiduAi> logger, Orc orc, FaceRecognition faceRecognition)
+        public BaiduAi(ILogger<BaiduAi> logger, Orc orc, FaceRecognition faceRecognition, BodyAnalysis bodyAnalysis)
         {
             _logger = logger;
             _orc = orc;
             _faceRecognition = faceRecognition;
+            _bodyAnalysis = bodyAnalysis;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            var orcBasicResult = await _orc.OrcBasic(@"Resources\OrcImage1.png");
-            _logger.LogInformation($"Orc 识别文字: {orcBasicResult}");
+            //var orcBasicResult = await _orc.OrcBasic(@"Resources\OrcImage1.png");
+            //_logger.LogInformation($"Orc 识别文字: {orcBasicResult}");
 
-            var faceRecognitionResult = await _faceRecognition.FaceDetect(@"Resources\FaceRecognition1.jpeg");
-            _logger.LogInformation($"人脸识别: {faceRecognitionResult}");
+            //var faceRecognitionResult = await _faceRecognition.FaceDetect(@"Resources\FaceRecognition1.jpeg");
+            //_logger.LogInformation($"人脸识别: {faceRecognitionResult}");
 
-            //while (!stoppingToken.IsCancellationRequested)
-            //{
-            //    _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-            //    await Task.Delay(1000, stoppingToken);
-            //}
+            var bodyDetectResult = await _bodyAnalysis.BodyDetect(@"Resources\BodyAnalysis1.jpeg");
+            _logger.LogInformation($"人体识别: {bodyDetectResult}");
+
         }
     }
 }

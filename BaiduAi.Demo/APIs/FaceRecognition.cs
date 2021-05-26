@@ -12,7 +12,7 @@ namespace BaiduAi.Demo.APIs
         private readonly Baidu.Aip.Face.Face _client;
         private readonly ILogger _logger;
 
-        public FaceRecognition(IOptions<ApiConfig> apiConfig, ILogger<Orc> logger)
+        public FaceRecognition(IOptions<ApiConfig> apiConfig, ILogger<FaceRecognition> logger)
         {
             _logger = logger;
             _client = new Baidu.Aip.Face.Face(apiConfig.Value.API_KEY, apiConfig.Value.SECRET_KEY) {Timeout = 60000};
