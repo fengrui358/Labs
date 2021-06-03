@@ -28,6 +28,7 @@ namespace AuthenticateCookieLab
             {
                 // 在这里可以根据需要添加一些Cookie认证相关的配置，在本次示例中使用默认值就可以了。
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                options.SessionStore = new MemoryCacheTicketStore();
             });
         }
 
