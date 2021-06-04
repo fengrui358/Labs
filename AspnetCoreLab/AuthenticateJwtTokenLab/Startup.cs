@@ -63,6 +63,16 @@ namespace AuthenticateJwtTokenLab
                     // ValidateLifetime = true
                 };
 
+                // https://www.cnblogs.com/RainingNight/p/jwtbearer-authentication-in-asp-net-core.html
+                // 使用远程OIDC获取令牌
+                //options.Authority = "https://oidc.faasx.com/";
+                //options.Audience = "api";
+                //options.TokenValidationParameters = new TokenValidationParameters
+                //{
+                //    NameClaimType = JwtClaimTypes.Name,
+                //    RoleClaimType = JwtClaimTypes.Role,
+                //};
+
                 options.Events = new JwtBearerEvents
                 {
                     OnMessageReceived = context =>
