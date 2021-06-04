@@ -63,7 +63,26 @@ namespace AuthenticateJwtTokenLab
                     // ValidateLifetime = true
                 };
 
-                
+                options.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        // context.Token = context.Request.Headers["Authorization"];
+                        return Task.CompletedTask;
+                    },
+                    OnTokenValidated = context =>
+                    {
+                        return Task.CompletedTask;
+                    },
+                    OnAuthenticationFailed = context =>
+                    {
+                        return Task.CompletedTask;
+                    },
+                    OnForbidden = context =>
+                    {
+                        return Task.CompletedTask;
+                    }
+                };
             });
 
             services.AddControllers();

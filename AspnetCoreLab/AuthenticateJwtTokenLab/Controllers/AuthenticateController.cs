@@ -13,7 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 namespace AuthenticateJwtTokenLab.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("oauth/[controller]")]
     public class AuthenticateController : ControllerBase
     {
         private readonly UserStore _store;
