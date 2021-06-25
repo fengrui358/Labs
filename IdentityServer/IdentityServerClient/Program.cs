@@ -10,13 +10,16 @@ namespace IdentityServerClient
         static async Task Main(string[] args)
         {
             await TestToken("");
-            var token = await GetAsync();
+            var token = await GetTokenAsync();
             await TestToken(token);
+
+            var code = await GetCodeAsync();
+            await TestToken(code);
 
             Console.ReadLine();
         }
 
-        private static async Task<string> GetAsync()
+        private static async Task<string> GetTokenAsync()
         {
             using (var httpClient = new HttpClient{BaseAddress = new Uri("http://localhost:44362") })
             {
@@ -38,6 +41,40 @@ namespace IdentityServerClient
                         ClientId = "EmergencyResponseService_App",
                         UserName = "admin",
                         Password = ""
+                    });
+
+                    if (!tokenResponse.IsError)
+                    {
+                        Console.WriteLine(tokenResponse);
+                        return $"{tokenResponse.TokenType} {tokenResponse.AccessToken}";
+                    }
+                }
+            }
+
+            return "";
+        }
+
+        private static async Task<string> GetCodeAsync()
+        {
+            using (var httpClient = new HttpClient { BaseAddress = new Uri("http://localhost:44362") })
+            {
+                var document = await httpClient.GetDiscoveryDocumentAsync();
+                if (!document.IsError)
+                {
+                    var tokenEndpoint = document.TokenEndpoint;
+
+                    //Task<TokenResponse> RequestAuthorizationCodeTokenAsync(AuthorizationCodeTokenRequest)
+                    //Task<TokenResponse> RequestClientCredentialsTokenAsync(ClientCredentialsTokenRequest)
+                    //Task<TokenResponse> RequestDeviceTokenAsync(DeviceTokenRequest)
+                    //Task<TokenResponse> RequestPasswordTokenAsync(PasswordTokenRequest)
+                    //Task<TokenResponse> RequestRefreshTokenAsync(RefreshTokenRequest)
+                    //Task<TokenResponse> RequestTokenAsync(TokenRequest)
+
+                    var tokenResponse = await httpClient.RequestAuthorizationCodeTokenAsync(new AuthorizationCodeTokenRequest
+                    {
+                        RequestUri = new Uri(tokenEndpoint),
+                        ClientId = "EmergencyResponseService_App",
+                        //Code = 
                     });
 
                     if (!tokenResponse.IsError)
