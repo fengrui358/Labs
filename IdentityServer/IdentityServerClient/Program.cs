@@ -70,11 +70,11 @@ namespace IdentityServerClient
                     //Task<TokenResponse> RequestRefreshTokenAsync(RefreshTokenRequest)
                     //Task<TokenResponse> RequestTokenAsync(TokenRequest)
 
-                    var tokenResponse = await httpClient.RequestAuthorizationCodeTokenAsync(new AuthorizationCodeTokenRequest
+                    var tokenResponse = await httpClient.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
                     {
                         RequestUri = new Uri(tokenEndpoint),
                         ClientId = "EmergencyResponseService_App",
-                        //Code = 
+                        ClientSecret= "b*1W2%dm",
                     });
 
                     if (!tokenResponse.IsError)
