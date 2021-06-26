@@ -1,7 +1,9 @@
 ﻿using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http;
 using System.Threading.Tasks;
 using IdentityModel.Client;
+using Newtonsoft.Json;
 
 namespace IdentityServerClient
 {
@@ -45,6 +47,8 @@ namespace IdentityServerClient
 
                     if (!tokenResponse.IsError)
                     {
+                        ValidToken(tokenResponse.AccessToken);
+
                         Console.WriteLine(tokenResponse);
                         return $"{tokenResponse.TokenType} {tokenResponse.AccessToken}";
                     }
@@ -79,6 +83,8 @@ namespace IdentityServerClient
 
                     if (!tokenResponse.IsError)
                     {
+                        ValidToken(tokenResponse.AccessToken);
+
                         Console.WriteLine(tokenResponse);
                         return $"{tokenResponse.TokenType} {tokenResponse.AccessToken}";
                     }
@@ -86,6 +92,12 @@ namespace IdentityServerClient
             }
 
             return "";
+        }
+
+        private static void ValidToken(string token)
+        {
+            var c = new JwtSecurityToken(token);
+            Console.WriteLine(JsonConvert.SerializeObject(c));
         }
 
         private static async Task<bool> TestToken(string token)
