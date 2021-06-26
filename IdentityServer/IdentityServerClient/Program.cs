@@ -78,7 +78,7 @@ namespace IdentityServerClient
                     {
                         RequestUri = new Uri(tokenEndpoint),
                         ClientId = "EmergencyResponseService_App",
-                        ClientSecret= "b*1W2%dm",
+                        ClientSecret= "",
                     });
 
                     if (!tokenResponse.IsError)
