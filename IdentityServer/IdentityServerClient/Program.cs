@@ -12,6 +12,7 @@ namespace IdentityServerClient
         static async Task Main(string[] args)
         {
             await TestToken("");
+
             var token = await GetTokenAsync();
             await TestToken(token);
 
@@ -37,13 +38,17 @@ namespace IdentityServerClient
                     //Task<TokenResponse> RequestRefreshTokenAsync(RefreshTokenRequest)
                     //Task<TokenResponse> RequestTokenAsync(TokenRequest)
 
-                    var tokenResponse = await httpClient.RequestPasswordTokenAsync(new PasswordTokenRequest
+                    var request = new PasswordTokenRequest
                     {
                         RequestUri = new Uri(tokenEndpoint),
                         ClientId = "EmergencyResponseService_App",
-                        UserName = "admin",
+                        UserName = "admin7",
                         Password = ""
-                    });
+                    };
+
+                    request.Headers.Add("__tenant", "");
+
+                    var tokenResponse = await httpClient.RequestPasswordTokenAsync(request);
 
                     if (!tokenResponse.IsError)
                     {
