@@ -6,14 +6,9 @@ using System.Threading.Tasks;
 
 namespace LinqLab.BaseModel
 {
-    public class Student
+    public class Standard
     {
-        public int StudentID { get; set; }
-
-        public string StudentName { get; set; }
-
-        public int Age { get; set; }
-
         public int StandardID { get; set; }
+        public string StandardName { get; set; }
     }
 }

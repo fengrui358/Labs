@@ -1,4 +1,5 @@
 ﻿using System;
+using LinqLab.OfType;
 using LinqLab.Where;
 
 namespace LinqLab
@@ -16,6 +17,18 @@ namespace LinqLab
 
             Console.WriteLine($"{nameof(Where2)}:{Environment.NewLine}");
             new Where2().Test();
+            Console.WriteLine();
+
+            Console.WriteLine($"{nameof(OfType1)}:{Environment.NewLine}");
+            new OfType1().Test();
+            Console.WriteLine();
+
+            Console.WriteLine($"{nameof(OrderBy.OrderBy)}:{Environment.NewLine}");
+            new OrderBy.OrderBy().Test();
+            Console.WriteLine();
+
+            Console.WriteLine($"{nameof(Join.Join)}:{Environment.NewLine}");
+            new Join.Join().Test();
             Console.WriteLine();
 
             Console.ReadLine();
