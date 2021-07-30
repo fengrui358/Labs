@@ -1,5 +1,6 @@
 ﻿using System;
 using LinqLab.GroupBy;
+using LinqLab.GroupJoin;
 using LinqLab.OfType;
 using LinqLab.Where;
 
@@ -34,6 +35,10 @@ namespace LinqLab
 
             Console.WriteLine($"{nameof(GroupBy1)}:{Environment.NewLine}");
             new GroupBy1().Test();
+            Console.WriteLine();
+
+            Console.WriteLine($"{nameof(GroupJoin1)}:{Environment.NewLine}");
+            new GroupJoin1().Test();
             Console.WriteLine();
 
             Console.ReadLine();

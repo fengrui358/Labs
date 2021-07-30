@@ -19,16 +19,17 @@ namespace LinqLab.GroupBy
                 new Student() { StudentID = 5, StudentName = "Abram" , Age = 21 }
             };
 
-            var groupResult = studentList.GroupBy(s => s.Age).GroupBy(x => x.GroupBy(c => c.StudentName));
+            var groupResult = studentList.GroupBy(s => s.Age).Select(s => new {Age = s.Key, Students = s})
+                .GroupBy(x => x.Students.GroupBy(c => c.StudentName)).Select(s => new {StudentName = s.Key, Students = s});
             foreach (var grouping in groupResult)
             {
-                Console.WriteLine($"{nameof(grouping)} count: {grouping.Count()}");
-                foreach (var students in grouping)
+                Console.WriteLine($"{nameof(grouping.StudentName)} {grouping.StudentName} count: {grouping.Students.Count()}");
+                foreach (var students in grouping.Students)
                 {
-                    Console.WriteLine($"{nameof(students)} count: {students.Count()}");
-                    foreach (var student in students)
+                    Console.WriteLine($"{nameof(students.Age)} {students} count: {students.Students.Count()}");
+                    foreach (var student in students.Students)
                     {
-                        Console.WriteLine($"{nameof(grouping.Key)}:{students.Key}:{student.StudentName}:{student.Age}");
+                        Console.WriteLine($"{nameof(grouping.StudentName)}:{students.Age}:{student.StudentName}:{student.Age}");
                     }
                 }
             }
