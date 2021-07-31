@@ -16,8 +16,12 @@ namespace IdentityServerClient
             var token = await GetTokenAsync();
             await TestToken(token);
 
+            await GetUserInfo(token);
+
             var code = await GetCodeAsync();
             await TestToken(code);
+
+            await GetUserInfo(code);
 
             Console.ReadLine();
         }
@@ -42,11 +46,11 @@ namespace IdentityServerClient
                     {
                         RequestUri = new Uri(tokenEndpoint),
                         ClientId = "EmergencyResponseService_App",
-                        UserName = "admin7",
-                        Password = ""
+                        UserName = "18888888887",
+                        Password = "123456"
                     };
 
-                    request.Headers.Add("__tenant", "");
+                    request.Headers.Add("__tenant", "39fe0e34-6c58-c5d7-ed25-0b0c9275a1f0");
 
                     var tokenResponse = await httpClient.RequestPasswordTokenAsync(request);
 
@@ -97,6 +101,30 @@ namespace IdentityServerClient
             }
 
             return "";
+        }
+
+        private static async Task GetUserInfo(string token)
+        {
+            using (var httpClient = new HttpClient {BaseAddress = new Uri("http://localhost:44362")})
+            {
+                var document = await httpClient.GetDiscoveryDocumentAsync();
+                if (!document.IsError)
+                {
+                    token = token.Remove(0, 7);
+                    var request = new UserInfoRequest
+                    {
+                        RequestUri = new Uri(document.UserInfoEndpoint),
+                        Token = token
+                    };
+
+                    var userResponse = await httpClient.GetUserInfoAsync(request);
+
+                    if (!userResponse.IsError)
+                    {
+                        Console.WriteLine(userResponse.Raw);
+                    }
+                }
+            }
         }
 
         private static void ValidToken(string token)
