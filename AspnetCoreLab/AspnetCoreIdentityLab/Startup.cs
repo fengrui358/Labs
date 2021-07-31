@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
 using AspnetCoreIdentityLab.Data;
 using AspnetCoreIdentityLab.Models;
 using Microsoft.AspNetCore.Builder;
@@ -8,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace AspnetCoreIdentityLab
 {
@@ -34,6 +37,9 @@ namespace AspnetCoreIdentityLab
                 })
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
+            services.AddControllers();
+
+            ConfigureSwaggerServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,9 +65,30 @@ namespace AspnetCoreIdentityLab
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();
+            });
+        }
+
+        private static void ConfigureSwaggerServices(IServiceCollection services)
+        {
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerGeneratorOptions.SwaggerDocs.Add("v1",
+                    new OpenApiInfo {Title = typeof(Startup).Assembly.FullName, Version = "v1"});
+                options.DocInclusionPredicate((_, _) => true);
+                options.CustomSchemaIds(type => type.FullName);
+
+                var xmls = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*.xml");
+                foreach (var xml in xmls)
+                {
+                    options.IncludeXmlComments(xml);
+                }
             });
         }
     }
