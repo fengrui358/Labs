@@ -1,4 +1,6 @@
+using System;
 using AspnetCoreIdentityLab.Data;
+using AspnetCoreIdentityLab.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -25,7 +27,11 @@ namespace AspnetCoreIdentityLab
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
             services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(options =>
+                {
+                    options.Lockout.MaxFailedAccessAttempts = 15;
+                    options.SignIn.RequireConfirmedAccount = true;
+                })
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
         }
