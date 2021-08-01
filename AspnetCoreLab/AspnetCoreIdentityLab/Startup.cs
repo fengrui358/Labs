@@ -39,6 +39,8 @@ namespace AspnetCoreIdentityLab
             services.AddRazorPages();
             services.AddControllers();
 
+            ConfigureOptions(services);
+
             ConfigureSwaggerServices(services);
         }
 
@@ -90,6 +92,11 @@ namespace AspnetCoreIdentityLab
                     options.IncludeXmlComments(xml);
                 }
             });
+        }
+
+        private void ConfigureOptions(IServiceCollection services)
+        {
+            services.Configure<IdentityOptions>(Configuration.GetSection("Identity"));
         }
     }
 }
