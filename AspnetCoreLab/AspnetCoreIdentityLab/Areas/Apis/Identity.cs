@@ -20,7 +20,6 @@ namespace AspnetCoreIdentityLab.Areas.Apis
         /// </summary>
         /// <param name="userManager"></param>
         /// <param name="signInManager"></param>
-        /// <param name="applicationDbContext"></param>
         public Identity(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
