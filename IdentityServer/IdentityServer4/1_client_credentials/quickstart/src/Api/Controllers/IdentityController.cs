@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace IdentityServer.Controllers
+namespace Api.Controllers
 {
     [Route("identity")]
     [Authorize]
