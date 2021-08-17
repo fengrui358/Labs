@@ -40,6 +40,10 @@ namespace MvcClient
                 options.ResponseType = "code";
 
                 options.SaveTokens = true;
+
+                // 增加获取用户信息
+                options.Scope.Add("profile");
+                options.GetClaimsFromUserInfoEndpoint = true;
             });
 
             services.AddControllersWithViews();
