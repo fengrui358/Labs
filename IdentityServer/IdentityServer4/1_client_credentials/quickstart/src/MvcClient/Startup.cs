@@ -43,6 +43,8 @@ namespace MvcClient
 
                 // 增加获取用户信息
                 options.Scope.Add("profile");
+                //options.Scope.Add("birthdate");
+                options.Scope.Add("address");
                 options.GetClaimsFromUserInfoEndpoint = true;
             });
 

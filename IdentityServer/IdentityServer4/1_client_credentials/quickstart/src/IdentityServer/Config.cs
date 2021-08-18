@@ -4,17 +4,33 @@
 
 using IdentityServer4.Models;
 using System.Collections.Generic;
+using IdentityModel;
 using IdentityServer4;
 
 namespace IdentityServer
 {
     public static class Config
     {
+        private static IdentityResource Profile
+        {
+            get
+            {
+                var profile = new IdentityResources.Profile();
+                profile.UserClaims.Add(JwtClaimTypes.BirthDate);
+
+                // 编辑最终获取的用户信息
+                profile.UserClaims.Remove(JwtClaimTypes.FamilyName);
+
+                return profile;
+            }
+        }
+
         public static IEnumerable<IdentityResource> IdentityResources =>
-            new IdentityResource[]
-            { 
+            new[]
+            {
                 new IdentityResources.OpenId(),
-                new IdentityResources.Profile()
+                Profile,
+                new IdentityResource(IdentityServerConstants.StandardScopes.Address, new[] {JwtClaimTypes.Address})
             };
 
         public static IEnumerable<ApiScope> ApiScopes =>
@@ -60,7 +76,8 @@ namespace IdentityServer
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Address
                     }
                 }
             };
