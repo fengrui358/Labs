@@ -46,6 +46,9 @@ namespace MvcClient
                 options.Scope.Add("profile");
                 options.Scope.Add("address");
 
+                options.Scope.Add("api1");
+                options.Scope.Add("offline_access");
+
                 options.ClaimActions.MapAll();
                 //options.ClaimActions.MapJsonKey("custom_claim", "custom_claim");
                 options.GetClaimsFromUserInfoEndpoint = true;
