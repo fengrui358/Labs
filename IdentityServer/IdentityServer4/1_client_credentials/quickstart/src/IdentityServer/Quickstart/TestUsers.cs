@@ -58,7 +58,8 @@ namespace IdentityServerHost.Quickstart.UI
                             new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
                             new Claim(JwtClaimTypes.WebSite, "http://bob.com"),
                             new Claim(JwtClaimTypes.Address, JsonSerializer.Serialize(address), IdentityServerConstants.ClaimValueTypes.Json),
-                            new Claim(JwtClaimTypes.BirthDate, "2001-05-01", ClaimValueTypes.Date)
+                            new Claim(JwtClaimTypes.BirthDate, "2001-05-01", ClaimValueTypes.Date),
+                            new Claim("custom_claim", "test_custom_claim")
                         }
                     }
                 };

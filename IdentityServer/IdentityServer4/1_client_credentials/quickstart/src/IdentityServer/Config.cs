@@ -20,6 +20,7 @@ namespace IdentityServer
 
                 // 编辑最终获取的用户信息
                 profile.UserClaims.Remove(JwtClaimTypes.FamilyName);
+                profile.UserClaims.Remove(JwtClaimTypes.Address);
 
                 return profile;
             }

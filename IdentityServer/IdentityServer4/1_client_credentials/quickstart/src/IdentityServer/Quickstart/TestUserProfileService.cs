@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using IdentityServer4.Extensions;
 using IdentityServer4.Models;
@@ -49,7 +50,13 @@ namespace IdentityServer.Quickstart
                 var user = Users.FindBySubjectId(context.Subject.GetSubjectId());
                 if (user != null)
                 {
+                    // add claims
+
+                    var claimTypes = context.RequestedClaimTypes.ToList();
+                    claimTypes.Add("custom_claim");
+                    context.RequestedClaimTypes = claimTypes;
                     context.AddRequestedClaims(user.Claims);
+                    //context.IssuedClaims.Add(new Claim("custom_claim", "dasfaf"));
                 }
             }
 
