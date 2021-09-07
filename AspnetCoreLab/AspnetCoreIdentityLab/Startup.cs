@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using AspnetCoreIdentityLab.Data;
 using AspnetCoreIdentityLab.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,18 +39,25 @@ namespace AspnetCoreIdentityLab
                     options.SignIn.RequireConfirmedAccount = true;
                 })
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddRazorPages();
+            //services.AddRazorPages();
             services.AddControllers();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
+                CookieAuthenticationDefaults.AuthenticationScheme, options =>
+                {
+                    options.LoginPath = string.Empty;
+                    options.AccessDeniedPath = string.Empty;
+                    options.ForwardSignIn = null;
+                });
+            //services.AddAuthorization(options =>
+            //{
+            //    //options.
+            //});
+
             //services.AddMvc(options =>
             //{
             //    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
             //    options.Filters.Add(new AuthorizeFilter(policy));
             //});
-            services.AddAuthentication();
-            services.AddAuthorization(options =>
-            {
-                //options.
-            });
 
             ConfigureOptions(services);
 
@@ -63,6 +71,9 @@ namespace AspnetCoreIdentityLab
             {
                 app.UseDeveloperExceptionPage();
                 app.UseMigrationsEndPoint();
+
+                app.UseSwagger();
+                app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/v1/swagger.json", "AspnetCoreIdentityLab v1"));
             }
             else
             {
@@ -76,15 +87,12 @@ namespace AspnetCoreIdentityLab
 
             app.UseRouting();
 
-            app.UseAuthentication();
+            //app.UseAuthentication();
             app.UseAuthorization();
-
-            app.UseSwagger();
-            app.UseSwaggerUI();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
+                //endpoints.MapRazorPages();
                 endpoints.MapControllers();
             });
         }

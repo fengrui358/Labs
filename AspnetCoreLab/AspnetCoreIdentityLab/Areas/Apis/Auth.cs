@@ -13,7 +13,7 @@ namespace AspnetCoreIdentityLab.Areas.Apis
         /// <summary>
         /// TestAuthorize
         /// </summary>
-        //[Authorize]
+        [Authorize]
         [Route(nameof(TestAuthentication))]
         [HttpGet]
         public string TestAuthentication()
