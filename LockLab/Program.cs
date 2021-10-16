@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace LockLab
 {
@@ -6,11 +7,14 @@ namespace LockLab
     {
         static void Main(string[] args)
         {
-            var task = new ConcurrentTask();
+            //var task = new ConcurrentTask();
 
-            task.SemaphoreSlimTest();
-            task.ReaderWriterLockSlimTest();
-            task.LockTest();
+            //task.SemaphoreSlimTest();
+            //task.ReaderWriterLockSlimTest();
+            //task.LockTest();
+
+            var semaphoreSlimLab = new SemaphoreSlimLab();
+            semaphoreSlimLab.Run();
 
             Console.ReadLine();
         }
