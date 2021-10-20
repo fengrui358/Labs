@@ -11,10 +11,10 @@ namespace RabbitMQReceiveDemo
         {
             var factory = new ConnectionFactory
             {
-                HostName = "10.15.9.113",
-                Port = 5672,
-                VirtualHost = "CAD_CLIENT",
-                UserName = "admin",
+                HostName = "localhost",
+                Port = 44465,
+                VirtualHost = "er",
+                UserName = "eruser",
                 Password = "admin",
                 AutomaticRecoveryEnabled = true
             };
@@ -27,7 +27,7 @@ namespace RabbitMQReceiveDemo
                 autoDelete: true,
                 arguments: null);
 
-            channel.QueueBind("free", "CAD_CLIENT_MSG", "*.free");
+            channel.QueueBind("free", "SyncDataExchangeTopic", "[SyncData].Master.#");
 
             var consumer = new EventingBasicConsumer(channel);
             consumer.Received += (model, ea) =>
