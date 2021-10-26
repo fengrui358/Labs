@@ -15,7 +15,7 @@ namespace RabbitMQReceiveDemo
                 Port = 44465,
                 VirtualHost = "er",
                 UserName = "eruser",
-                Password = "admin",
+                Password = "",
                 AutomaticRecoveryEnabled = true
             };
 
@@ -27,16 +27,36 @@ namespace RabbitMQReceiveDemo
                 autoDelete: true,
                 arguments: null);
 
-            channel.QueueBind("free", "SyncDataExchangeTopic", "[SyncData].Master.#");
+            channel.QueueBind("free", "ErExchangeTopic", "#");
 
             var consumer = new EventingBasicConsumer(channel);
             consumer.Received += (model, ea) =>
             {
                 var body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
-                Console.WriteLine(" [x] Received {0}", message);
+                Console.WriteLine(" [x] Received Topic {0}", message);
             };
             channel.BasicConsume(queue: "free",
+                autoAck: true,
+                consumer: consumer);
+
+            using var channel2 = connection.CreateModel();
+            channel2.QueueDeclare(queue: "free2",
+                durable: false,
+                exclusive: false,
+                autoDelete: true,
+                arguments: null);
+
+            channel2.QueueBind("free2", "ErExchangeFanout", "#");
+
+            var consumer2 = new EventingBasicConsumer(channel2);
+            consumer2.Received += (model, ea) =>
+            {
+                var body = ea.Body.ToArray();
+                var message = Encoding.UTF8.GetString(body);
+                Console.WriteLine(" [x] Received Topic {0}", message);
+            };
+            channel2.BasicConsume(queue: "free2",
                 autoAck: true,
                 consumer: consumer);
 
