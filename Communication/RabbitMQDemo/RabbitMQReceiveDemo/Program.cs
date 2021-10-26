@@ -34,7 +34,7 @@ namespace RabbitMQReceiveDemo
             {
                 var body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
-                Console.WriteLine(" [x] Received Topic {0}", message);
+                Console.WriteLine(" [x] Received ErExchangeTopic {0}", message);
             };
             channel.BasicConsume(queue: "free",
                 autoAck: true,
@@ -54,11 +54,31 @@ namespace RabbitMQReceiveDemo
             {
                 var body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
-                Console.WriteLine(" [x] Received Topic {0}", message);
+                Console.WriteLine(" [x] Received ErExchangeFanout {0}", message);
             };
             channel2.BasicConsume(queue: "free2",
                 autoAck: true,
-                consumer: consumer);
+                consumer: consumer2);
+
+            using var channel3 = connection.CreateModel();
+            channel3.QueueDeclare(queue: "free3",
+                durable: false,
+                exclusive: false,
+                autoDelete: true,
+                arguments: null);
+
+            channel3.QueueBind("free3", "SyncDataExchangeTopic", "#");
+
+            var consumer3 = new EventingBasicConsumer(channel3);
+            consumer3.Received += (model, ea) =>
+            {
+                var body = ea.Body.ToArray();
+                var message = Encoding.UTF8.GetString(body);
+                Console.WriteLine(" [x] Received SyncDataExchangeTopic {0}", message);
+            };
+            channel3.BasicConsume(queue: "free3",
+                autoAck: true,
+                consumer: consumer3);
 
             Console.WriteLine(" Press [enter] to exit.");
             Console.ReadLine();
