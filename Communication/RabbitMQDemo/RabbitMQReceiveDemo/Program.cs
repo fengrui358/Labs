@@ -16,11 +16,11 @@ namespace RabbitMQReceiveDemo
                 Port = 44465,
                 VirtualHost = "er",
                 UserName = "eruser",
-                Password = "",
+                Password = "MubA39Ub",
                 AutomaticRecoveryEnabled = true
             };
 
-            var filterKey = "AppUser";
+            var filterKey = "";
 
             using var connection = factory.CreateConnection();
             Listen(connection, "ErExchangeTopic", filterKey);
