@@ -68,6 +68,10 @@ Json 序列化 Demo
 
 ## NoSQL
 
+### MongoDB
+
+<https://docs.microsoft.com/zh-cn/aspnet/core/tutorials/first-mongo-app?view=aspnetcore-6.0&tabs=visual-studio>
+
 ### RedisLab
 
 Redis 实验

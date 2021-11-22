@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
+using MongoDBLab.Models;
 
 namespace MongoDBLab
 {
@@ -32,6 +34,13 @@ namespace MongoDBLab
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MongoDBLab", Version = "v1" });
             });
+
+            // requires using Microsoft.Extensions.Options
+            services.Configure<BookstoreDatabaseSettings>(
+                Configuration.GetSection(nameof(BookstoreDatabaseSettings)));
+
+            services.AddSingleton<IBookstoreDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<BookstoreDatabaseSettings>>().Value);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
