@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using RedisLab.PubSub;
 using RedisLab.StringType;
 
 namespace RedisLab
@@ -13,6 +14,10 @@ namespace RedisLab
             var stringTypeLab = new StringTypeLab();
             await stringTypeLab.Init();
             await stringTypeLab.Run();
+
+            var pubSubLab = new PubSubLab();
+            await pubSubLab.Init();
+            await pubSubLab.Run();
 
             Console.ReadLine();
         }
