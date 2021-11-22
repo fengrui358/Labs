@@ -235,3 +235,4 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 /CSharpLanguageLabs/AlgorithmPerformanceDemo/BenchmarkDotNet.Artifacts
+/NoSQL/RedisLab/data

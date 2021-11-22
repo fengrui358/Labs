@@ -16,7 +16,7 @@ CSharp 的一些语法测试
 
 ## ProbingPrivatepathLab
 
-.NET 程序制定私有目录的测试
+.NET 程序指定私有目录的测试
 
 ## QiniuLab
 
@@ -65,6 +65,12 @@ Json 序列化 Demo
 ## Globalization
 
 国际化相关测试
+
+## NoSQL
+
+### RedisLab
+
+Redis 实验
 
 ## ReverseEngineering
 
