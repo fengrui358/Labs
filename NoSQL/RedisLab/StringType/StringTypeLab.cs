@@ -10,8 +10,8 @@ namespace RedisLab.StringType
         {
             using var redis = await Init();
 
-            var db = redis.GetDatabase(3);
-            Console.WriteLine($"Get database {db.Database}");
+            var db = redis.GetDatabase(5);
+            Console.WriteLine($"Get database {db.Database}, key random: {db.KeyRandom()}");
 
             var key = Guid.NewGuid().ToString("N").Substring(0, 4);
             var value = Guid.NewGuid().ToString();
@@ -23,7 +23,7 @@ namespace RedisLab.StringType
 
             await Task.Delay(1000);
             var getValue2 = await db.StringGetAsync(key);
-            Console.WriteLine($"After 1 s, get string key: {key} value: {getValue2}");
+            Console.WriteLine($"After 1 s, get string key: {key} value: {getValue2}, key type: {db.KeyType(key)}");
         }
     }
 }
