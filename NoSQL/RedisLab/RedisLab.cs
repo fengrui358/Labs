@@ -10,7 +10,7 @@ namespace RedisLab
             
         }
 
-        public async Task<ConnectionMultiplexer> Init()
+        protected async Task<ConnectionMultiplexer> Init()
         {
             return await ConnectionMultiplexer.ConnectAsync("localhost:6379", (options) => options.Password = "abc123");
         }

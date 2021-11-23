@@ -13,16 +13,16 @@ namespace RedisLab
             Console.WriteLine("Hello Redis!");
 
             var stringTypeLab = new StringTypeLab();
-            await stringTypeLab.Init();
             await stringTypeLab.Run();
 
             var pubSubLab = new PubSubLab();
-            await pubSubLab.Init();
             await pubSubLab.Run();
 
             var setTypeLab = new SetTypeLab();
-            await setTypeLab.Init();
             await setTypeLab.Run();
+
+            var hashTypeLab = new HashType.HashTypeLab();
+            await hashTypeLab.Run();
 
             Console.ReadLine();
         }
