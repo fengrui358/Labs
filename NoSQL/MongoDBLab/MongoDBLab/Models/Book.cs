@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
 namespace MongoDBLab.Models
 {
@@ -10,6 +11,7 @@ namespace MongoDBLab.Models
         public string Id { get; set; }
 
         [BsonElement("Name")]
+        [JsonProperty("Name")]
         public string BookName { get; set; }
 
         public decimal Price { get; set; }
