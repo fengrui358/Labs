@@ -17,8 +17,8 @@ var tokenResponse = await client.RequestClientCredentialsTokenAsync(new ClientCr
 {
     Address = disco.TokenEndpoint,
 
-    ClientId = "client",
-    ClientSecret = "secret",
+    ClientId = "consoleClient",
+    ClientSecret = "consoleClientSecrets",
     Scope = "api1"
 });
 
