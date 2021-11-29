@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiServer.Sample.Controllers
 {
+    /// <summary>
+    /// IdentityController
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     [Authorize]
