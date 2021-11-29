@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ApiServer.Sample.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class IdentityController : ControllerBase
     {
         /// <summary>
@@ -13,7 +15,7 @@ namespace ApiServer.Sample.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok();
+            return Ok(User.Claims.Select(s => new { s.Type, s.Value }));
         }
     }
 }
