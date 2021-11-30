@@ -8,7 +8,8 @@ namespace SpikeBenchmark
         static void Main(string[] args)
         {
             var summary = BenchmarkRunner.Run<SpikeRunner>();
-            Console.WriteLine(summary);
+            //Console.WriteLine(summary);
+            Console.ReadLine();
         }
     }
 }
