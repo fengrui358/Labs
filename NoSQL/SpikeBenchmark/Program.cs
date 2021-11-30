@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BenchmarkDotNet.Running;
+using System;
 
 namespace SpikeBenchmark
 {
@@ -6,7 +7,8 @@ namespace SpikeBenchmark
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var summary = BenchmarkRunner.Run<SpikeRunner>();
+            Console.WriteLine(summary);
         }
     }
 }
