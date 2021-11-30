@@ -2,7 +2,6 @@
 using BenchmarkDotNet.Jobs;
 using SpikeLib;
 using System;
-using System.IO;
 
 namespace SpikeBenchmark
 {
@@ -15,7 +14,6 @@ namespace SpikeBenchmark
         private SpikeInMemery _spikeImMemery;
         private SpikeInRedis _spikeInRedis;
 
-        private static int index = 1;
         public SpikeRunner()
         {
             _spikeImMemery = new SpikeInMemery();
@@ -23,8 +21,6 @@ namespace SpikeBenchmark
 
             _spikeInRedis = new SpikeInRedis();
             _spikeInRedis.InitStock(100000).Wait();
-
-            File.AppendAllText(@"G:\Users\Administrator\Desktop\test123.txt", "构造" + index);
         }
 
         [Benchmark]

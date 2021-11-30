@@ -237,3 +237,4 @@ _Pvt_Extensions
 /CSharpLanguageLabs/AlgorithmPerformanceDemo/BenchmarkDotNet.Artifacts
 /NoSQL/RedisLab/data
 /NoSQL/SpikeBenchmark/BenchmarkDotNet.Artifacts
+/NoSQL/SpikeLib/data
