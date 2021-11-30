@@ -7,8 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var spike = new SpikeInMemery();
-spike.InitStock(100000);
+var spikeInMemery = new SpikeInMemery();
+spikeInMemery.InitStock(100000).Wait();
+
+var spikeInRedis = new SpikeInRedis();
+spikeInRedis.InitStock(100000).Wait();
 
 var app = builder.Build();
 
@@ -23,8 +26,14 @@ app.UseHttpsRedirection();
 
 app.MapGet("/spikeInMemery/{userId}", async (int userId) =>
 {
-    var result = await spike.Decrease(userId);
+    var result = await spikeInMemery.Decrease(userId);
     return result;
 });
 
-app.Run();
+app.MapGet("/spikeInRedis/{userId}", async (int userId) =>
+{
+    var result = await spikeInRedis.Decrease(userId);
+    return result;
+});
+
+app.Run("https://localhost:7009");

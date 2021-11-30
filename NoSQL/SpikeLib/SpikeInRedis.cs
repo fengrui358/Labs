@@ -41,6 +41,7 @@ namespace SpikeLib
             _connectionMultiplexer = ConnectionMultiplexer.Connect("localhost:6379", (options) => options.Password = "abc123");
             _database = _connectionMultiplexer.GetDatabase();
             _database.StringSet("stock", stock);
+            _database.KeyDelete("user");
 
             return Task.CompletedTask;
         }
