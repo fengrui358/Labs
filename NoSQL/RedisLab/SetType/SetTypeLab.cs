@@ -14,7 +14,7 @@ namespace RedisLab.SetType
         {
             using var redis = await Init();
 
-            var db = redis.GetDatabase(5);
+            var db = redis.GetDatabase(0);
             await db.SetAddAsync("setA", new RedisValue[] { 1, 2, 3 }, CommandFlags.FireAndForget);
             await db.SetAddAsync("setB", new RedisValue[] { 1, 2, 3, 4 }, CommandFlags.FireAndForget);
             await db.SetCombineAndStoreAsync(SetOperation.Difference, "setC", "setB", "setA");
@@ -31,7 +31,17 @@ namespace RedisLab.SetType
             var setE = await db.SetMembersAsync("setE");
             Assert.AreEqual(3, setE.Length);
 
-            db.StringSetAsync("setExpired", "free", TimeSpan.FromSeconds(5), flags: CommandFlags.FireAndForget);
+            await db.StringSetAsync("setExpired", "free", TimeSpan.FromSeconds(5), flags: CommandFlags.FireAndForget);
+            await Task.Delay(TimeSpan.FromSeconds(2));
+            var t = await db.KeyTimeToLiveAsync("setExpired");
+            Console.WriteLine($"发送 setExpired，剩余过期时间：{t}");
+            await Task.Delay(TimeSpan.FromSeconds(2));
+            var setExpired = await db.StringGetAsync("setExpired");
+            Assert.IsFalse(setExpired.IsNull, "setExpired is not null");
+            Assert.AreEqual("free", setExpired.ToString());
+            await Task.Delay(TimeSpan.FromSeconds(1));
+            setExpired = await db.StringGetAsync("setExpired");
+            Assert.IsTrue(setExpired.IsNull, "setExpired is null");
         }
     }
 }
