@@ -15,8 +15,8 @@ namespace RedisLab.PubSub
             var subMultiplexer = await Init();
             var subscriber = subMultiplexer.GetSubscriber();
 
-            // 不保证顺序，性能更好的方式（推荐使用）
-            await subscriber.SubscribeAsync("test", (channel, message) =>
+            // 不保证顺序，性能更好的方式（推荐使用） __keyevent@0__:expired  为 key 过期通知
+            await subscriber.SubscribeAsync("__keyevent@0__:expired", (channel, message) =>
             {
                 Console.WriteLine($"不保证接收顺序的方式 received {channel} message: {message}");
             }, CommandFlags.FireAndForget);

@@ -30,6 +30,8 @@ namespace RedisLab.SetType
             await db.SetCombineAndStoreAsync(SetOperation.Intersect, "setE", new RedisKey[] { "setD", "setA" });
             var setE = await db.SetMembersAsync("setE");
             Assert.AreEqual(3, setE.Length);
+
+            db.StringSetAsync("setExpired", "free", TimeSpan.FromSeconds(5), flags: CommandFlags.FireAndForget);
         }
     }
 }
