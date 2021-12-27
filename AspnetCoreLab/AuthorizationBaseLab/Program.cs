@@ -1,4 +1,30 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["SecretKey"]));
+builder.Services.AddSingleton(secretKey);
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
+    options =>
+    {
+        options.ExpireTimeSpan = TimeSpan.FromSeconds(60);
+    }).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true, // 是否验证失效时间
+        ClockSkew = TimeSpan.FromSeconds(5), // 时钟偏移时间
+        ValidateIssuerSigningKey = true, // 是否验证 SecretKey
+        ValidAudience = "localhost",
+        ValidIssuer = "localhost",
+        IssuerSigningKey = secretKey
+    };
+});
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -29,6 +55,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
