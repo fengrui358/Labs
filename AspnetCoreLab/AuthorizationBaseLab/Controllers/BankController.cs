@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Server.HttpSys;
 
 namespace AuthorizationBaseLab.Controllers
 {
@@ -11,6 +10,13 @@ namespace AuthorizationBaseLab.Controllers
     [Route("[controller]")]
     public class BankController : ControllerBase
     {
+        private readonly ILogger _logger;
+
+        public BankController(ILogger<BankController> logger)
+        {
+            _logger = logger;
+        }
+
         /// <summary>
         /// 查询银行信息
         /// </summary>
@@ -44,6 +50,23 @@ namespace AuthorizationBaseLab.Controllers
         {
             var userName = User.FindFirst("Name");
             return Task.FromResult(userName?.Value);
+        }
+
+        /// <summary>
+        /// 用于演示跨站请求伪造
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpGet(nameof(Transfer))]
+        public Task<string> Transfer(string name, double amount)
+        {
+            var userName = User.FindFirst("Name");
+            var msg = $"{userName?.Value} 转账 ${amount} 给 ${name}";
+            _logger.LogInformation(msg);
+
+            return Task.FromResult(msg);
         }
     }
 }

