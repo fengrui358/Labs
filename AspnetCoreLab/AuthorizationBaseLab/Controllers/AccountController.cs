@@ -1,5 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -21,13 +22,29 @@ namespace AuthorizationBaseLab.Controllers
         /// Cookie login
         /// </summary>
         /// <param name="userName"></param>
+        /// <param name="returnUrl">重定向地址</param>
         /// <returns></returns>
         [HttpGet(nameof(CookieLogin))]
-        public async Task<IActionResult> CookieLogin(string userName)
+        public async Task<IActionResult> CookieLogin([FromServices]IAntiforgery antiforgery, string userName, string? returnUrl = null)
         {
             var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
             identity.AddClaim(new Claim("Name", userName));
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+
+            var tokens = antiforgery.GetAndStoreTokens(HttpContext);
+            // 向客户端发送名称为 XSRF-TOKEN 的 Cookie ， 客户端必须将这个 Cookie 的值
+            // 以 X-XSRF-TOKEN 为名称的 Header 再发送回服务端， 才能完成 XSRF 认证。
+            Response.Cookies.Append(
+                "XSRF-TOKEN",
+                tokens.RequestToken,
+                new CookieOptions
+                {
+                    HttpOnly = false,
+                    Path = "/",
+                    IsEssential = true,
+                    SameSite = SameSiteMode.Lax
+                }
+            );
             return Content("login success");
         }
 

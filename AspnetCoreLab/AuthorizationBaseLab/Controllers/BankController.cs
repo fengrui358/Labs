@@ -55,15 +55,16 @@ namespace AuthorizationBaseLab.Controllers
         /// <summary>
         /// 用于演示跨站请求伪造
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="toUserName"></param>
         /// <param name="amount"></param>
         /// <returns></returns>
         [Authorize]
-        [HttpGet(nameof(Transfer))]
-        public Task<string> Transfer(string name, double amount)
+        [HttpPost(nameof(Transfer))]
+        [ValidateAntiForgeryToken] // 如果不加入 XSRF Token 的校验，那么跨站请求伪造就能成功
+        public Task<string> Transfer([FromForm]string toUserName, [FromForm]double amount)
         {
             var userName = User.FindFirst("Name");
-            var msg = $"{userName?.Value} 转账 ${amount} 给 ${name}";
+            var msg = $"{userName?.Value} 转账 {amount} 给 {toUserName}";
             _logger.LogInformation(msg);
 
             return Task.FromResult(msg);

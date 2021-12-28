@@ -9,4 +9,10 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     <p><a href="/Account/CookieLogin?userName=free">CookieLogin</a>.</p>
     <p><a href="/Bank/WhoAreYouWithCookie?userName=free">WhoAreYouWithCookie</a>.</p>
+    <form action="/Bank/Transfer" method="post">
+        @Html.AntiForgeryToken()
+        <label>账号：<input type="hidden" name="toUserName" value="真实站点"/></label>
+        <label>金额：<input type="hidden" name="amount" value="50000"/></label>
+        <input type="submit" value="提交"/>
+    </form>
 </div>

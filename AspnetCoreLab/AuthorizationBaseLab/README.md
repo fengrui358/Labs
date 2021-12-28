@@ -39,4 +39,9 @@
 
 ### 跨站请求伪造
 
-主要目的，偷取 cookie
+主要目的，利用已登录站点的 cookie，执行用户原站点非用户本意的请求
+
+参考：<https://docs.microsoft.com/zh-cn/aspnet/core/security/anti-request-forgery?view=aspnetcore-6.0>
+
+<https://beginor.github.io/2019/05/27/anti-forgery-with-asp-net-core-and-angular.html>
+### 

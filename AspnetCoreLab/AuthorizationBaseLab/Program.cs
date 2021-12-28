@@ -1,6 +1,7 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,14 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         IssuerSigningKey = secretKey
     };
 });
+
+// 防跨站请求伪造
+builder.Services.AddAntiforgery(options =>
+{
+    options.HeaderName = "X-XSRF-TOKEN";
+});
+// 开启全局 Post 请求 AntiforgeryToken 验证，不推荐全局验证
+//builder.Services.AddMvc(options => options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
 
 // Add services to the container.
 builder.Services.AddRazorPages();
