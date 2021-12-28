@@ -49,6 +49,28 @@ namespace AuthorizationBaseLab.Controllers
         }
 
         /// <summary>
+        /// 登陆
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
+        [HttpPost(nameof(Login))]
+        public IActionResult Login([FromForm] string userName, [FromForm] string password, string? returnUrl = null)
+        {
+            var s = $"正式登陆界面获取用户名 {userName}，密码 {password}，returnUrl {returnUrl}";
+            Console.WriteLine(s);
+
+            if (!string.IsNullOrEmpty(returnUrl))
+            {
+                // 直接重定向，会导致开放重定向攻击
+                return Redirect(returnUrl);
+            }
+
+            return Content(s);
+        }
+
+        /// <summary>
         /// JwtLogin
         /// </summary>
         /// <param name="securityKey"></param>

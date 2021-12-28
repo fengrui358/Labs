@@ -1,0 +1,15 @@
+﻿@page
+@model AuthorizationBaseLab.Pages.MockLoginModel
+@{
+    ViewData["Title"] = "伪造登陆页";
+}
+
+<div>
+    <p>伪造登陆页（惯用手法，提示用户重新输入密码）</p>
+    <p style="color: red; border: 1px solid red;">刚才的密码输入错误，请重新输入</p>
+    <form action="/Account/MockLogin" method="post">
+        <label>用户名：<input name="userName"/></label>
+        <label>密码：<input type="password" name="password"/></label>
+        <input type="submit" value="提交"/>
+    </form>
+</div>
