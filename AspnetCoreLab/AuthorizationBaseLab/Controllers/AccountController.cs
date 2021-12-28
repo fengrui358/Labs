@@ -64,7 +64,17 @@ namespace AuthorizationBaseLab.Controllers
             if (!string.IsNullOrEmpty(returnUrl))
             {
                 // 直接重定向，会导致开放重定向攻击
-                return Redirect(returnUrl);
+                //return Redirect(returnUrl);
+
+                // 1. 避免开放重定向攻击手段，仅允许本地重定向，不常用
+                return LocalRedirect(returnUrl);
+
+                // 2. 根据允许跳转的 host 的配置表进行跳转
+                //var url = new Uri(returnUrl);
+                //if (url.Host.IsVaild)
+                //{
+                //    return Redirect(returnUrl);
+                //}
             }
 
             return Content(s);
