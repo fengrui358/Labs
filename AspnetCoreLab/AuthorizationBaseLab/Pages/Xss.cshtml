@@ -1,0 +1,10 @@
+﻿@page
+@model AuthorizationBaseLab.Pages.XssModel
+@{
+}
+
+<div>
+    <p>跨站脚本攻击，XSS</p>
+    <p>该页面模拟已被用户通过图片 src 注入恶意脚本盗取 cookie</p>
+    @Html.Raw(ViewData["xss"])
+</div>
