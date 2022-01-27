@@ -4,10 +4,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
+using IdentityModel;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
@@ -33,6 +32,8 @@ namespace AuthenticateCookieLab
                 {
                     OnValidatePrincipal = CookieValidateEventHandler.ValidateAsync
                 };
+                // 也可以不使用自己实现 Cookie 的事件响应类
+                // options.EventsType = 
             });
         }
 
@@ -79,25 +80,24 @@ namespace AuthenticateCookieLab
                     }
                     else
                     {
-                        var claimIdentity = new ClaimsIdentity("Cookie");
-                        claimIdentity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
-                        claimIdentity.AddClaim(new Claim(ClaimTypes.Name, user.Name));
-                        claimIdentity.AddClaim(new Claim(ClaimTypes.Email, user.Email));
-                        claimIdentity.AddClaim(new Claim(ClaimTypes.MobilePhone, user.PhoneNumber));
-                        claimIdentity.AddClaim(new Claim(ClaimTypes.DateOfBirth, user.Birthday.ToString()));
-
-                        // 使用JwtClaimTypes
-                        //var claimIdentity = new ClaimsIdentity("Cookie", JwtClaimTypes.);
+                        //var claimIdentity = new ClaimsIdentity("Cookie");
                         //claimIdentity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
                         //claimIdentity.AddClaim(new Claim(ClaimTypes.Name, user.Name));
                         //claimIdentity.AddClaim(new Claim(ClaimTypes.Email, user.Email));
                         //claimIdentity.AddClaim(new Claim(ClaimTypes.MobilePhone, user.PhoneNumber));
                         //claimIdentity.AddClaim(new Claim(ClaimTypes.DateOfBirth, user.Birthday.ToString()));
 
+                        // 使用JwtClaimTypes，可以将 claim 的键缩短很多
+                        var claimIdentity = new ClaimsIdentity("Cookie");
+                        claimIdentity.AddClaim(new Claim(JwtClaimTypes.Id, user.Id.ToString()));
+                        claimIdentity.AddClaim(new Claim(JwtClaimTypes.Name, user.Name));
+                        claimIdentity.AddClaim(new Claim(JwtClaimTypes.Email, user.Email));
+                        claimIdentity.AddClaim(new Claim(JwtClaimTypes.PhoneNumber, user.PhoneNumber));
+                        claimIdentity.AddClaim(new Claim(JwtClaimTypes.BirthDate, user.Birthday.ToString()));
+
                         var claimsPrincipal = new ClaimsPrincipal(claimIdentity);
                         // 在上面注册AddAuthentication时，指定了默认的Scheme，在这里便可以不再指定Scheme。
                         await context.SignInAsync(claimsPrincipal);
-                        var token = await context.GetTokenAsync("Cookie");
 
                         if (string.IsNullOrEmpty(context.Request.Form["ReturnUrl"])) context.Response.Redirect("/");
                         else context.Response.Redirect(context.Request.Form["ReturnUrl"]);
