@@ -7,6 +7,7 @@ namespace DiagnosticsSource.Controllers
     /// 参考文章：
     /// https://mp.weixin.qq.com/s/bO7QpH0mvaW6i192fu_SCg
     /// https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md
+    /// https://www.cnblogs.com/sheng-jie/p/how-much-you-know-about-diagnostic-in-dotnet.html
     /// </summary>
     [ApiController]
     [Route("[controller]")]
