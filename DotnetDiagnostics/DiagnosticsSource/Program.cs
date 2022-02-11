@@ -4,7 +4,9 @@
 // https://www.cnblogs.com/sheng-jie/p/how-much-you-know-about-diagnostic-in-dotnet.html
 
 using System.Diagnostics;
+using System.Net;
 using DiagnosticsSource;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.WebHost.ConfigureKestrel((context, options) =>
+{
+    // options.Listen(IPAddress.Any, 5001, listenOptions => listenOptions.Protocols = HttpProtocols.Http3);
+});
 var app = builder.Build();
 
 var listenter = app.Services.GetRequiredService<DiagnosticListener>();
