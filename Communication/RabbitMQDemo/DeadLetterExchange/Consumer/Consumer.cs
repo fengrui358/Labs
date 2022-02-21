@@ -35,7 +35,7 @@ namespace Consumer
         public void Run()
         {
             var channel = _connection.CreateModel();
-            channel.ExchangeDeclare(_exchangeName, ExchangeType.Direct, true, false, null);
+            // channel.ExchangeDeclare(_exchangeName, ExchangeType.Direct, true, false, null);
             channel.QueueDeclare(_queueName, true, false, false,
                 new Dictionary<string, object>
                 {
@@ -44,6 +44,8 @@ namespace Consumer
                     { "x-dead-letter-routing-key", DEAD_QUEUE_NAME } //死信队列routingKey
                 });
             channel.QueueBind(_queueName, _exchangeName, _bindingKey, null);
+            // 消费死信队列
+            channel.QueueBind(DEAD_QUEUE_NAME, DEAD_EXCHANGE_NAME, DEAD_QUEUE_NAME, null);
 
             //消息持久化
             var properties = channel.CreateBasicProperties();
@@ -55,10 +57,15 @@ namespace Consumer
             {
                 var body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
-                Console.WriteLine($" [x] Received {ea.Exchange} {message}");
+                Console.WriteLine($" [x] Received {ea.Exchange} -- {ea.DeliveryTag} -- {message}");
+
+                channel.BasicNack(ea.DeliveryTag, false, false);
             };
             channel.BasicConsume(queue: _queueName,
-                autoAck: true,
+                autoAck: false, // autoAck false
+                consumer: consumer);
+            channel.BasicConsume(queue: DEAD_QUEUE_NAME,
+                autoAck: false, // autoAck false
                 consumer: consumer);
         }
 

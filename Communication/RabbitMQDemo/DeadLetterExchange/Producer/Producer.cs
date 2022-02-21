@@ -49,11 +49,23 @@ namespace Producer
                 properties.Persistent = true;//相当于设置DeliveryMode=2
 
                 //5：发布消息
-                for (int i = 0; i < 5; i++)
+                var i = 0;
+                while (true)
                 {
-                    var msg = $"{i}:haha";
-                    Console.WriteLine($"send message to [{_exchangeName}] with routingKey [{_routingKey}]: {msg}");
-                    channel.BasicPublish(_exchangeName, _routingKey, properties, Encoding.UTF8.GetBytes(msg));
+                    Console.WriteLine("发送消息？(Y/N)");
+                    var input = Console.ReadKey();
+                    if (input.KeyChar == 'y' || input.KeyChar == 'Y')
+                    {
+                        var msg = $"{i}:haha";
+                        Console.WriteLine($"send message to [{_exchangeName}] with routingKey [{_routingKey}]: {msg}");
+                        channel.BasicPublish(_exchangeName, _routingKey, properties, Encoding.UTF8.GetBytes(msg));
+
+                        i++;
+                    }
+                    else if(input.KeyChar == 'n' || input.KeyChar == 'N')
+                    {
+                        break;
+                    }
                 }
             }
         }
