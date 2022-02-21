@@ -9,9 +9,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQReceiveDemo", "Rabb
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DeadLetterExchange", "DeadLetterExchange", "{289AFD4E-CC65-4EFE-9707-99AA547F36DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Producer", "DeadLetterExchange\Producer\Producer.csproj", "{74491128-09AC-4325-B940-054A840A7CDE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Producer", "DeadLetterExchange\Producer\Producer.csproj", "{74491128-09AC-4325-B940-054A840A7CDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Consumer", "DeadLetterExchange\Consumer\Consumer.csproj", "{BD2EC8A0-E9F3-42E0-A3D2-FE48F19EEA54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consumer", "DeadLetterExchange\Consumer\Consumer.csproj", "{BD2EC8A0-E9F3-42E0-A3D2-FE48F19EEA54}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6D67C5E7-16A5-4897-8A60-3DCFF80A8BC5}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+		Dockerfile = Dockerfile
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

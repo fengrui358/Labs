@@ -11,7 +11,7 @@ namespace RabbitMQSendDemo
         {
             var factory = new ConnectionFactory
             {
-                HostName = "10.15.9.113", Port = 5672, VirtualHost = "CAD_CLIENT", UserName = "admin", Password = "admin",
+                HostName = "127.0.0.1", Port = 5672, VirtualHost = "test", UserName = "testUser", Password = "abc123",
                 AutomaticRecoveryEnabled = true
             };
             using var connection = factory.CreateConnection();

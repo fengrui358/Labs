@@ -1,0 +1,23 @@
+version: '3'
+services:
+    mq:
+        build: ./
+        container_name: mq
+        # restart: always
+        environment:
+            RABBITMQ_DEFAULT_VHOST: test
+            RABBITMQ_DEFAULT_USER: testUser
+            RABBITMQ_DEFAULT_PASS: abc123
+        networks:
+            - "mq_network"
+        expose:
+            - '15672'
+            - '15674'
+            - '5672'
+        ports:
+            - "15672:15672"
+            - "15674:15674"
+            - "5672:5672"
+
+networks:
+    mq_network:

@@ -13,10 +13,10 @@ namespace RabbitMQReceiveDemo
             var factory = new ConnectionFactory
             {
                 HostName = "localhost",
-                Port = 44465,
-                VirtualHost = "er",
-                UserName = "eruser",
-                Password = "MubA39Ub",
+                Port = 5672,
+                VirtualHost = "test",
+                UserName = "testUser",
+                Password = "abc123",
                 AutomaticRecoveryEnabled = true
             };
 
