@@ -46,6 +46,7 @@ namespace Consumer
             channel.QueueBind(_queueName, _exchangeName, _bindingKey, null);
             // 消费死信队列
             channel.QueueBind(DEAD_QUEUE_NAME, DEAD_EXCHANGE_NAME, DEAD_QUEUE_NAME, null);
+            //channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: true);
 
             //消息持久化
             var properties = channel.CreateBasicProperties();
@@ -57,13 +58,17 @@ namespace Consumer
             {
                 var body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
-                Console.WriteLine($" [x] Received {ea.Exchange} -- {ea.DeliveryTag} -- {message}");
+                Console.WriteLine($"{DateTime.Now} [x] Received {ea.Exchange} -- {ea.DeliveryTag} -- {message}");
 
+                // 1. 第一种情况，消息处理者拒绝 ack 消息，并且不重新入队
                 channel.BasicNack(ea.DeliveryTag, false, false);
             };
-            channel.BasicConsume(queue: _queueName,
-                autoAck: false, // autoAck false
-                consumer: consumer);
+
+            // 2. 不消费普通队列，则消息在消息队列中存活时间超过 ttl 就会转发到死信队列
+            // 注释下面的代码取消消费普通队列
+            //channel.BasicConsume(queue: _queueName,
+            //    autoAck: false, // autoAck false
+            //    consumer: consumer);
             channel.BasicConsume(queue: DEAD_QUEUE_NAME,
                 autoAck: false, // autoAck false
                 consumer: consumer);

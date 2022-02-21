@@ -42,7 +42,7 @@ namespace Producer
                         { "x-dead-letter-exchange", DEAD_EXCHANGE_NAME },//死信队列交换机
                         { "x-dead-letter-routing-key", DEAD_QUEUE_NAME }//死信队列routingKey
                     });
-                // channel.QueueBind(_queueName, _exchangeName, _bindingKey, null);
+                //channel.QueueBind(_queueName, _exchangeName, _bindingKey, null);
 
                 //消息持久化
                 var properties = channel.CreateBasicProperties();
@@ -57,7 +57,7 @@ namespace Producer
                     if (input.KeyChar == 'y' || input.KeyChar == 'Y')
                     {
                         var msg = $"{i}:haha";
-                        Console.WriteLine($"send message to [{_exchangeName}] with routingKey [{_routingKey}]: {msg}");
+                        Console.WriteLine($"{DateTime.Now}, send message to [{_exchangeName}] with routingKey [{_routingKey}]: {msg}");
                         channel.BasicPublish(_exchangeName, _routingKey, properties, Encoding.UTF8.GetBytes(msg));
 
                         i++;
