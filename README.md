@@ -46,6 +46,10 @@ DotNet 程序集域的加载卸载测试，顺便提供一个小工具检查目�
 
 Dapper ORM 搭配 SQLite 测试
 
+## DataBasePerformanceLab
+
+数据库性能测试
+
 ## AspNetCoreMini
 
 200 行代码，7 个对象——了解 ASP.NET Core 框架的本质<https://www.cnblogs.com/artech/p/inside-asp-net-core-framework.html>
