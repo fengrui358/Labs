@@ -260,3 +260,5 @@ src/DataBasePerformanceLab.HttpApi.Host/Logs/*
 src/DataBasePerformanceLab.DbMigrator/Logs/*
 src/DataBasePerformanceLab.Blazor.Server/Logs/*
 src/DataBasePerformanceLab.Blazor.Server.Tiered/Logs/*
+
+docker/

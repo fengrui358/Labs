@@ -36,6 +36,7 @@ public class Program
                 .UseSerilog();
             await builder.AddApplicationAsync<DataBasePerformanceLabHttpApiHostModule>();
             var app = builder.Build();
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             await app.InitializeApplicationAsync();
             await app.RunAsync();
             return 0;

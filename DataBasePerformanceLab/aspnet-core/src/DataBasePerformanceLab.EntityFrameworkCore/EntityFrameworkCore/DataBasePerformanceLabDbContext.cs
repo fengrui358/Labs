@@ -4,6 +4,7 @@ using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
@@ -46,6 +47,8 @@ public class DataBasePerformanceLabDbContext :
     public DbSet<IdentitySecurityLog> SecurityLogs { get; set; }
     public DbSet<IdentityLinkUser> LinkUsers { get; set; }
 
+    public DbSet<DeviceGps.DeviceGps> DeviceGpsDbSet { get; set; }
+
     // Tenant Management
     public DbSet<Tenant> Tenants { get; set; }
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
@@ -81,5 +84,14 @@ public class DataBasePerformanceLabDbContext :
         //    b.ConfigureByConvention(); //auto configure for the base class props
         //    //...
         //});
+
+        builder.Entity<DeviceGps.DeviceGps>(b =>
+        {
+            b.ToTable(DataBasePerformanceLabConsts.DbTablePrefix + "DeviceGps",
+                DataBasePerformanceLabConsts.DbSchema);
+            b.ConfigureByConvention();
+
+            b.HasIndex(s => s.CreationTime);
+        });
     }
 }

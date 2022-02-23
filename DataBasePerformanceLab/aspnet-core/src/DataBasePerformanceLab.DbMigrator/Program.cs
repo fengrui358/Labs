@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
@@ -26,7 +27,7 @@ class Program
             .WriteTo.Async(c => c.File("Logs/logs.txt"))
             .WriteTo.Async(c => c.Console())
             .CreateLogger();
-
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         await CreateHostBuilder(args).RunConsoleAsync();
     }
 

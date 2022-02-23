@@ -142,7 +142,15 @@ public class DataBasePerformanceLabHttpApiHostModule : AbpModule
             options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "DataBasePerformanceLab API", Version = "v1" });
-                options.DocInclusionPredicate((docName, description) => true);
+                options.DocInclusionPredicate((docName, description) =>
+                {
+                    if (description.GroupName == nameof(DeviceGps))
+                    {
+                        return true;
+                    }
+                    // Console.WriteLine($"{docName}--{description.GroupName}");
+                    return false;
+                });
                 options.CustomSchemaIds(type => type.FullName);
             });
     }

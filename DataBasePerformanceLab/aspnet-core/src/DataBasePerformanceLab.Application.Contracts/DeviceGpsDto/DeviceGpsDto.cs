@@ -1,17 +1,9 @@
 ﻿using System;
-using Volo.Abp.Auditing;
-using Volo.Abp.Domain.Entities;
 
-namespace DataBasePerformanceLab.DeviceGps
+namespace DataBasePerformanceLab.DeviceGpsDto
 {
-    public class DeviceGps : Entity<Guid>, IHasCreationTime
+    public class DeviceGpsDto
     {
-        public new Guid Id
-        {
-            get => base.Id;
-            set => base.Id = value;
-        }
-
         /// <summary>
         /// 设备标识
         /// </summary>
@@ -26,6 +18,11 @@ namespace DataBasePerformanceLab.DeviceGps
         /// 纬度
         /// </summary>
         public double Latitude { get; set; }
+
+        /// <summary>
+        /// 设备Id
+        /// </summary>
+        public Guid DeviceId { get; set; }
 
         /// <summary>
         /// 高度
