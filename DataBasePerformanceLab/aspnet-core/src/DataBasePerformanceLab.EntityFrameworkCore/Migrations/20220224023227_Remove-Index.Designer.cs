@@ -3,6 +3,7 @@ using System;
 using DataBasePerformanceLab.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Volo.Abp.EntityFrameworkCore;
@@ -12,9 +13,10 @@ using Volo.Abp.EntityFrameworkCore;
 namespace DataBasePerformanceLab.Migrations
 {
     [DbContext(typeof(DataBasePerformanceLabDbContext))]
-    partial class DataBasePerformanceLabDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220224023227_Remove-Index")]
+    partial class RemoveIndex
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

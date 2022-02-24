@@ -91,7 +91,7 @@ public class DataBasePerformanceLabDbContext :
                 DataBasePerformanceLabConsts.DbSchema);
             b.ConfigureByConvention();
 
-            b.HasIndex(s => s.CreationTime);
+            // b.HasIndex(s => s.CreationTime);
         });
     }
 }
