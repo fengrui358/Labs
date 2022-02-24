@@ -6,12 +6,6 @@ namespace DataBasePerformanceLab.DeviceGps
 {
     public class DeviceGps : Entity<Guid>, IHasCreationTime
     {
-        public new Guid Id
-        {
-            get => base.Id;
-            set => base.Id = value;
-        }
-
         /// <summary>
         /// 设备标识
         /// </summary>
