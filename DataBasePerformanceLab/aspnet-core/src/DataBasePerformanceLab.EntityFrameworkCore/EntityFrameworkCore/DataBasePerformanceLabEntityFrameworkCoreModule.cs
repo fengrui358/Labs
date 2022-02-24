@@ -7,6 +7,7 @@ using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.IdentityServer.EntityFrameworkCore;
 using Volo.Abp.Modularity;
+using Volo.Abp.MongoDB;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
@@ -23,7 +24,8 @@ namespace DataBasePerformanceLab.EntityFrameworkCore;
     typeof(AbpBackgroundJobsEntityFrameworkCoreModule),
     typeof(AbpAuditLoggingEntityFrameworkCoreModule),
     typeof(AbpTenantManagementEntityFrameworkCoreModule),
-    typeof(AbpFeatureManagementEntityFrameworkCoreModule)
+    typeof(AbpFeatureManagementEntityFrameworkCoreModule),
+    typeof(AbpMongoDbModule)
     )]
 public class DataBasePerformanceLabEntityFrameworkCoreModule : AbpModule
 {
@@ -36,16 +38,22 @@ public class DataBasePerformanceLabEntityFrameworkCoreModule : AbpModule
     {
         context.Services.AddAbpDbContext<DataBasePerformanceLabDbContext>(options =>
         {
-                /* Remove "includeAllEntities: true" to create
-                 * default repositories only for aggregate roots */
+            /* Remove "includeAllEntities: true" to create
+             * default repositories only for aggregate roots */
             options.AddDefaultRepositories(includeAllEntities: true);
         });
 
         Configure<AbpDbContextOptions>(options =>
         {
-                /* The main point to change your DBMS.
-                 * See also DataBasePerformanceLabMigrationsDbContextFactory for EF Core tooling. */
+            /* The main point to change your DBMS.
+             * See also DataBasePerformanceLabMigrationsDbContextFactory for EF Core tooling. */
             options.UseNpgsql();
+        });
+
+        // 使用 Mongodb
+        context.Services.AddMongoDbContext<DataBasePerformanceLabMongoDbContext>(options =>
+        {
+            options.AddDefaultRepositories(includeAllEntities: true);
         });
     }
 }

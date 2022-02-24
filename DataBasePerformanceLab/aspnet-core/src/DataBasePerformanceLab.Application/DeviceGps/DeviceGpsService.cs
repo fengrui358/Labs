@@ -20,7 +20,7 @@ namespace DataBasePerformanceLab.DeviceGps
         }
 
 
-        public async Task<string> InitPostgresqlData()
+        public async Task<string> InitData()
         {
             var batchDuration = _batchDuration;
             // 读取 guid
