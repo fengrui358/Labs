@@ -34,6 +34,19 @@ namespace MongoDBLab.Services
         public void Update(string id, Book bookIn) =>
             _books.ReplaceOne(book => book.Id == id, bookIn);
 
+        public async Task<UpdateResult> UpdatePrice()
+        {
+            // 使用 json 更新
+            return await _books.UpdateManyAsync(s => s.Price < 20, new JsonUpdateDefinition<Book>("{$set: { \"Price\": 435}}"));
+
+            //return await _books.UpdateManyAsync(s => s.Price < 20, new ObjectUpdateDefinition<Book>(new
+            //{
+            //    Price = 455
+            //}));
+
+            //_books.UpdateManyAsync(s => s.Price < 20, new BsonDocumentUpdateDefinition<Book>())
+        }
+
         public void Remove(Book bookIn) =>
             _books.DeleteOne(book => book.Id == bookIn.Id);
 

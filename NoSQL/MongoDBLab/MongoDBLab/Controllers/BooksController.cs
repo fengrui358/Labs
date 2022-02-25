@@ -59,6 +59,13 @@ namespace MongoDBLab.Controllers
             return NoContent();
         }
 
+        [HttpPut]
+        [Route("price")]
+        public async Task<IActionResult> UpdatePrice()
+        {
+            return new JsonResult(await _bookService.UpdatePrice());
+        }
+
         [HttpDelete("{id:length(24)}")]
         public IActionResult Delete(string id)
         {
