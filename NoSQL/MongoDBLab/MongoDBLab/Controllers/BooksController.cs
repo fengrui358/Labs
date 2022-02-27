@@ -23,6 +23,13 @@ namespace MongoDBLab.Controllers
         public ActionResult<List<Book>> Get() =>
             _bookService.Get();
 
+        [HttpGet]
+        [Route("query")]
+        public Task<List<Book>> Query()
+        {
+            return _bookService.Query();
+        }
+
         [HttpGet("{id:length(24)}", Name = "GetBook")]
         public ActionResult<Book> Get(string id)
         {

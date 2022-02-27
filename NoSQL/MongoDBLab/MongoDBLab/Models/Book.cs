@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using System;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 
@@ -19,5 +20,7 @@ namespace MongoDBLab.Models
         public string Category { get; set; }
 
         public string Author { get; set; }
+
+        public DateTime CreationTime { get; set; }
     }
 }

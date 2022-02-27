@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using MongoDBLab.Models;
 
@@ -24,6 +25,12 @@ namespace MongoDBLab.Services
 
         public Book Get(string id) =>
             _books.Find<Book>(book => book.Id == id).FirstOrDefault();
+
+        public async Task<List<Book>> Query()
+        {
+            var result = await _books.Find(book => book.CreationTime > DateTime.Now).ToListAsync();
+            return result;
+        }
 
         public Book Create(Book book)
         {
