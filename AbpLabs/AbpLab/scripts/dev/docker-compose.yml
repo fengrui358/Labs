@@ -1,0 +1,27 @@
+version: '3'
+services:
+    mysql:
+        image: mysql:8
+        container_name: abplab_mysql
+        restart: always
+        expose:
+            - '3306'
+        ports:
+            - '3306:3306'
+        networks:
+            - 'abplab_network'
+        environment: 
+            - MYSQL_ROOT_PASSWORD=abc123
+            - MYSQL_DATABASE=AbpLab
+        volumes:
+            - ./mysql/conf.d:/etc/mysql/conf.d
+            - ./mysql/datadir:/var/lib/mysql
+        command: >
+            bash -c "
+            chmod 644 /etc/mysql/conf.d/*.cnf
+            && /entrypoint.sh mysqld
+            "
+        # command: --collation-server=utf8mb4_unicode_ci # 指定变量，免去修改配置文件的方式
+
+networks:
+    abplab_network:
