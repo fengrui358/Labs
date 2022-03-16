@@ -238,3 +238,4 @@ _Pvt_Extensions
 /NoSQL/RedisLab/data
 /NoSQL/SpikeBenchmark/BenchmarkDotNet.Artifacts
 /NoSQL/SpikeLib/data
+/AbpLabs/AbpLab/scripts/dev/mysql/datadir
