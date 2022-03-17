@@ -4,6 +4,7 @@ using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
@@ -52,6 +53,8 @@ public class AbpLabDbContext :
 
     #endregion
 
+    public DbSet<Item.Item> Items { get; set; }
+
     public AbpLabDbContext(DbContextOptions<AbpLabDbContext> options)
         : base(options)
     {
@@ -81,5 +84,12 @@ public class AbpLabDbContext :
         //    b.ConfigureByConvention(); //auto configure for the base class props
         //    //...
         //});
+
+        builder.Entity<Item.Item>(b =>
+        {
+            b.ToTable(AbpLabConsts.DbTablePrefix + "Items", AbpLabConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+            //...
+        });
     }
 }

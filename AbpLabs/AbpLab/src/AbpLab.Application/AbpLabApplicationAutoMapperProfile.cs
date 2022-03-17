@@ -1,4 +1,5 @@
-﻿using AbpLab.Organization;
+﻿using AbpLab.Item;
+using AbpLab.Organization;
 using AutoMapper;
 using Volo.Abp.Identity;
 
@@ -14,5 +15,8 @@ public class AbpLabApplicationAutoMapperProfile : Profile
 
         CreateMap<OrganizationUnit, OrganizationUnitDto>();
         CreateMap<CreateOrganizationUnitDto, OrganizationUnit>();
+
+        CreateMap<Item.Item, ItemDto>();
+        CreateMap<CreateUpdateItemDto, Item.Item>();
     }
 }

@@ -3,6 +3,7 @@ using System;
 using AbpLab.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -11,9 +12,10 @@ using Volo.Abp.EntityFrameworkCore;
 namespace AbpLab.Migrations
 {
     [DbContext(typeof(AbpLabDbContext))]
-    partial class AbpLabDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220317022923_Add Item")]
+    partial class AddItem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
