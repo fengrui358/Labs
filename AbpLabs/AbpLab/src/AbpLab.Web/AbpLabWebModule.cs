@@ -9,6 +9,7 @@ using AbpLab.EntityFrameworkCore;
 using AbpLab.Localization;
 using AbpLab.MultiTenancy;
 using AbpLab.Web.Menus;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using Volo.Abp;
 using Volo.Abp.Account.Web;
@@ -111,7 +112,11 @@ public class AbpLabWebModule : AbpModule
 
     private void ConfigureAuthentication(ServiceConfigurationContext context, IConfiguration configuration)
     {
-        context.Services.AddAuthentication()
+        context.Services.AddAuthentication(options =>
+            {
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultForbidScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
             .AddJwtBearer(options =>
             {
                 options.Authority = configuration["AuthServer:Authority"];
